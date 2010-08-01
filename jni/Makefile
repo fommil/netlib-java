@@ -24,7 +24,7 @@ arpack.a:
 	cd ARPACK/SRC/ ; $(FC) $(FFLAGS) -c *.f
 	ar rc arpack.a ARPACK/UTIL/*.o ARPACK/SRC/*.o
 
-.c.o:
+%.o: %.c %.h
 	$(CC) $(CPPFLAGS) $(LAPACK_INCLUDES) $(CFLAGS) -c $*.c
 
 org_netlib_blas_NativeBLAS.h:
