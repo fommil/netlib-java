@@ -3,6 +3,8 @@
 OS=`uname`
 ARCH=`uname -m`
 
+VERSION="0.9.1"
+
 # standardise the OS and ARCH names
 if [ "$OS" = "Darwin" ] ; then
 	OS="apple"
@@ -90,7 +92,7 @@ fi
 if [ -d "../bin" ] ; then
 	echo "JLAPACK_JNI_CP=../bin" >> Makefile.incl
 else 
-	echo "JLAPACK_JNI_CP=../netlib-java-0.9.1.jar:../lib/f2j/arpack-combined.jar" >> Makefile.incl
+	echo "JLAPACK_JNI_CP=../netlib-java-$VERSION.jar:../lib/f2j/arpack-combined.jar" >> Makefile.incl
 fi
 
 # wget http://netlib.org/lapack/lapack-3.1.1.tgz
