@@ -2,6 +2,7 @@
 <project name="org.netlib" default="default" basedir=".">
 	<description>Builds, tests, and runs the project org.netlib.</description>
 	<property name="version" value="0.9.1" />
+	<!-- REMINDER: When bumping the version value, also bump the value in jni/configure -->
 	<import file="nbproject/build-impl.xml"/>
     <!--
       -pre-init:                 called before initialization of project properties
