@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -41,8 +40,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -872,17 +869,21 @@ class JavaGenerator {
 		StringBuilder builder = new StringBuilder();
 		builder.append("\tstatic private final " + wrapperName + " current;\n");
 		builder.append("\tstatic {\n");
-		builder.append("\t\tLogger logger = Logger.getLogger(\"org.netlib\");\n");
-		builder.append("\t\tif (Native" + wrapperName
-				+ ".INSTANCE.isLoaded) {\n");
+		builder.append("\t\tLogger logger = Logger.getLogger(\"org.netlib." + wrapperName.toLowerCase() + "\");\n");
+		builder.append("\t\tif (Native" + wrapperName + ".INSTANCE.isLoaded) {\n");
 		builder.append("\t\t\tcurrent = Native" + wrapperName + ".INSTANCE;\n");
-		builder.append("\t\t\tlogger.config(\"Using JNI for " + wrapperName
-				+ "\");\n");
+		builder.append("\t\t\tlogger.config(\"Using JNI for " + wrapperName + "\");\n");
 		builder.append("\t\t} else {\n");
-		builder.append("\t\t\tcurrent = J" + wrapperName + ".INSTANCE;\n");
-		builder.append("\t\t\tlogger.config(\"Using F2J as JNI failed for "
-				+ wrapperName + "\");\n");
+		builder.append("\t\t\tcurrent = J" + wrapperName + ".INSTANCE;\n");		
+		builder.append("\t\t\tlogger.config(\"Using F2J as JNI failed for " + wrapperName + "\");\n");
 		builder.append("\t\t}\n");
+
+		if ("LAPACK".equals(wrapperName)) {
+			// workaround bug 5
+			builder.append("\t\tcurrent.slamch(\"E\");\n");
+			builder.append("\t\tcurrent.dlamch(\"E\");\n");
+		}
+
 		builder.append("\t}\n\n");
 		builder.append("\tpublic static " + wrapperName + " getInstance() {\n");
 		builder.append("\t\treturn current;\n");
