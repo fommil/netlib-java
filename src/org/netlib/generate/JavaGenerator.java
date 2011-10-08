@@ -784,21 +784,20 @@ class JavaGenerator {
 	private String jniWrapperLoader(String wrapperName) {
 		StringBuilder b = new StringBuilder();
 		b.append("\t// singleton\n");
-		b.append("\tprotected static final Native" + wrapperName
-				+ " INSTANCE = new Native" + wrapperName + "();\n\n");
+		b.append("\tprotected static final Native" + wrapperName + " INSTANCE = new Native" + wrapperName + "();\n\n");
 		b.append("\t// indicates if the JNI loaded OK. If this is false, calls to the native\n");
 		b.append("\t// methods will fail with UnsatisfiedLinkError\n");
 		b.append("\tprotected final boolean isLoaded;\n\n");
 		b.append("\tprivate Native" + wrapperName + "() {\n");
-		b.append("\t\tString libname = JNIMethods.getPortableLibraryName(\"jni"
-				+ wrapperName.toLowerCase() + "\");\n");
+		b.append("\t\tString libname = JNIMethods.getPortableLibraryName(\"jni" + wrapperName.toLowerCase() + "\");\n");
+		b.append("\t\tboolean succeeded=false;\n");		
 		b.append("\t\ttry {\n");
 		b.append("\t\t\tSystem.loadLibrary(libname);\n");
+		b.append("\t\t\tsucceeded=true;\n");		
 		b.append("\t\t} catch (UnsatisfiedLinkError e) {\n");
-		b.append("\t\t\tisLoaded = false;\n");
-		b.append("\t\t\treturn;\n");
+		b.append("\t\t} catch (SecurityException e) {\n");
 		b.append("\t\t}\n");
-		b.append("\t\tisLoaded = true;\n");
+		b.append("\t\tisLoaded = succeeded;\n");
 		b.append("\t}\n\n");
 		return b.toString();
 	}
