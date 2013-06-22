@@ -1,5 +1,5 @@
 // http://www.antlr.org/wiki/display/ST4/Group+file+syntax
 
-group netlib-java
+group netlib-java;
 
 test() ::= "single-line template"
