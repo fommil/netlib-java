@@ -2,6 +2,8 @@ package org.netlib;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.thoughtworks.paranamer.DefaultParanamer;
+import com.thoughtworks.paranamer.Paranamer;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -21,7 +23,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     @Parameter(property = "netlib.outputDir", defaultValue = "${project.build.directory}/generated-sources/netlib", required = true)
     protected File outputDir;
 
-    @Parameter(property = "netlib.outputName", defaultValue = "org/netlib/Blas.java", required = true)
+    @Parameter(property = "netlib.outputName", defaultValue = "org/netlib/blas/JBLAS.java", required = true)
     protected String outputName;
 
     /**
@@ -64,9 +66,14 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      */
     abstract protected String generate(List<Method> methods) throws Exception;
 
+    protected Paranamer paranamer = new DefaultParanamer();
+
     @Override
     public void execute() throws MojoExecutionException {
         try {
+            if (netlib_javadoc_artifact != null)
+                paranamer = new JavadocParanamer(getFile(netlib_javadoc_artifact));
+
             File jar = getFile(netlib_jar_artifact);
             JarMethodScanner scanner = new JarMethodScanner(jar);
 
@@ -82,6 +89,35 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
             project.addCompileSourceRoot(outputDir.getAbsolutePath());
         } catch (Exception e) {
             throw new MojoExecutionException("java generation", e);
+        }
+    }
+
+    protected interface ParameterCallback {
+        void process(int i, Class<?> param, String name);
+    }
+
+    /**
+     * Calls the callback with every parameter of the method, skipping out the offset parameter
+     * introduced by F2J for array arguments.
+     *
+     * @param method
+     * @param callback
+     */
+    protected void iterateRelevantParameters(Method method, ParameterCallback callback) {
+        String[] names = paranamer.lookupParameterNames(method, false);
+        Class <?> last = null;
+        for (int i = 0; i < method.getParameterTypes().length; i++) {
+            Class<?> param = method.getParameterTypes()[i];
+            if (last != null && last.isArray() && param.equals(Integer.TYPE)) {
+                last = param;
+                continue;
+            }
+            last = param;
+            String name = "arg" + i;
+            if (names.length > 0)
+                name = names[i];
+
+            callback.process(i, param, name);
         }
     }
 
