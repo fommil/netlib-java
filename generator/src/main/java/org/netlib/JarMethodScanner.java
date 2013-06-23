@@ -17,6 +17,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static java.lang.reflect.Modifier.isPublic;
+import static java.lang.reflect.Modifier.isStatic;
 
 /**
  * Scans jar files for methods.
@@ -50,7 +52,7 @@ public class JarMethodScanner {
         return matched;
     }
 
-    public List<Method> getMethods(String packageName) throws Exception {
+    public List<Method> getStaticMethods(String packageName) throws Exception {
         List<Method> methods = newArrayList();
         List<String> classNames = getClasses(packageName);
         URLClassLoader loader = createLoader();
@@ -58,7 +60,9 @@ public class JarMethodScanner {
         for (String className : classNames) {
             Class<?> clazz = loader.loadClass(className);
             for (Method method : clazz.getMethods()) {
-                if (method.getDeclaringClass().getCanonicalName().startsWith(packageName))
+                int modifiers = method.getModifiers();
+                String fqn = method.getDeclaringClass().getCanonicalName();
+                if (isStatic(modifiers) && isPublic(modifiers) && fqn.startsWith(packageName))
                     methods.add(method);
             }
         }
