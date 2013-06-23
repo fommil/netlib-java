@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Method;
 
 /**
  * @author Sam Halliday
@@ -21,15 +22,42 @@ import java.io.OutputStreamWriter;
 )
 public class GenerateJava extends AbstractMojo {
 
-    /** Location of the generated source files. */
+    /**
+     * Location of the generated source files.
+     */
     @Parameter(property = "netlib.outputDir", defaultValue = "${project.build.directory}/generated-sources/netlib", required = true)
-    private File outputDir;
+    File outputDir;
 
-    /** The jar to generate from. */
-    @Parameter(property = "netlib.artifact", defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
+    /**
+     * The jar to generate from.
+     */
+    @Parameter(property = "netlib.jar", defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
+    String netlib_jar_artifact;
+
+    /**
+     * The javadocs to use to extract parameter names.
+     */
+    @Parameter(property = "netlib.javadoc", defaultValue = "net.sourceforge.f2j:jlapack")
+    String netlib_javadoc_artifact;
+
+    /**
+     * The package to scan.
+     */
+    @Parameter(property = "netlib.package", defaultValue = "org.netlib.blas", required = true)
+    String netlib_package;
 
     @Component
-    protected MavenProject project;
+    MavenProject project;
+
+    private File getFile(String artifactName) {
+        Artifact artifact = project.getArtifactMap().get(artifactName);
+        if (artifact == null)
+            throw new IllegalArgumentException("could not find artifact " + artifactName + " from " + project.getArtifactMap().keySet());
+        File file = artifact.getFile();
+        if (file == null)
+            throw new IllegalArgumentException("could not find file for " + artifact);
+        return file;
+    }
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -38,14 +66,18 @@ public class GenerateJava extends AbstractMojo {
 //            ST t = templates.getInstanceOf("test");
 //            getLog().info(t.render());
 
-            // TODO: http://downloads.sourceforge.net/project/f2j/f2j/jlapack-0.8/jlapack-0.8-javadoc.zip?r=&ts=1371940324&use_mirror=heanet
+            getLog().debug("Scanning " + getFile(netlib_jar_artifact).getAbsolutePath());
+            File jar = getFile(netlib_jar_artifact);
+            JarMethodScanner scanner = new JarMethodScanner(jar);
 
-            getLog().info(project.getArtifactMap().keySet().toString());
-
-            for (Artifact artifact : project.getArtifacts()) {
-
-                getLog().info(artifact.getFile().getAbsolutePath());
+            for (Method method : scanner.getMethods(netlib_package)) {
+                getLog().info(method.toString());
             }
+
+
+            if (netlib_javadoc_artifact != null)
+                getLog().info(getFile(netlib_javadoc_artifact).getAbsolutePath());
+
 
 //            // create the BLAS wrapper
 //            JavaGenerator blas =
