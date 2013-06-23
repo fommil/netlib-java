@@ -42,6 +42,17 @@
             <version>0.1</version>
         </dependency>
         <dependency>
+            <!--
+            To install locally:
+                curl -O https://raw.github.com/fommil/netlib-java/ant/lib/f2j/jlapack-0.8-javadoc.zip
+                mvn install:install-file -Dfile=jlapack-0.8-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=jlapack -Dversion=0.8 -Dpackaging=javadoc
+            -->
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>jlapack</artifactId>
+            <classifier>javadoc</classifier>
+            <version>0.8</version>
+        </dependency>
+        <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>stringtemplate</artifactId>
             <version>4.0.2</version>
