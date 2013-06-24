@@ -3,6 +3,7 @@ package org.netlib;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.DefaultParanamer;
+import com.thoughtworks.paranamer.JavadocParanamer;
 import com.thoughtworks.paranamer.Paranamer;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
