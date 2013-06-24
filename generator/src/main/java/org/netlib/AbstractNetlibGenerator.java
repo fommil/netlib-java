@@ -20,29 +20,29 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     /**
      * Location of the generated source files.
      */
-    @Parameter(property = "netlib.outputDir", defaultValue = "${project.build.directory}/generated-sources/netlib", required = true)
+    @Parameter(defaultValue = "${project.build.directory}/generated-sources/netlib-java", required = true)
     protected File outputDir;
 
-    @Parameter(property = "netlib.outputName", defaultValue = "org/netlib/blas/JBLAS.java", required = true)
+    @Parameter(required = true)
     protected String outputName;
 
     /**
      * The jar to generate from.
      */
-    @Parameter(property = "netlib.jar", defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
-    protected String netlib_jar_artifact;
+    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
+    protected String input;
 
     /**
      * The javadocs to use to extract parameter names.
      */
-    @Parameter(property = "netlib.javadoc", defaultValue = "net.sourceforge.f2j:jlapack")
-    protected String netlib_javadoc_artifact;
+    @Parameter
+    protected String javadoc;
 
     /**
      * The package to scan.
      */
-    @Parameter(property = "netlib.package", defaultValue = "org.netlib.blas", required = true)
-    protected String netlib_package;
+    @Parameter(required = true)
+    protected String scan;
 
     @Component
     protected MavenProject project;
@@ -71,13 +71,13 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            if (netlib_javadoc_artifact != null)
-                paranamer = new JavadocParanamer(getFile(netlib_javadoc_artifact));
+            if (javadoc != null && !javadoc.isEmpty())
+                paranamer = new JavadocParanamer(getFile(javadoc));
 
-            File jar = getFile(netlib_jar_artifact);
+            File jar = getFile(input);
             JarMethodScanner scanner = new JarMethodScanner(jar);
 
-            List<Method> methods = scanner.getStaticMethods(netlib_package);
+            List<Method> methods = scanner.getStaticMethods(scan);
             String generated = generate(methods);
 
             File output = new File(outputDir, outputName);
