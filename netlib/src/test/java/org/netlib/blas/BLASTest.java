@@ -1,17 +1,17 @@
 package org.netlib.blas;
 
+import com.google.common.base.Stopwatch;
+import junit.framework.TestCase;
+import lombok.extern.java.Log;
+
 import java.util.Random;
 
-import junit.framework.TestCase;
-
+@Log
 public class BLASTest extends TestCase {
-	private final BLAS jBLAS = JBLAS.INSTANCE;
-
-	private final NativeBLAS nativeBLAS = NativeBLAS.INSTANCE;
+	private final BLAS jBLAS = BLAS.getInstance();
 
 	public void testDot() {
 		testDot1(jBLAS);
-		testDot1(nativeBLAS);
 	}
 
 	/**
@@ -22,27 +22,20 @@ public class BLASTest extends TestCase {
 	 * @see #testDot()
 	 */
 	public void testDotSpeed() {
-		assert nativeBLAS.isLoaded;
-
 		int[] sizes = new int[]{10, 100, 1000, 10000, 20000, 50000, 75000,
 			100000, 200000, 500000, 1000000, 10000000
 		}; // , 50000000 };
 
+        Stopwatch stopwatch = new Stopwatch();
 		for (int size : sizes) {
 			final double[] array1 = randomArray(size);
 			final double[] array2 = randomArray(size);
 
-			long start = System.currentTimeMillis();
+            stopwatch.start();
 			double outJ = jBLAS.ddot(size, array1, 1, array2, 1);
-			long endJ = System.currentTimeMillis();
-			double outN = nativeBLAS.ddot(size, array1, 1, array2, 1);
-			long endN = System.currentTimeMillis();
+            stopwatch.stop();
 
-
-			assert Math.abs(outJ - outN) < 0.00001d;
-			System.out.println("Array size: " + size + ", jLAPACK took: " +
-				(endJ - start) / 1000.0 + ", nativeLAPACK took: " +
-				(endN - endJ) / 1000.0);
+            log.info(size + " took " + stopwatch);
 		}
 	}
 

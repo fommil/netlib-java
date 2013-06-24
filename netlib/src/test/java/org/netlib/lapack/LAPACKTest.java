@@ -3,20 +3,14 @@ package org.netlib.lapack;
 import junit.framework.TestCase;
 
 public class LAPACKTest extends TestCase {
-	LAPACK jLAPACK = JLAPACK.INSTANCE;
-
-	LAPACK nativeLAPACK = NativeLAPACK.INSTANCE;
+	private LAPACK jLAPACK = LAPACK.getInstance();
 
 	public void testGesvd() {
 		double[] jAns = testGesvd1(jLAPACK);
-		double[] nativeAns = testGesvd1(nativeLAPACK);
-		assert arrayElementsEqual(jAns, nativeAns);
 	}
 
 	public void testSygv() {
 		double[] jAns = testSygv1(jLAPACK);
-		double[] nativeAns = testSygv1(nativeLAPACK);
-		assert arrayElementsEqual(jAns, nativeAns);
 	}
 
 	private double[] testGesvd1(LAPACK lapack) {
