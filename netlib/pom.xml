@@ -54,6 +54,7 @@
             <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
+                <version>${project.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.f2j</groupId>
