@@ -36,7 +36,20 @@
             <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
-                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>1</id>
+                        <goals><goal>interface</goal></goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>2</id>
+                        <goals><goal>f2j</goal></goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,17 +1,7 @@
-
-/**
- * Sep 14, 2007
- *
- * @author Samuel Halliday, ThinkTank Maths Limited
- * @copyright ThinkTank Maths Limited 2007
- */
 package org.netlib.lapack;
 
 import junit.framework.TestCase;
 
-/**
- * @author Samuel Halliday, ThinkTank Maths Limited
- */
 public class LAPACKTest extends TestCase {
 	LAPACK jLAPACK = JLAPACK.INSTANCE;
 

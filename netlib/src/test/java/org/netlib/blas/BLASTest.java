@@ -1,19 +1,9 @@
-
-/**
- * Jun 4, 2007
- *
- * @author Samuel Halliday, ThinkTank Maths Limited
- * @copyright ThinkTank Maths Limited 2007
- */
 package org.netlib.blas;
 
 import java.util.Random;
 
 import junit.framework.TestCase;
 
-/**
- * @author Samuel Halliday, ThinkTank Maths Limited
- */
 public class BLASTest extends TestCase {
 	private final BLAS jBLAS = JBLAS.INSTANCE;
 
