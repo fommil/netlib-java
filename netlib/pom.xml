@@ -16,11 +16,24 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>arpack_combined_all</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+        <!-- FIXME: this seems to be ignored in the plugin's <dependencies> -->
+        <dependency>
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>jlapack</artifactId>
+            <classifier>javadoc</classifier>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -36,17 +49,53 @@
             <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.f2j</groupId>
+                        <artifactId>jlapack</artifactId>
+                        <classifier>javadoc</classifier>
+                        <version>0.8</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
-                        <id>1</id>
+                        <id>blas-interface</id>
                         <goals><goal>interface</goal></goals>
                         <configuration>
+                            <outputName>org/netlib/blas/BLAS.java</outputName>
+                            <scan>org.netlib.blas</scan>
+                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
+                            <fallback>org.netlib.blas.JBLAS</fallback>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>2</id>
+                        <id>blas-f2j-implementation</id>
                         <goals><goal>f2j</goal></goals>
                         <configuration>
+                            <outputName>org/netlib/blas/JBLAS.java</outputName>
+                            <scan>org.netlib.blas</scan>
+                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
+                            <implementing>org.netlib.blas.BLAS</implementing>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>lapack-interface</id>
+                        <goals><goal>interface</goal></goals>
+                        <configuration>
+                            <outputName>org/netlib/lapack/LAPACK.java</outputName>
+                            <scan>org.netlib.lapack</scan>
+                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
+                            <fallback>org.netlib.lapack.JLAPACK</fallback>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>lapack-f2j-implementation</id>
+                        <goals><goal>f2j</goal></goals>
+                        <configuration>
+                            <outputName>org/netlib/lapack/JLAPACK.java</outputName>
+                            <scan>org.netlib.lapack</scan>
+                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
+                            <implementing>org.netlib.lapack.LAPACK</implementing>
                         </configuration>
                     </execution>
                 </executions>

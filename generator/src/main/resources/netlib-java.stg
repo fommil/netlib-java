@@ -51,10 +51,10 @@ public class $name$ extends $parent$ {
 >>
 
 
-f2jImplMethod(return, method, impl, params, calls) ::= <<
+f2jImplMethod(returns, method, impl, params, calls, return="return") ::= <<
 @Override
-public $return$ $method$($params; separator=", "$) {
-  $impl$($calls; separator=", "$);
+public $returns$ $method$($params; separator=", "$) {
+  $return$ $impl$($calls; separator=", "$);
 }
 >>
 
@@ -63,7 +63,7 @@ abstractMethod(return, method, params) ::= <<
 abstract public $return$ $method$($params; separator=", "$);
 >>
 
-abstractClass(package, name, members, docs, defaultImpl) ::= <<
+abstractClass(package, name, members, docs, fallback) ::= <<
 $copyright()$
 package $package$;
 
@@ -77,8 +77,8 @@ public abstract class $name$ {
   static {
     try {
       // TODO: property lookup of implementation
-      current = new $defaultImpl$();
-      log.config("Implementation provided by {}", current.getClass());
+      current = new $fallback$();
+      log.config("Implementation provided by " + current.getClass());
     } catch (Exception e) {
       throw new ExceptionInInitializerError(e);
     }
