@@ -79,6 +79,7 @@ public abstract class $name$ {
       // TODO: property lookup of implementation
       current = new $fallback$();
       log.config("Implementation provided by " + current.getClass());
+      // FIXME: initialise LAPACK implementations
     } catch (Exception e) {
       throw new ExceptionInInitializerError(e);
     }
