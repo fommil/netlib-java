@@ -20,6 +20,12 @@
             <groupId>net.sourceforge.f2j</groupId>
             <artifactId>arpack_combined_all</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>jlapack</artifactId>
+            <classifier>javadoc</classifier>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -29,14 +35,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-
-        <!-- FIXME: this seems to be ignored in the plugin's <dependencies> -->
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>jlapack</artifactId>
-            <classifier>javadoc</classifier>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -55,14 +53,6 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
                 <version>${project.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sourceforge.f2j</groupId>
-                        <artifactId>jlapack</artifactId>
-                        <classifier>javadoc</classifier>
-                        <version>0.8</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <id>blas-interface</id>
