@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-            <groupId>org.netlib</groupId>
-            <artifactId>parent</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        <groupId>com.github.fommil.netlib</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>netlib</artifactId>
@@ -36,7 +36,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -56,42 +55,50 @@
                 <executions>
                     <execution>
                         <id>blas-interface</id>
-                        <goals><goal>interface</goal></goals>
+                        <goals>
+                            <goal>interface</goal>
+                        </goals>
                         <configuration>
-                            <outputName>org/netlib/blas/BLAS.java</outputName>
+                            <outputName>com/github/fommil/netlib/BLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
                             <javadoc>net.sourceforge.f2j:jlapack</javadoc>
-                            <fallback>org.netlib.blas.JBLAS</fallback>
+                            <fallback>com.github.fommil.netlib.JBLAS</fallback>
                         </configuration>
                     </execution>
                     <execution>
                         <id>blas-f2j-implementation</id>
-                        <goals><goal>f2j</goal></goals>
+                        <goals>
+                            <goal>f2j</goal>
+                        </goals>
                         <configuration>
-                            <outputName>org/netlib/blas/JBLAS.java</outputName>
+                            <outputName>com/github/fommil/netlib/JBLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
                             <javadoc>net.sourceforge.f2j:jlapack</javadoc>
-                            <implementing>org.netlib.blas.BLAS</implementing>
+                            <implementing>com.github.fommil.netlib.BLAS</implementing>
                         </configuration>
                     </execution>
                     <execution>
                         <id>lapack-interface</id>
-                        <goals><goal>interface</goal></goals>
+                        <goals>
+                            <goal>interface</goal>
+                        </goals>
                         <configuration>
-                            <outputName>org/netlib/lapack/LAPACK.java</outputName>
+                            <outputName>com/github/fommil/netlib/LAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
                             <javadoc>net.sourceforge.f2j:jlapack</javadoc>
-                            <fallback>org.netlib.lapack.JLAPACK</fallback>
+                            <fallback>com.github.fommil.netlib.JLAPACK</fallback>
                         </configuration>
                     </execution>
                     <execution>
                         <id>lapack-f2j-implementation</id>
-                        <goals><goal>f2j</goal></goals>
+                        <goals>
+                            <goal>f2j</goal>
+                        </goals>
                         <configuration>
-                            <outputName>org/netlib/lapack/JLAPACK.java</outputName>
+                            <outputName>com/github/fommil/netlib/JLAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
                             <javadoc>net.sourceforge.f2j:jlapack</javadoc>
-                            <implementing>org.netlib.lapack.LAPACK</implementing>
+                            <implementing>com.github.fommil.netlib.LAPACK</implementing>
                         </configuration>
                     </execution>
                 </executions>

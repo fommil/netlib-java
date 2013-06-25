@@ -1,4 +1,4 @@
-package org.netlib.blas;
+package com.github.fommil.netlib;
 
 import com.google.common.base.Stopwatch;
 import junit.framework.TestCase;
@@ -35,7 +35,7 @@ public class BLASTest extends TestCase {
 			double outJ = jBLAS.ddot(size, array1, 1, array2, 1);
             stopwatch.stop();
 
-            log.info(size + " took " + stopwatch);
+            BLASTest.log.info(size + " took " + stopwatch);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package org.netlib;
+package com.github.fommil.netlib.generator;
 
 import lombok.Cleanup;
 import lombok.NonNull;

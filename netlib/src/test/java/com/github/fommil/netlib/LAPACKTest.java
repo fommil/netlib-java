@@ -1,4 +1,4 @@
-package org.netlib.lapack;
+package com.github.fommil.netlib;
 
 import junit.framework.TestCase;
 
