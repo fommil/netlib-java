@@ -59,7 +59,12 @@ public $returns$ $method$($params; separator=", "$) {
 >>
 
 
-abstractMethod(return, method, params) ::= <<
+abstractMethod(return, method, params, docs = "") ::= <<
+/**
+ * $docs$
+ *
+ * TODO: @param list
+ */
 abstract public $return$ $method$($params; separator=", "$);
 >>
 

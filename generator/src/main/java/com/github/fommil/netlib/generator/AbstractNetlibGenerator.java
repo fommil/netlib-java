@@ -1,6 +1,7 @@
-package org.netlib;
+package com.github.fommil.netlib.generator;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.DefaultParanamer;
 import com.thoughtworks.paranamer.JavadocParanamer;
@@ -73,10 +74,9 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
 
     protected Paranamer paranamer = new DefaultParanamer();
 
-    @Override
     public void execute() throws MojoExecutionException {
         try {
-            if (javadoc != null && !javadoc.isEmpty())
+            if (!Strings.isNullOrEmpty(javadoc))
                 paranamer = new JavadocParanamer(getFile(javadoc));
 
             File jar = getFile(input);
