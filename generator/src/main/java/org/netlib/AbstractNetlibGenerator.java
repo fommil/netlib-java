@@ -28,13 +28,17 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     protected String outputName;
 
     /**
-     * The jar to generate from.
+     * The artifact of the jar to generate from.
+     * Note that this must be listed as a <code>dependency</code>
+     * section of the calling module, not a plugin <code>dependency</code>.
      */
     @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
     protected String input;
 
     /**
-     * The javadocs to use to extract parameter names.
+     * The artifact of the javadocs to extract parameter names.
+     * Note that this must be listed as a <code>dependency</code>
+     * section of the calling module, not a plugin <code>dependency</code>.
      */
     @Parameter
     protected String javadoc;

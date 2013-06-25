@@ -17,6 +17,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
         </dependency>
@@ -28,6 +33,7 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.thoughtworks.paranamer</groupId>
             <artifactId>paranamer</artifactId>
@@ -35,11 +41,6 @@
         <dependency>
             <groupId>net.sourceforge.f2j</groupId>
             <artifactId>arpack_combined_all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>jlapack</artifactId>
-            <classifier>javadoc</classifier>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -57,6 +58,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
+                <configuration>
+                    <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>mojo-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
