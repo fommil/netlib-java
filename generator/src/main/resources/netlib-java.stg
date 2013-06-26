@@ -81,6 +81,10 @@ package $package$;
  * <p>
  * Property {@value #PROPERTY_KEY} defines the implementation to load,
  * defaulting to {@value #FALLBACK}.
+ * <p>
+ * <i>This requires 1D column-major linearized arrays, as
+ * expected by the lower level routines; contrary to
+ * typical Java 2D row-major arrays.</i>
  */
 @lombok.extern.java.Log
 public abstract class $name$ {
@@ -91,7 +95,7 @@ public abstract class $name$ {
   static {
     try {
       String className = System.getProperty(PROPERTY_KEY, FALLBACK);
-      Class klass = Class.forName(FALLBACK);
+      Class klass = Class.forName(className);
       INSTANCE = ($name$) klass.newInstance();
       log.config("Implementation provided by " + INSTANCE.getClass());
       $initCode$
