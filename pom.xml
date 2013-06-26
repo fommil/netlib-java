@@ -16,6 +16,7 @@
     <modules>
         <module>generator</module>
         <module>netlib</module>
+        <module>legacy</module>
     </modules>
 
     <build>

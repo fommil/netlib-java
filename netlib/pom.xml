@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
-                <version>${project.version}</version>
+                <version>${project.parent.version}</version>
                 <executions>
                     <execution>
                         <id>blas-interface</id>
