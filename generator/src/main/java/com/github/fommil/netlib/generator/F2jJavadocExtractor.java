@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import static java.lang.String.format;
+
 /**
  * Extracts F2J Javadoc comments.
  *
@@ -44,14 +46,15 @@ public class F2jJavadocExtractor {
         String javadoc = getRawJavadoc(method);
         Matcher matcher = pattern.matcher(javadoc);
         boolean matched = matcher.find();
-        if (!matched) return String.format(
-                "<i>{@code %s} could not find docs for {@code %s} in {@code %s}</i>",
-                getClass().getSimpleName(), method, jar.getName());
+        if (!matched) return format(
+                "<i>{@code %s} could not find docs for {@code %s} in {@code %s}</i>.",
+                getClass().getSimpleName(), method, jar.getName()
+        );
 
         int start = matcher.end();
         int end = javadoc.indexOf("</pre>", start);
         javadoc = javadoc.substring(start, end).replace("\n c", "\n").replace("\n\n", "\n");
-        return "<pre>" + javadoc + "</pre>";
+        return "<pre><code>" + javadoc + " * </code></pre>";
     }
 
 }
