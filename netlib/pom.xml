@@ -87,6 +87,7 @@
                             <scan>org.netlib.lapack</scan>
                             <javadoc>net.sourceforge.f2j:jlapack</javadoc>
                             <fallback>com.github.fommil.netlib.JLAPACK</fallback>
+                            <initCode>INSTANCE.slamch("E"); INSTANCE.dlamch("E");</initCode>
                         </configuration>
                     </execution>
                     <execution>

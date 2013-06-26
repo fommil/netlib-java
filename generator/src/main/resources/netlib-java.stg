@@ -68,30 +68,39 @@ abstractMethod(return, method, params, docs = "") ::= <<
 abstract public $return$ $method$($params; separator=", "$);
 >>
 
-abstractClass(package, name, members, docs, fallback) ::= <<
+abstractClass(package, name, members, docs, fallback, initCode = "") ::= <<
 $copyright()$
 package $package$;
 
 /**
  * $docs$
+ * <p>
+ * Property {@value #PROPERTY_KEY} defines the implementation to load,
+ * defaulting to {@value #FALLBACK}.
  */
 @lombok.extern.java.Log
 public abstract class $name$ {
 
-  static private final $name$ current;
+  private static final String FALLBACK = "$fallback$";
+  private static final String PROPERTY_KEY = "$package$.$name$";
+  private static final $name$ INSTANCE;
   static {
     try {
-      // TODO: property lookup of implementation
-      current = new $fallback$();
-      log.config("Implementation provided by " + current.getClass());
-      // FIXME: initialise LAPACK implementations
+      String className = System.getProperty(PROPERTY_KEY, FALLBACK);
+      Class klass = Class.forName(FALLBACK);
+      INSTANCE = ($name$) klass.newInstance();
+      log.config("Implementation provided by " + INSTANCE.getClass());
+      $initCode$
     } catch (Exception e) {
       throw new ExceptionInInitializerError(e);
     }
   }
 
+  /**
+   * @return the environment-defined implementation.
+   */
   public static $name$ getInstance() {
-    return current;
+    return INSTANCE;
   }
 
   $members; separator="\n\n"$

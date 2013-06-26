@@ -74,6 +74,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
 
     protected Paranamer paranamer = new DefaultParanamer();
 
+    @Override
     public void execute() throws MojoExecutionException {
         try {
             if (!Strings.isNullOrEmpty(javadoc))
