@@ -20,17 +20,32 @@ public abstract class AbstractJavaGenerator extends AbstractNetlibGenerator {
 
     /**
      * @param method
-     * @return a list of relevant parameters for the netlib interface as "fqn name"
+     * @return a list of relevant parameters for the netlib interface.
      */
-    protected List<String> getNetlibJavaParameters(Method method) {
+    protected List<String> getNetlibJavaParameterNames(Method method) {
         final List<String> params = Lists.newArrayList();
         iterateRelevantParameters(method, new ParameterCallback() {
             @Override
             public void process(int i, Class<?> param, String name) {
-                params.add(param.getCanonicalName() + " " + name);
+                params.add(name);
             }
         });
         return params;
+    }
+
+    /**
+     * @param method
+     * @return a list of relevant canonical parameter types for the netlib interface.
+     */
+    protected List<String> getNetlibJavaParameterTypes(Method method) {
+        final List<String> types = Lists.newArrayList();
+        iterateRelevantParameters(method, new ParameterCallback() {
+            @Override
+            public void process(int i, Class<?> param, String name) {
+                types.add(param.getCanonicalName());
+            }
+        });
+        return types;
     }
 
     /**

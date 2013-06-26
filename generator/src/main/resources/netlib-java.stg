@@ -50,22 +50,26 @@ public class $name$ extends $parent$ {
 }
 >>
 
+params(paramTypes, paramNames) ::= <<
+$paramTypes,paramNames:{t,p|$t$ $p$};separator=", "$
+>>
 
-f2jImplMethod(returns, method, impl, params, calls, return="return") ::= <<
+f2jImplMethod(returns, method, impl, paramTypes, paramNames, calls, return="return") ::= <<
 @Override
-public $returns$ $method$($params; separator=", "$) {
+public $returns$ $method$($params(paramTypes,paramNames)$) {
   $return$ $impl$($calls; separator=", "$);
 }
 >>
 
 
-abstractMethod(return, method, params, docs = "") ::= <<
+abstractMethod(return, method, paramTypes, paramNames, docs = "", returnDocs = "@return") ::= <<
 /**
  * $docs$
  *
- * TODO: @param list
+$paramNames:{n|  * @param $n$};separator="\n"$
+ * $returnDocs$
  */
-abstract public $return$ $method$($params; separator=", "$);
+abstract public $return$ $method$($params(paramTypes,paramNames)$);
 >>
 
 abstractClass(package, name, members, docs, fallback, initCode = "") ::= <<
