@@ -22,6 +22,9 @@ import static java.lang.reflect.Modifier.isStatic;
 
 /**
  * Scans jar files for methods.
+ * <p>
+ * <b>SIDE-EFFECT WARNING: discovered classes are loaded</b>
+ * (only point at trusted jars, as arbitrary code may be invoked).
  *
  * @author Sam Halliday
  */
