@@ -108,13 +108,18 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * @param callback
      */
     protected void iterateRelevantParameters(Method method, ParameterCallback callback) {
+        if (method.getParameterTypes().length == 0)
+            return;
+
         String[] names;
         try {
             names = paranamer.lookupParameterNames(method, false);
         } catch (Exception e) {
-            getLog().warn("Parameter names not found for " + method);
             names = new String[0];
         }
+        if (names.length == 0)
+            getLog().warn("Parameter names not found for " + method);
+
         Class<?> last = null;
         for (int i = 0; i < method.getParameterTypes().length; i++) {
             Class<?> param = method.getParameterTypes()[i];
