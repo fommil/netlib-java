@@ -25,6 +25,11 @@
             <artifactId>arpack_combined_all</artifactId>
             <classifier>javadoc</classifier>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>jlapack</artifactId>
+            <classifier>javadoc</classifier>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -39,10 +44,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -106,6 +107,7 @@
                             <outputName>com/github/fommil/netlib/ARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <fallback>com.github.fommil.netlib.JARPACK</fallback>
+                            <javadoc>net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1</javadoc>
                         </configuration>
                     </execution>
                     <execution>
@@ -117,6 +119,7 @@
                             <outputName>com/github/fommil/netlib/JARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <implementing>com.github.fommil.netlib.ARPACK</implementing>
+                            <javadoc>net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1</javadoc>
                         </configuration>
                     </execution>
                 </executions>
