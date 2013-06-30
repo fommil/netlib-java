@@ -22,9 +22,8 @@
         </dependency>
         <dependency>
             <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>jlapack</artifactId>
+            <artifactId>arpack_combined_all</artifactId>
             <classifier>javadoc</classifier>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -61,7 +60,6 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/BLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
-                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
                             <fallback>com.github.fommil.netlib.JBLAS</fallback>
                         </configuration>
                     </execution>
@@ -73,7 +71,6 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/JBLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
-                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
                         </configuration>
                     </execution>
@@ -85,7 +82,6 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/LAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
-                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
                             <fallback>com.github.fommil.netlib.JLAPACK</fallback>
                             <initCode>INSTANCE.slamch("E"); INSTANCE.dlamch("E");</initCode>
                         </configuration>
@@ -98,7 +94,6 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/JLAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
-                            <javadoc>net.sourceforge.f2j:jlapack</javadoc>
                             <implementing>com.github.fommil.netlib.LAPACK</implementing>
                         </configuration>
                     </execution>

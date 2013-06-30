@@ -22,17 +22,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>jlapack</artifactId>
-            <classifier>javadoc</classifier>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>

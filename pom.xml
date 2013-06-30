@@ -121,16 +121,17 @@
                 <artifactId>arpack_combined_all</artifactId>
                 <version>0.1</version>
             </dependency>
+            <!--
+            To install locally:
+                curl -O https://raw.github.com/fommil/netlib-java/ant/lib/f2j/jlapack-0.8-javadoc.zip
+                mvn install:install-file -Dfile=jarpack-0.1-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=arpack_combined_all -Dversion=0.1 -Dpackaging=javadoc
+            -->
             <dependency>
-                <!--
-                To install locally:
-                    curl -O https://raw.github.com/fommil/netlib-java/ant/lib/f2j/jlapack-0.8-javadoc.zip
-                    mvn install:install-file -Dfile=jlapack-0.8-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=jlapack -Dversion=0.8 -Dpackaging=javadoc
-                -->
                 <groupId>net.sourceforge.f2j</groupId>
-                <artifactId>jlapack</artifactId>
+                <artifactId>arpack_combined_all</artifactId>
                 <classifier>javadoc</classifier>
-                <version>0.8</version>
+                <scope>provided</scope>
+                <version>0.1</version>
             </dependency>
             <dependency>
                 <groupId>org.antlr</groupId>
