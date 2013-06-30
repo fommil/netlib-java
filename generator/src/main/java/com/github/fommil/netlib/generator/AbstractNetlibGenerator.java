@@ -41,7 +41,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * Note that this must be listed as a <code>dependency</code>
      * section of the calling module, not a plugin <code>dependency</code>.
      */
-    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1")
+    @Parameter(defaultValue = "net.sourceforge.f2j:jlapack:jar:javadoc:0.8")
     protected String javadoc;
 
     /**
