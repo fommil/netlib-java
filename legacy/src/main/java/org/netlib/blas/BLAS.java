@@ -11,9 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BLAS extends com.github.fommil.netlib.BLAS {
 
-    @Delegate
-    private static final com.github.fommil.netlib.BLAS DELEGATE = com.github.fommil.netlib.BLAS.getInstance();
-
     private static final BLAS INSTANCE = new BLAS();
 
     /**
@@ -24,4 +21,8 @@ public class BLAS extends com.github.fommil.netlib.BLAS {
     public static BLAS getInstance() {
         return INSTANCE;
     }
+
+    @Delegate
+    private final com.github.fommil.netlib.BLAS DELEGATE = com.github.fommil.netlib.BLAS.getInstance();
+
 }

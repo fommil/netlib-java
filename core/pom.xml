@@ -97,6 +97,28 @@
                             <implementing>com.github.fommil.netlib.LAPACK</implementing>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>arpack-interface</id>
+                        <goals>
+                            <goal>interface</goal>
+                        </goals>
+                        <configuration>
+                            <outputName>com/github/fommil/netlib/ARPACK.java</outputName>
+                            <scan>org.netlib.arpack</scan>
+                            <fallback>com.github.fommil.netlib.JARPACK</fallback>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>arpack-f2j-implementation</id>
+                        <goals>
+                            <goal>f2j</goal>
+                        </goals>
+                        <configuration>
+                            <outputName>com/github/fommil/netlib/JARPACK.java</outputName>
+                            <scan>org.netlib.arpack</scan>
+                            <implementing>com.github.fommil.netlib.ARPACK</implementing>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
