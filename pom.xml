@@ -124,11 +124,11 @@
             <!--
             To install locally:
                 mvn install:install-file -Dfile=jlapack-0.8-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=jlapack -Dversion=0.8 -Dpackaging=javadoc
-                mvn install:install-file -Dfile=jarpack-0.1-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=arpack_combined_all -Dversion=0.1 -Dpackaging=javadoc
+                mvn install:install-file -Dfile=jarpack-0.1-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=jarpack -Dversion=0.1 -Dpackaging=javadoc
             -->
             <dependency>
                 <groupId>net.sourceforge.f2j</groupId>
-                <artifactId>arpack_combined_all</artifactId>
+                <artifactId>jarpack</artifactId>
                 <classifier>javadoc</classifier>
                 <scope>provided</scope>
                 <version>0.1</version>

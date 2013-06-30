@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
+            <artifactId>jarpack</artifactId>
             <classifier>javadoc</classifier>
         </dependency>
         <dependency>
@@ -107,7 +107,7 @@
                             <outputName>com/github/fommil/netlib/ARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <fallback>com.github.fommil.netlib.JARPACK</fallback>
-                            <javadoc>net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1</javadoc>
+                            <javadoc>net.sourceforge.f2j:jarpack:jar:javadoc:0.1</javadoc>
                         </configuration>
                     </execution>
                     <execution>
@@ -119,7 +119,7 @@
                             <outputName>com/github/fommil/netlib/JARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <implementing>com.github.fommil.netlib.ARPACK</implementing>
-                            <javadoc>net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1</javadoc>
+                            <javadoc>net.sourceforge.f2j:jarpack:jar:javadoc:0.1</javadoc>
                         </configuration>
                     </execution>
                 </executions>
