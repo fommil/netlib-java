@@ -33,7 +33,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * Note that this must be listed as a <code>dependency</code>
      * section of the calling module, not a plugin <code>dependency</code>.
      */
-    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all", required = true)
+    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all:jar:0.1", required = true)
     protected String input;
 
     /**
@@ -41,7 +41,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * Note that this must be listed as a <code>dependency</code>
      * section of the calling module, not a plugin <code>dependency</code>.
      */
-    @Parameter
+    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1")
     protected String javadoc;
 
     /**
@@ -54,13 +54,11 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     protected MavenProject project;
 
     protected File getFile(String artifactName) {
-        Artifact artifact = project.getArtifactMap().get(artifactName);
-        if (artifact == null)
-            throw new IllegalArgumentException("could not find artifact " + artifactName + " from " + project.getArtifactMap().keySet());
-        File file = artifact.getFile();
-        if (file == null)
-            throw new IllegalArgumentException("could not find file for " + artifact);
-        return file;
+        // artifactMap is a bit too simplistic
+        for (Artifact artifact : project.getArtifacts())
+            if (artifact.toString().startsWith(artifactName))
+                return artifact.getFile();
+        throw new IllegalArgumentException("could not find " + artifactName + " in " + project.getArtifacts());
     }
 
     /**
@@ -110,8 +108,14 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * @param callback
      */
     protected void iterateRelevantParameters(Method method, ParameterCallback callback) {
-        String[] names = paranamer.lookupParameterNames(method, false);
-        Class <?> last = null;
+        String[] names;
+        try {
+            names = paranamer.lookupParameterNames(method, false);
+        } catch (Exception e) {
+            getLog().warn("Parameter names not found for " + method);
+            names = new String[0];
+        }
+        Class<?> last = null;
         for (int i = 0; i < method.getParameterTypes().length; i++) {
             Class<?> param = method.getParameterTypes()[i];
             if (last != null && last.isArray() && param.equals(Integer.TYPE)) {
@@ -119,9 +123,11 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
                 continue;
             }
             last = param;
-            String name = "arg" + i;
+            String name;
             if (names.length > 0)
                 name = names[i];
+            else
+                name = "arg" + i;
 
             callback.process(i, param, name);
         }
