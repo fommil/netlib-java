@@ -396,16 +396,13 @@ public class JavadocParanamer implements Paranamer {
     private String[] fallbackHack(String javadoc, String method, Class<?>[] types) {
         String[] names = new String[types.length];
         int begin = javadoc.indexOf("METHOD SUMMARY");
-        System.out.println(method);
         Pattern pattern = Pattern.compile("(?i)\\Q>" + method + "\\E</A></(B|strong)>\\(");
         Matcher matcher = pattern.matcher(javadoc);
         matcher.find(begin);
-        System.out.println(matcher.group());
         begin = matcher.end();
         pattern = Pattern.compile("(?i)\\Q)</CODE>\\E");
         matcher = pattern.matcher(javadoc);
         matcher.find(begin);
-        System.out.println(matcher.group());
         int end = matcher.start();
         pattern = Pattern.compile("&nbsp;([^,]*)(,|$)");
         matcher = pattern.matcher(javadoc);
