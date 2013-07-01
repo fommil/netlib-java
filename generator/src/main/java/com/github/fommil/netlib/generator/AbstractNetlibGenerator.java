@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.DefaultParanamer;
-import com.thoughtworks.paranamer.JavadocParanamer;
+//import com.thoughtworks.paranamer.JavadocParanamer;
 import com.thoughtworks.paranamer.Paranamer;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -41,7 +41,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
      * Note that this must be listed as a <code>dependency</code>
      * section of the calling module, not a plugin <code>dependency</code>.
      */
-    @Parameter(defaultValue = "net.sourceforge.f2j:jlapack:jar:javadoc:0.8")
+    @Parameter(defaultValue = "net.sourceforge.f2j:arpack_combined_all:jar:javadoc:0.1")
     protected String javadoc;
 
     /**
