@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.DefaultParanamer;
-//import com.thoughtworks.paranamer.JavadocParanamer;
+import com.thoughtworks.paranamer.JavadocParanamer;
 import com.thoughtworks.paranamer.Paranamer;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -111,12 +111,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
         if (method.getParameterTypes().length == 0)
             return;
 
-        String[] names;
-        try {
-            names = paranamer.lookupParameterNames(method, false);
-        } catch (Exception e) {
-            names = new String[0];
-        }
+        String[] names = paranamer.lookupParameterNames(method, false);
         if (names.length == 0)
             getLog().warn("Parameter names not found for " + method);
 
