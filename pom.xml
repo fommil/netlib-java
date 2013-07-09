@@ -121,10 +121,6 @@
                 <artifactId>arpack_combined_all</artifactId>
                 <version>0.1</version>
             </dependency>
-            <!--
-            To install locally:
-                mvn install:install-file -Dfile=jarpack-0.1-javadoc.zip -DgroupId=net.sourceforge.f2j -DartifactId=arpack_combined_all -Dversion=0.1 -Dpackaging=javadoc
-            -->
             <dependency>
                 <groupId>net.sourceforge.f2j</groupId>
                 <artifactId>arpack_combined_all</artifactId>
