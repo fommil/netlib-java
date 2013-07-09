@@ -65,6 +65,7 @@
                             <goal>f2j</goal>
                         </goals>
                         <configuration>
+                            <!-- TODO: use F2J nonclementure -->
                             <outputName>com/github/fommil/netlib/JBLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
