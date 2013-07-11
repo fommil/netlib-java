@@ -5,6 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.DefaultParanamer;
 import com.thoughtworks.paranamer.JavadocParanamer;
+import com.thoughtworks.paranamer.ParameterNamesNotFoundException;
 import com.thoughtworks.paranamer.Paranamer;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -75,7 +76,9 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            if (!Strings.isNullOrEmpty(javadoc))
+            if (Strings.isNullOrEmpty(javadoc))
+                getLog().warn("Javadocs not attached for paranamer.");
+            else
                 paranamer = new JavadocParanamer(getFile(javadoc));
 
             File jar = getFile(input);
@@ -111,9 +114,12 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
         if (method.getParameterTypes().length == 0)
             return;
 
-        String[] names = paranamer.lookupParameterNames(method, false);
-        if (names.length == 0)
-            getLog().warn("Parameter names not found for " + method);
+        String[] names = new String[0];
+        try {
+            names = paranamer.lookupParameterNames(method, true);
+        } catch (ParameterNamesNotFoundException e) {
+            getLog().warn(e);
+        }
 
         Class<?> last = null;
         for (int i = 0; i < method.getParameterTypes().length; i++) {
