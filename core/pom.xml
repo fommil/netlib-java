@@ -56,7 +56,7 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/BLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
-                            <fallback>com.github.fommil.netlib.JBLAS</fallback>
+                            <fallback>com.github.fommil.netlib.F2jBLAS</fallback>
                         </configuration>
                     </execution>
                     <execution>
@@ -65,8 +65,7 @@
                             <goal>f2j</goal>
                         </goals>
                         <configuration>
-                            <!-- TODO: use F2J nonclementure -->
-                            <outputName>com/github/fommil/netlib/JBLAS.java</outputName>
+                            <outputName>com/github/fommil/netlib/F2jBLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
                         </configuration>
@@ -79,7 +78,7 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/LAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
-                            <fallback>com.github.fommil.netlib.JLAPACK</fallback>
+                            <fallback>com.github.fommil.netlib.F2jLAPACK</fallback>
                             <initCode>INSTANCE.slamch("E"); INSTANCE.dlamch("E");</initCode>
                         </configuration>
                     </execution>
@@ -89,7 +88,7 @@
                             <goal>f2j</goal>
                         </goals>
                         <configuration>
-                            <outputName>com/github/fommil/netlib/JLAPACK.java</outputName>
+                            <outputName>com/github/fommil/netlib/F2jLAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
                             <implementing>com.github.fommil.netlib.LAPACK</implementing>
                         </configuration>
@@ -102,7 +101,7 @@
                         <configuration>
                             <outputName>com/github/fommil/netlib/ARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
-                            <fallback>com.github.fommil.netlib.JARPACK</fallback>
+                            <fallback>com.github.fommil.netlib.F2jARPACK</fallback>
                         </configuration>
                     </execution>
                     <execution>
@@ -111,7 +110,7 @@
                             <goal>f2j</goal>
                         </goals>
                         <configuration>
-                            <outputName>com/github/fommil/netlib/JARPACK.java</outputName>
+                            <outputName>com/github/fommil/netlib/F2jARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <implementing>com.github.fommil.netlib.ARPACK</implementing>
                         </configuration>
