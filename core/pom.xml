@@ -44,7 +44,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${project.parent.groupId}</groupId>
                 <artifactId>generator</artifactId>
                 <version>${project.parent.version}</version>
                 <executions>

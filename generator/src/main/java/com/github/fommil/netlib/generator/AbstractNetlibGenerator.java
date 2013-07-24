@@ -3,10 +3,7 @@ package com.github.fommil.netlib.generator;
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
-import com.thoughtworks.paranamer.DefaultParanamer;
-import com.thoughtworks.paranamer.JavadocParanamer;
-import com.thoughtworks.paranamer.ParameterNamesNotFoundException;
-import com.thoughtworks.paranamer.Paranamer;
+import com.thoughtworks.paranamer.*;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -79,7 +76,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
             if (Strings.isNullOrEmpty(javadoc))
                 getLog().warn("Javadocs not attached for paranamer.");
             else
-                paranamer = new JavadocParanamer(getFile(javadoc));
+                paranamer = new CachingParanamer(new JavadocParanamer(getFile(javadoc)));
 
             File jar = getFile(input);
             JarMethodScanner scanner = new JarMethodScanner(jar);

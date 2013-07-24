@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>net.sourceforge.f2j</groupId>
             <artifactId>arpack_combined_all</artifactId>
         </dependency>
@@ -38,6 +43,20 @@
                         <configuration>
                             <outputName>c/testing.c</outputName>
                             <scan>org.netlib.blas</scan>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>blas-native-java-osx</id>
+                        <goals>
+                            <goal>native-java</goal>
+                        </goals>
+                        <configuration>
+                            <outputName>com/github/fommil/netlib/BlasOSX.java</outputName>
+                            <scan>org.netlib.blas</scan>
+                            <implementing>com.github.fommil.netlib.BLAS</implementing>
+                            <extending>com.github.fommil.netlib.F2jBLAS</extending>
+                            <library>blasosx</library>
+                            <excluded>dasum</excluded>
                         </configuration>
                     </execution>
                 </executions>

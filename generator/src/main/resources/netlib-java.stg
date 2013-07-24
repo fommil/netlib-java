@@ -78,3 +78,15 @@ public abstract class $name$ {
   $members; separator="\n\n"$
 }
 >>
+
+nativeImplMethod(returns, method, paramTypes, paramNames) ::= <<
+@Override
+public native $returns$ $method$($params(paramTypes,paramNames)$);
+>>
+
+unsupportedMethod(returns, method, paramTypes, paramNames) ::= <<
+@Override
+public $returns$ $method$($params(paramTypes,paramNames)$) {
+  throw new UnsupportedOperationException();
+}
+>>
