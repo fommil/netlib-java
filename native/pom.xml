@@ -26,6 +26,10 @@
             <artifactId>arpack_combined_all</artifactId>
             <classifier>javadoc</classifier>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -55,7 +59,12 @@
                             <scan>org.netlib.blas</scan>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
                             <extending>com.github.fommil.netlib.F2jBLAS</extending>
-                            <library>blasosx</library>
+                            <natives>
+                                <param>lib/linux/x86_64/netlib.so</param>
+                                <param>lib/linux/x86_32/netlib.so</param>
+                                <param>lib/osx/x86_64/netlib.jnilib</param>
+                                <param>lib/osx/x86_32/netlib.jnilib</param>
+                            </natives>
                             <excluded>dasum</excluded>
                         </configuration>
                     </execution>

@@ -33,7 +33,7 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
    * The name of the native library.
    */
   @Parameter(required = true)
-  protected String library;
+  protected String[] natives;
 
   /**
    * The implementation that we are extending (if not specified,
@@ -58,6 +58,11 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
     Set<String> excludes = newHashSet(excluded != null ? excluded.split(",") : new String[0]);
 
     List<String> members = Lists.newArrayList();
+
+    ST loader = jTemplates.getInstanceOf("staticJniLoader");
+    loader.add("libs", natives);
+    members.add(loader.render());
+
     for (Method method : methods) {
       ST m = jTemplates.getInstanceOf("nativeImplMethod");
       if (excludes.contains(method.getName())) {

@@ -90,3 +90,9 @@ public $returns$ $method$($params(paramTypes,paramNames)$) {
   throw new UnsupportedOperationException();
 }
 >>
+
+staticJniLoader(libs) ::= <<
+static {
+  com.github.fommil.jni.JniLoader.load("$libs; separator="\", \""$");
+}
+>>
