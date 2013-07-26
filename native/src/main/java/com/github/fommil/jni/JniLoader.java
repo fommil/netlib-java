@@ -67,7 +67,7 @@ public final class JniLoader {
       loaded = true;
     } catch (Throwable e) {
       if (e instanceof SecurityException || e instanceof UnsatisfiedLinkError)
-        log.log(INFO, "skipping direct load of " + path, e);
+        log.log(INFO, "skipping load of " + path, e);
       else throw new ExceptionInInitializerError(e);
     }
   }
@@ -90,7 +90,7 @@ public final class JniLoader {
       return file;
     } catch (Throwable e) {
       if (e instanceof SecurityException || e instanceof IOException) {
-        log.log(INFO, "skipping direct load of " + path, e);
+        log.log(INFO, "skipping extraction of " + path, e);
         return null;
       } else throw new ExceptionInInitializerError(e);
     }
