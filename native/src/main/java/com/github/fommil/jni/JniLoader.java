@@ -23,7 +23,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Log
 public final class JniLoader {
 
-  public static final String JNI_EXTRACT_DIR_PROP = "com.github.fommil.netlib.jni.dir";
+  public static final String JNI_EXTRACT_DIR_PROP = "com.github.fommil.jni.dir";
 
   static private boolean loaded;
 
