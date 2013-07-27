@@ -186,6 +186,11 @@
                     <artifactId>maven-plugin-plugin</artifactId>
                     <version>3.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>1.0-alpha-7</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
