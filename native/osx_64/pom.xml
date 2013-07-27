@@ -45,11 +45,17 @@
                     </javahClassNames>
                     <sources>
                         <source>
-                            <directory>../java/target/netlib-native</directory>
-                            <fileNames>
-                                <fileName>testing.c</fileName>
-                            </fileNames>
+                            <directory>../common/arpack</directory>
+                            <includes>
+                                <include>**/*.f</include>
+                            </includes>
                         </source>
+                        <!--<source>-->
+                            <!--<directory>../java/target/netlib-native</directory>-->
+                            <!--<fileNames>-->
+                                <!--<fileName>testing.c</fileName>-->
+                            <!--</fileNames>-->
+                        <!--</source>-->
                     </sources>
                 </configuration>
             </plugin>
