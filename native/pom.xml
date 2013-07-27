@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,67 +11,11 @@
     </parent>
 
     <artifactId>native</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-            <classifier>javadoc</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>java</module>
+        <module>osx_64</module>
+    </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>generator</artifactId>
-                <version>${project.parent.version}</version>
-                <executions>
-                    <execution>
-                        <id>testing</id>
-                        <goals>
-                            <goal>native-jni</goal>
-                        </goals>
-                        <configuration>
-                            <outputName>c/testing.c</outputName>
-                            <scan>org.netlib.blas</scan>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>blas-native-java-osx</id>
-                        <goals>
-                            <goal>native-java</goal>
-                        </goals>
-                        <configuration>
-                            <outputName>com/github/fommil/netlib/BlasOSX.java</outputName>
-                            <scan>org.netlib.blas</scan>
-                            <implementing>com.github.fommil.netlib.BLAS</implementing>
-                            <extending>com.github.fommil.netlib.F2jBLAS</extending>
-                            <natives>
-                                <param>lib/linux/x86_64/netlib.so</param>
-                                <param>lib/linux/x86_32/netlib.so</param>
-                                <param>lib/osx/x86_64/netlib.jnilib</param>
-                                <param>lib/osx/x86_32/netlib.jnilib</param>
-                            </natives>
-                            <excluded>dasum</excluded>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>

@@ -19,6 +19,18 @@ import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.WARNING;
 import static lombok.AccessLevel.PRIVATE;
 
+/**
+ * Simple (for the end user) native library loader.
+ * </p>
+ * The static method in this class enables developers to ship native
+ * libraries in jar files which are extracted and loaded at runtime,
+ * making native loading transparent for the end-user (as long as
+ * they are on a supported platform). Native libraries can also be
+ * placed in {@code java.library.path} for slightly faster startup
+ * times.
+ *
+ * TODO: move to a separate no-dependency project.
+ */
 @NoArgsConstructor(access = PRIVATE)
 @Log
 public final class JniLoader {
@@ -52,7 +64,6 @@ public final class JniLoader {
       File extracted = extract(path);
       if (extracted != null)
         liberalLoad(extracted.getAbsolutePath());
-      if (loaded) return;
     }
 
     if (!loaded)
@@ -100,14 +111,14 @@ public final class JniLoader {
     String name = new File(path).getName();
 
     String dir = System.getProperty(JNI_EXTRACT_DIR_PROP);
-    if (dir != null) {
-      File file = new File(dir, name);
-      if (file.exists() && !file.isFile())
-        throw new IllegalArgumentException(file.getAbsolutePath() + " is not a file.");
-      if (!file.exists()) file.createNewFile();
-      return file;
-    }
-    return createTempFile("", name);
+    if (dir == null)
+      return createTempFile("", name);
+
+    File file = new File(dir, name);
+    if (file.exists() && !file.isFile())
+      throw new IllegalArgumentException(file.getAbsolutePath() + " is not a file.");
+    if (!file.exists()) file.createNewFile();
+    return file;
   }
 
   /**
