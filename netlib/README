@@ -1,0 +1,28 @@
+This folder contains the netlib reference implementations.
+
+The netlib API is a Fortran API. The recommended C interface is via
+the CBLAS wrapper (for BLAS) and the LAPACKE wrapper (for LAPACK).
+
+netlib-java uses the C interface for native calls.
+
+Note that the CLAPACK effort is a translation of the Fortran codes into C
+and is therefore not as performant as the original Fortran codes - we
+do not use CLAPACK.
+
+There is no official C interface to ARPACK.
+
+Files extracted from:
+
+  http://www.netlib.org/blas/blas.tgz
+  http://www.netlib.org/blas/blast-forum/cblas.tgz
+  
+  http://www.netlib.org/lapack/lapack-3.4.2.tgz
+  
+  http://www.caam.rice.edu/software/ARPACK/SRC/arpack96.tar.gz
+  http://www.caam.rice.edu/software/ARPACK/SRC/patch.tar.gz
+
+complex and double complex routines (and empty files dnaupe.f, snaupe.f)
+have been removed.
+
+LAPACK ships with a bundled version of BLAS, but we use the original BLAS.
+Likewise for ARPACK and BLAS/LAPACK.
