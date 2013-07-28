@@ -245,7 +245,7 @@ c     strsen  LAPACK routine that re-orders the Schur form.
 c     strmm   Level 3 BLAS matrix times an upper triangular matrix.
 c     sger    Level 2 BLAS rank one update to a matrix.
 c     scopy   Level 1 BLAS that copies one vector to another .
-c     sdot    Level 1 BLAS that computes the scalar product of two vectors.
+c     wsdot    Level 1 BLAS that computes the scalar product of two vectors.
 c     snrm2   Level 1 BLAS that computes the norm of a vector.
 c     sscal   Level 1 BLAS that scales a vector.
 c
@@ -353,7 +353,7 @@ c
      &           mode  , msglvl, outncv, ritzr   ,
      &           ritzi , wri   , wrr   , irr     ,
      &           iri   , ibd   , ishift, numcnv  ,
-     &           np    , jj 
+     &           np    , jj    , nconv2
       logical    reord
       Real 
      &           conds  , rnorm, sep  , temp,
@@ -373,8 +373,8 @@ c     | External Functions |
 c     %--------------------%
 c
       Real 
-     &           slapy2, snrm2, slamch, sdot
-      external   slapy2, snrm2, slamch, sdot
+     &           slapy2, snrm2, slamch, wsdot
+      external   slapy2, snrm2, slamch, wsdot
 c
 c     %---------------------%
 c     | Intrinsic Functions |
@@ -589,7 +589,7 @@ c
      &          workl(ibd+jj-1) .le. tol*temp1) then
                select(jj) = .true.
                numcnv = numcnv + 1
-               if (jj .gt. nev) reord = .true.
+               if (jj .gt. nconv) reord = .true.
             endif
    11    continue
 c
@@ -661,11 +661,15 @@ c
      &                   workl(iuptri), ldh          , 
      &                   workl(invsub), ldq          , 
      &                   workl(iheigr), workl(iheigi), 
-     &                   nconv        , conds        ,
+     &                   nconv2       , conds        ,
      &                   sep          , workl(ihbds) , 
      &                   ncv          , iwork        ,
      &                   1            , ierr)
 c
+            if (nconv2 .lt. nconv) then
+               nconv = nconv2
+            end if
+
             if (ierr .eq. 1) then
                info = 1
                go to 9000

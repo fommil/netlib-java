@@ -43,11 +43,45 @@
                     <javahClassNames>
                         <javahClassName>com.github.fommil.netlib.BlasOSX</javahClassName>
                     </javahClassNames>
+                    <compilerMiddleOptions>
+                        <compilerMiddleOption>-fPIC -O3 -DADD_</compilerMiddleOption>
+                    </compilerMiddleOptions>
+                    <linkerMiddleOptions>
+                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                    </linkerMiddleOptions>
+                    <numberOfConcurrentCompilation>1</numberOfConcurrentCompilation>
                     <sources>
                         <source>
-                            <directory>../common/arpack</directory>
+                            <directory>../../netlib/blas</directory>
                             <includes>
-                                <include>**/*.f</include>
+                                <include>*.f</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/cblas</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/lapack</directory>
+                            <includes>
+                                <include>*.f</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/lapacke</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/arpack</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
                             </includes>
                         </source>
                         <!--<source>-->

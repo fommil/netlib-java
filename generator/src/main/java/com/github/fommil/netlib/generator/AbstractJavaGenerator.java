@@ -10,7 +10,7 @@ import static java.lang.String.format;
 
 public abstract class AbstractJavaGenerator extends AbstractNetlibGenerator {
 
-    protected final STGroupFile jTemplates = new STGroupFile("netlib-java.stg", '$', '$');
+    protected final STGroupFile jTemplates = new STGroupFile("com/github/fommil/netlib/generator/netlib-java.stg", '$', '$');
 
     protected String getTargetPackage() {
         return outputName.replace("/", ".").substring(0, outputName.lastIndexOf("/"));

@@ -60,16 +60,6 @@
                             <excluded>dasum</excluded>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>generator</artifactId>
-                <version>${project.parent.version}</version>
-                <configuration>
-                    <outputDir>${project.build.directory}/netlib-native</outputDir>
-                </configuration>
-                <executions>
                     <execution>
                         <id>testing</id>
                         <goals>
