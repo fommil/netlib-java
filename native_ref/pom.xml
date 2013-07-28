@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>native</artifactId>
+    <artifactId>native_ref</artifactId>
     <packaging>pom</packaging>
 
     <modules>
