@@ -3,5 +3,8 @@ group netlib-java;
 import "netlib-common.stg"
 
 double_(blah) ::= <<
-hello $blah$
+>>
+
+dummy() ::= <<
+void blah() { }
 >>

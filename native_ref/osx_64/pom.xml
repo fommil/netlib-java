@@ -10,13 +10,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>native-ref-osx_64</artifactId>
+    <artifactId>netlib-native_ref-osx_64</artifactId>
     <packaging>jnilib</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>native-java</artifactId>
+            <artifactId>native_ref-java</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -34,6 +34,25 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>generator</artifactId>
+                <version>${project.parent.version}</version>
+                <executions>
+                    <execution>
+                        <id>blas</id>
+                        <goals>
+                            <goal>native-jni</goal>
+                        </goals>
+                        <configuration>
+                            <outputDir>${project.build.directory}/netlib-native</outputDir>
+                            <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
+                            <scan>org.netlib.blas</scan>
+                        </configuration>
+                    </execution>
+                    <!-- TODO: LAPACK/ARPACK.c -->
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native-maven-plugin</artifactId>
                 <extensions>true</extensions>
@@ -48,16 +67,17 @@
                     </compilerMiddleOptions>
                     <linkerMiddleOptions>
                         <!-- macports gcc must be used to compile on OS X -->
-                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM -static-libgfortran /opt/local/lib/gcc47/libquadmath.a -static-libgcc</linkerMiddleOption>
+                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM -static-libgfortran
+                            /opt/local/lib/gcc47/libquadmath.a -static-libgcc
+                        </linkerMiddleOption>
                     </linkerMiddleOptions>
-                    <numberOfConcurrentCompilation>1</numberOfConcurrentCompilation>
                     <sources>
-                        <!--<source>-->
-                        <!--<directory>../java/target/netlib-native</directory>-->
-                        <!--<fileNames>-->
-                        <!--<fileName>testing.c</fileName>-->
-                        <!--</fileNames>-->
-                        <!--</source>-->
+                        <source>
+                            <directory>${project.build.directory}/netlib-native</directory>
+                            <includes>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
                         <source>
                             <directory>../../netlib/JNI</directory>
                             <includes>

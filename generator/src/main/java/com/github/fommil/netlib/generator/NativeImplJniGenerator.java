@@ -20,8 +20,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
 
   @Override
   protected String generate(List<Method> methods) throws Exception {
-    ST t = jniTemplates.getInstanceOf("double_");
-    t.add("blah", "world");
+    ST t = jniTemplates.getInstanceOf("dummy");
     return t.render();
   }
 
