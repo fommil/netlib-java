@@ -20,7 +20,7 @@
         <module>generator</module>
         <module>core</module>
         <module>legacy</module>
-        <module>native</module>
+        <module>native_ref</module>
     </modules>
 
     <properties>
