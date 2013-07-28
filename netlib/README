@@ -21,12 +21,15 @@ Files extracted from:
   http://www.netlib.org/lapack/lapacke_mangling.h (missing file)
   
   https://github.com/scipy/scipy/tree/master/scipy/sparse/linalg/eigen/arpack/ARPACK
+  http://www.caam.rice.edu/software/ARPACK/ARPACK++/arpack++.tar.gz (modified arpack.h)
 
-complex and double complex routines are not included because they are not
+Complex and double complex routines are not included because they are not
 supported by netlib-java.
 
 The following files have been removed because they don't compile:
 
+BLAS/xerbla.c
+LAPACK/xerbla.f
 LAPACK/*_extended.f
 LAPACK/{d,s}{gb,ge,po,sy}{rfs,svx}x.f
 LAPACKE/lapacke_{d,s}{gb,ge,po,sy}{rfs,svx}x{_work,}.c

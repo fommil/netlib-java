@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>native-osx_64</artifactId>
-    <packaging>so</packaging>
+    <packaging>jnilib</packaging>
 
     <dependencies>
         <dependency>
@@ -44,10 +44,10 @@
                         <javahClassName>com.github.fommil.netlib.BlasOSX</javahClassName>
                     </javahClassNames>
                     <compilerMiddleOptions>
-                        <compilerMiddleOption>-fPIC -O3 -DADD_</compilerMiddleOption>
+                        <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM</linkerMiddleOption>
                     </linkerMiddleOptions>
                     <numberOfConcurrentCompilation>1</numberOfConcurrentCompilation>
                     <sources>
