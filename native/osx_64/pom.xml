@@ -47,49 +47,56 @@
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM</linkerMiddleOption>
+                        <!-- macports gcc must be used to compile on OS X -->
+                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM -static-libgfortran /opt/local/lib/gcc47/libquadmath.a -static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                     <numberOfConcurrentCompilation>1</numberOfConcurrentCompilation>
                     <sources>
-                        <source>
-                            <directory>../../netlib/blas</directory>
-                            <includes>
-                                <include>*.f</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/cblas</directory>
-                            <includes>
-                                <include>*.f</include>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/lapack</directory>
-                            <includes>
-                                <include>*.f</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/lapacke</directory>
-                            <includes>
-                                <include>*.f</include>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/arpack</directory>
-                            <includes>
-                                <include>*.f</include>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
                         <!--<source>-->
-                            <!--<directory>../java/target/netlib-native</directory>-->
-                            <!--<fileNames>-->
-                                <!--<fileName>testing.c</fileName>-->
-                            <!--</fileNames>-->
+                        <!--<directory>../java/target/netlib-native</directory>-->
+                        <!--<fileNames>-->
+                        <!--<fileName>testing.c</fileName>-->
+                        <!--</fileNames>-->
                         <!--</source>-->
+                        <source>
+                            <directory>../../netlib/JNI</directory>
+                            <includes>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/BLAS</directory>
+                            <includes>
+                                <include>*.f</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/CBLAS</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/LAPACK</directory>
+                            <includes>
+                                <include>*.f</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/LAPACKE</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../netlib/ARPACK</directory>
+                            <includes>
+                                <include>*.f</include>
+                                <include>*.c</include>
+                            </includes>
+                        </source>
                     </sources>
                 </configuration>
             </plugin>
