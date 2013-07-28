@@ -1,10 +1,6 @@
 #include <jni.h>
 #include "f2c.h"
 #include <cblas.h>
-#include <clapack.h>
-#include "arpack.h"
-// this will be ignored if a system clapack.h was found first
-#include "clapack.h"
 
 // enum CBLAS_ORDER {CblasRowMajor=101, CblasColMajor=102 };
 // this is the ordering used by F2J
