@@ -16,7 +16,7 @@ import java.util.List;
 )
 public class NativeImplJniGenerator extends AbstractNetlibGenerator {
 
-  protected final STGroupFile jniTemplates = new STGroupFile("netlib-jni.stg", '$', '$');
+  protected final STGroupFile jniTemplates = new STGroupFile("com/github/fommil/netlib/generator/netlib-jni.stg", '$', '$');
 
   @Override
   protected String generate(List<Method> methods) throws Exception {
