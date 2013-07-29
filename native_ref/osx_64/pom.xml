@@ -114,7 +114,6 @@
                             <directory>../../netlib/ARPACK</directory>
                             <includes>
                                 <include>*.f</include>
-                                <include>*.c</include>
                             </includes>
                         </source>
                     </sources>

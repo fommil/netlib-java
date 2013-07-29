@@ -10,7 +10,7 @@ and is therefore not as performant as the original Fortran codes - we
 do not use CLAPACK.
 
 There is no official C interface to ARPACK:
-[SCIPY-2662](https://github.com/scipy/scipy/issues/2662).
+[ARPACK-1287](http://forge.scilab.org/index.php/p/arpack-ng/issues/1287/).
 
 Files extracted from:
 
@@ -20,7 +20,7 @@ Files extracted from:
   http://www.netlib.org/lapack/lapack-3.4.2.tgz (from various folders)
   http://www.netlib.org/lapack/lapacke_mangling.h (missing file)
   
-  https://github.com/scipy/scipy/tree/master/scipy/sparse/linalg/eigen/arpack/ARPACK
+  http://forge.scilab.org/index.php/p/arpack-ng/downloads/607/
   http://www.caam.rice.edu/software/ARPACK/ARPACK++/arpack++.tar.gz (modified arpack.h)
 
 Complex and double complex routines are not included because they are not
