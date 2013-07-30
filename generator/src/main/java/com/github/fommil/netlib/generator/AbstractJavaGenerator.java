@@ -22,36 +22,6 @@ public abstract class AbstractJavaGenerator extends AbstractNetlibGenerator {
 
     /**
      * @param method
-     * @return parameters names for the netlib interface.
-     */
-    protected List<String> getNetlibJavaParameterNames(Method method) {
-        final List<String> params = Lists.newArrayList();
-        iterateRelevantParameters(method, new ParameterCallback() {
-            @Override
-            public void process(int i, Class<?> param, String name) {
-                params.add(name);
-            }
-        });
-        return params;
-    }
-
-    /**
-     * @param method
-     * @return canonical parameter types for the netlib interface.
-     */
-    protected List<String> getNetlibJavaParameterTypes(Method method) {
-        final List<String> types = Lists.newArrayList();
-        iterateRelevantParameters(method, new ParameterCallback() {
-            @Override
-            public void process(int i, Class<?> param, String name) {
-                types.add(param.getCanonicalName());
-            }
-        });
-        return types;
-    }
-
-    /**
-     * @param method
      * @return parameters to pass to the F2J implementation.
      */
     protected List<String> getF2jJavaParameters(Method method) {

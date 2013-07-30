@@ -60,7 +60,7 @@
                     <javahOS>macosx</javahOS>
                     <javahVerbose>true</javahVerbose>
                     <javahClassNames>
-                        <javahClassName>com.github.fommil.netlib.NativeRefBLAS.java</javahClassName>
+                        <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
                     </javahClassNames>
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
