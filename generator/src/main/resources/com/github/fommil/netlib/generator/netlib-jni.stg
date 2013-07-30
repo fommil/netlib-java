@@ -1,6 +1,28 @@
 group netlib-java;
 
 import "netlib-common.stg"
+import "netlib-java.stg"
+
+include(files) ::= <<
+$files:{f|#include $f$};separator="\n"$
+>>
+
+function(returns, fqn, members, paramTypes, paramNames, return="return returnValue;") ::= <<
+JNIEXPORT $returns$ JNICALL Java_$fqn$ (JNIEnv * env, jobject calling_obj, $params(paramTypes,paramNames)$) {
+    $members; separator="\n"$
+	$return$
+}
+>>
+
+jni(includes, members) ::= <<
+$copyright()$
+
+#include <jni.h>
+$include(includes)$
+
+$members; separator="\n\n"$
+>>
+
 
 double_(blah) ::= <<
 >>
