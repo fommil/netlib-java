@@ -1,18 +1,16 @@
 package com.github.fommil.netlib.generator;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroupFile;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.collect.Iterables.transform;
-import static com.google.common.collect.Lists.newArrayList;
 
 @Mojo(
     name = "native-jni",
@@ -23,22 +21,55 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
 
   protected final STGroupFile jniTemplates = new STGroupFile("com/github/fommil/netlib/generator/netlib-jni.stg", '$', '$');
 
+  /**
+   * C Header files to include
+   */
+  @Parameter
+  protected List<String> includes;
+
   @Override
   protected String generate(List<Method> methods) throws Exception {
     ST t = jniTemplates.getInstanceOf("jni");
 
-    t.add("includes", newArrayList("<cblas.h>"));
+    if (includes != null)
+      t.add("includes", includes);
 
     List<String> members = Lists.newArrayList();
     for (Method method : methods) {
       ST f = jniTemplates.getInstanceOf("function");
       f.add("returns", "void");
       f.add("fqn", (method.getDeclaringClass().getCanonicalName() + "." + method.getName()).replace(".", "_"));
-      f.add("paramTypes", getNetlibCParameterTypes(method));
-      f.add("paramNames", getNetlibJavaParameterNames(method));
+      List<String> params = getNetlibCParameterTypes(method);
+      List<String> names = getNetlibJavaParameterNames(method);
+      f.add("paramTypes", params);
+      f.add("paramNames", names);
       f.add("return", "");
+
+      List<String> init = Lists.newArrayList();
+      List<String> clean = Lists.newArrayList();
+
+      for (int i = 0; i < params.size(); i++) {
+        String param = params.get(i);
+        String name = names.get(i);
+        ST before = jniTemplates.getInstanceOf(param + "_init");
+        if (before != null) {
+          before.add("name", name);
+          init.add(before.render());
+        }
+
+        ST after = jniTemplates.getInstanceOf(param + "_clean");
+        if (after != null) {
+          after.add("name", name);
+          clean.add(after.render());
+        }
+      }
+      Collections.reverse(clean);
+
+      f.add("init", init);
+      f.add("clean", clean);
       members.add(f.render());
     }
+
 
     t.add("members", members);
 
@@ -46,12 +77,17 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   }
 
   private List<String> getNetlibCParameterTypes(Method method) {
-    return newArrayList(transform(getNetlibJavaParameterTypes(method), new Function<String, String>() {
+    final List<String> types = Lists.newArrayList();
+    iterateRelevantParameters(method, new ParameterCallback() {
       @Override
-      public String apply(String input) {
-        return input;
+      public void process(int i, Class<?> param, String name) {
+        if (param.isArray())
+          types.add("j" + param.getComponentType().getSimpleName() + "Array");
+        else
+          types.add("j" + param.getSimpleName().toLowerCase());
       }
-    }));
+    });
+    return types;
   }
 
 }
