@@ -4,12 +4,13 @@ import "netlib-common.stg"
 import "netlib-java.stg"
 
 include(files) ::= <<
-$files:{f|#include $f$};separator="\n"$
+$files:{f|#include <$f$>};separator="\n"$
 >>
 
-function(returns, fqn, members, paramTypes, paramNames, return="return returnValue;") ::= <<
+function(returns, fqn, init, clean, paramTypes, paramNames, return="return returnValue;") ::= <<
 JNIEXPORT $returns$ JNICALL Java_$fqn$ (JNIEnv * env, jobject calling_obj, $params(paramTypes,paramNames)$) {
-    $members; separator="\n"$
+    $init; separator="\n"$
+    $clean; separator="\n"$
 	$return$
 }
 >>
@@ -18,15 +19,30 @@ jni(includes, members) ::= <<
 $copyright()$
 
 #include <jni.h>
+#include <netlib-jni.h>
 $include(includes)$
 
 $members; separator="\n\n"$
 >>
 
-
-double_(blah) ::= <<
+array_init(type, name) ::= <<
+$type$ * jni_$name$ = (*env)->GetPrimitiveArrayCritical(env, $name$, JNI_FALSE);
+check_memory(env, jni_$name$);
 >>
 
-dummy() ::= <<
-void blah() { }
+array_clean(name) ::= <<
+(*env)->ReleasePrimitiveArrayCritical(env, $name$, jni_$name$, 0);
+>>
+
+jdoubleArray_init(name, type="jdouble") ::= "$array_init(type, name)$"
+jdoubleArray_clean(name) ::= "$array_clean(name)$"
+jfloatArray_init(name, type="jfloat") ::= "$array_init(type, name)$"
+jfloatArray_clean(name) ::= "$array_clean(name)$"
+
+jstring_init(name) ::= <<
+char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, $name$, JNI_FALSE);
+>>
+
+jstring_clean(name) ::= <<
+(*env)->ReleaseStringUTFChars(env, $name$, jni_$name$);
 >>

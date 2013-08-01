@@ -47,6 +47,10 @@
                             <outputDir>${project.build.directory}/netlib-native</outputDir>
                             <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
                             <scan>org.netlib.blas</scan>
+                            <!--<includes>-->
+                            <!--<param>lapacke.h</param>-->
+                            <!--<param>arpack.h</param>-->
+                            <!--</includes>-->
                         </configuration>
                     </execution>
                     <!-- TODO: LAPACK/ARPACK.c -->
