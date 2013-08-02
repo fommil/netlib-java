@@ -22,6 +22,12 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   protected final STGroupFile jniTemplates = new STGroupFile("com/github/fommil/netlib/generator/netlib-jni.stg", '$', '$');
 
   /**
+   * The interface that we are implementing.
+   */
+  @Parameter(required = true)
+  protected String implementing;
+
+  /**
    * C Header files to include
    */
   @Parameter
@@ -31,19 +37,28 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   protected String generate(List<Method> methods) throws Exception {
     ST t = jniTemplates.getInstanceOf("jni");
 
-    if (includes != null)
-      t.add("includes", includes);
+    if (includes == null)
+      includes = Lists.newArrayList();
+
+    includes.add(outputName.replace(".c", ".h"));
+    t.add("includes", includes);
 
     List<String> members = Lists.newArrayList();
     for (Method method : methods) {
       ST f = jniTemplates.getInstanceOf("function");
-      f.add("returns", "void");
-      f.add("fqn", (method.getDeclaringClass().getCanonicalName() + "." + method.getName()).replace(".", "_"));
+      f.add("returns", jType2C(method.getReturnType()));
+      f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
       List<String> params = getNetlibCParameterTypes(method);
       List<String> names = getNetlibJavaParameterNames(method);
       f.add("paramTypes", params);
       f.add("paramNames", names);
-      f.add("return", "");
+
+      if (method.getReturnType() == Void.TYPE) {
+        f.add("decReturn", "");
+        f.add("return", "");
+      } else {
+        f.add("decReturn", jType2C(method.getReturnType()) + " returnValue;");
+      }
 
       List<String> init = Lists.newArrayList();
       List<String> clean = Lists.newArrayList();
@@ -81,13 +96,18 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     iterateRelevantParameters(method, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
-        if (param.isArray())
-          types.add("j" + param.getComponentType().getSimpleName() + "Array");
-        else
-          types.add("j" + param.getSimpleName().toLowerCase());
+        types.add(jType2C(param));
       }
     });
     return types;
+  }
+
+  private String jType2C(Class param) {
+    if (param == Void.TYPE)
+      return "void";
+    if (param.isArray())
+      return "j" + param.getComponentType().getSimpleName() + "Array";
+    return "j" + param.getSimpleName().toLowerCase();
   }
 
 }
