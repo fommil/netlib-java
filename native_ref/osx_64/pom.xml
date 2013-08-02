@@ -44,6 +44,7 @@
                             <goal>native-jni</goal>
                         </goals>
                         <configuration>
+                            <implementing>com.github.fommil.netlib.NativeRefBLAS</implementing>
                             <outputDir>${project.build.directory}/netlib-native</outputDir>
                             <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
                             <scan>org.netlib.blas</scan>
