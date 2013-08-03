@@ -7,10 +7,10 @@ include(files) ::= <<
 $files:{f|#include <$f$>};separator="\n"$
 >>
 
-function(returns, fqn, init, clean, paramTypes, paramNames, decReturn, return="return returnValue;") ::= <<
+function(returns, fqn, init, clean, paramTypes, paramNames, assignReturn, return, params, name) ::= <<
 JNIEXPORT $returns$ JNICALL Java_$fqn$ (JNIEnv * env, jobject calling_obj, $params(paramTypes,paramNames)$) {
-  $decReturn$
   $init; separator="\n"$
+  $assignReturn$$name$($params;separator=", "$);
   $clean; separator="\n"$
   $return$
 }

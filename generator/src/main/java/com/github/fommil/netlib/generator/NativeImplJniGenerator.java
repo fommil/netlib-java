@@ -10,6 +10,7 @@ import org.stringtemplate.v4.STGroupFile;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Mojo(
@@ -33,6 +34,24 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   @Parameter
   protected List<String> includes;
 
+  /**
+   * Prepended to the native function name.
+   */
+  @Parameter(defaultValue = "")
+  protected String prefix;
+
+  /**
+   * Prepended to the native function parameter list.
+   */
+  @Parameter
+  protected String firstParam;
+
+  @Parameter(defaultValue = "")
+  protected String noFirstParam;
+
+  @Parameter(defaultValue = "")
+  protected String exclude;
+
   @Override
   protected String generate(List<Method> methods) throws Exception {
     ST t = jniTemplates.getInstanceOf("jni");
@@ -43,21 +62,27 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     includes.add(outputName.replace(".c", ".h"));
     t.add("includes", includes);
 
-    List<String> members = Lists.newArrayList();
+    List <String> members = Lists.newArrayList();
     for (Method method : methods) {
+      if (method.getName().matches(exclude))
+        continue;
+
       ST f = jniTemplates.getInstanceOf("function");
       f.add("returns", jType2C(method.getReturnType()));
       f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
+      f.add("name", prefix + method.getName());
       List<String> params = getNetlibCParameterTypes(method);
       List<String> names = getNetlibJavaParameterNames(method);
       f.add("paramTypes", params);
       f.add("paramNames", names);
+      f.add("params", getCMethodParams(method));
 
       if (method.getReturnType() == Void.TYPE) {
-        f.add("decReturn", "");
+        f.add("assignReturn", "");
         f.add("return", "");
       } else {
-        f.add("decReturn", jType2C(method.getReturnType()) + " returnValue;");
+        f.add("assignReturn", jType2C(method.getReturnType()) + " returnValue = ");
+        f.add("return", "return returnValue;");
       }
 
       List<String> init = Lists.newArrayList();
@@ -110,4 +135,36 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     return "j" + param.getSimpleName().toLowerCase();
   }
 
+  private List<String> getCMethodParams(Method method) {
+    final LinkedList<String> params = Lists.newLinkedList();
+    if (firstParam != null && !method.getName().matches(noFirstParam)) {
+      params.add(firstParam);
+    }
+
+    iterateRelevantParameters(method, new ParameterCallback() {
+      @Override
+      public void process(int i, Class<?> param, String name) {
+        if (!param.isPrimitive()) {
+          name = "jni_" + name;
+          if (param.getSimpleName().endsWith("W")) {
+            name = "&" + name;
+          }
+        }
+
+        // hack for CBLAS
+        if (name.contains("trans")) {
+          name = "getTrans(" + name + ")";
+        } else if (name.contains("uplo")) {
+          name = "getUpLo(" + name + ")";
+        } else if (name.contains("side")) {
+          name = "getSide(" + name + ")";
+        } else if (name.contains("diag")) {
+          name = "getDiag(" + name + ")";
+        }
+        params.add(name);
+      }
+    });
+
+    return params;
+  }
 }
