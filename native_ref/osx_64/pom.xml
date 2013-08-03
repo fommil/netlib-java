@@ -77,14 +77,20 @@
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
-                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.6</compilerExecutable>
+                    <!-- numberOfConcurrentCompilation would be nice, but always fails :-( -->
+                    <!-- http://jira.codehaus.org/browse/MOJO-1955 -->
+                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.8</compilerExecutable>
+                    <linkerExecutable>dragonegg-3.4-gcc-mp-4.8</linkerExecutable>
+                    <!-- dragonegg 3m3s 5.0MB -->
+                    <!--<compilerExecutable>gcc-mp-4.8</compilerExecutable>-->
+                    <!--<linkerExecutable>gcc-mp-4.8</linkerExecutable>-->
+                    <!-- gcc-4.7 3m34s 5.0MB -->
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/local/lib/gcc46</linkerMiddleOption>
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <linkerMiddleOption>-static-libgfortran -static-libquadmath -static-libgcc</linkerMiddleOption>
+                        <linkerMiddleOption>-static-libgfortran /opt/local/lib/gcc48/libquadmath.a -static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
                         <source>
