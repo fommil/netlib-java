@@ -17,7 +17,7 @@
     NOTE: OS X does not come with a Fortran compiler.
     This configuration uses macports' distribution of dragonegg and gcc 4.6:
 
-      sudo port install dragonegg-3.4
+      sudo port install dragonegg-3.4-gcc-4.8
     -->
 
     <dependencies>
@@ -55,6 +55,10 @@
                             <outputDir>${project.build.directory}/netlib-native</outputDir>
                             <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
                             <scan>org.netlib.blas</scan>
+                            <prefix>cblas_</prefix>
+                            <firstParam>F2J_JNI_ORDER</firstParam>
+                            <noFirstParam>.*(dot|nrm2|asum|amax|swap|copy|rot|xpy|cal).*</noFirstParam>
+                            <exclude>.*lsame.*</exclude>
                             <!--<includes>-->
                             <!--<param>lapacke.h</param>-->
                             <!--<param>arpack.h</param>-->
