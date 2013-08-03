@@ -62,7 +62,7 @@
                 <artifactId>native-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <javahOS>macosx</javahOS>
+                    <javahOS>darwin</javahOS>
                     <javahVerbose>true</javahVerbose>
                     <javahClassNames>
                         <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
@@ -70,10 +70,11 @@
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
+                    <!-- macports gcc must be used to compile on OS X -->
+                    <compilerExecutable>dragonegg-3.4-gcc</compilerExecutable>
                     <linkerMiddleOptions>
-                        <!-- macports gcc must be used to compile on OS X -->
                         <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM -static-libgfortran
-                            /opt/local/lib/gcc47/libquadmath.a -static-libgcc
+                            /opt/local/lib/gcc46/libquadmath.a -static-libgcc
                         </linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
