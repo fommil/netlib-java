@@ -13,6 +13,13 @@
     <artifactId>netlib-native_ref-osx_64</artifactId>
     <packaging>jnilib</packaging>
 
+    <!--
+    NOTE: OS X does not come with a Fortran compiler.
+    This configuration uses macports' distribution of dragonegg and gcc 4.6:
+
+      sudo port install dragonegg-3.4
+    -->
+
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
@@ -70,12 +77,14 @@
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
-                    <!-- macports gcc must be used to compile on OS X -->
-                    <compilerExecutable>dragonegg-3.4-gcc</compilerExecutable>
+                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.6</compilerExecutable>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-dynamiclib -lgfortran -framework JavaVM -static-libgfortran
-                            /opt/local/lib/gcc46/libquadmath.a -static-libgcc
-                        </linkerMiddleOption>
+                        <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/local/lib/gcc46</linkerMiddleOption>
+                        <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
+                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
+                        <linkerMiddleOption>-static-libgfortran -static-libquadmath -static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
                         <source>
