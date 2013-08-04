@@ -3,6 +3,7 @@ package com.github.fommil.netlib;
 import com.google.common.base.Stopwatch;
 import junit.framework.TestCase;
 import lombok.extern.java.Log;
+import org.junit.Test;
 
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import java.util.Random;
 public class BLASTest extends TestCase {
 	private final BLAS jBLAS = BLAS.getInstance();
 
+  @Test
 	public void testDot() {
 		testDot1(jBLAS);
 	}
@@ -21,6 +23,7 @@ public class BLASTest extends TestCase {
 	 *
 	 * @see #testDot()
 	 */
+  @Test
 	public void testDotSpeed() {
 		int[] sizes = new int[]{10, 100, 1000, 10000, 20000, 50000, 75000,
 			100000, 200000, 500000, 1000000, 10000000

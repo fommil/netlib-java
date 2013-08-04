@@ -35,6 +35,21 @@
             <artifactId>arpack_combined_all</artifactId>
             <classifier>javadoc</classifier>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- http://svn.codehaus.org/mojo/trunk/mojo/maven-native/native-maven-plugin/src/it/jni/native/macosx/pom.xml -->

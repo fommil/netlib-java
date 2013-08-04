@@ -1,14 +1,17 @@
 package com.github.fommil.netlib;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 
 public class LAPACKTest extends TestCase {
 	private LAPACK jLAPACK = LAPACK.getInstance();
 
+  @Test
 	public void testGesvd() {
 		double[] jAns = testGesvd1(jLAPACK);
 	}
 
+  @Test
 	public void testSygv() {
 		double[] jAns = testSygv1(jLAPACK);
 	}

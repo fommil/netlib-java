@@ -15,8 +15,7 @@ import java.util.Arrays;
 
 import static java.io.File.createTempFile;
 import static java.nio.channels.Channels.newChannel;
-import static java.util.logging.Level.INFO;
-import static java.util.logging.Level.WARNING;
+import static java.util.logging.Level.*;
 import static lombok.AccessLevel.PRIVATE;
 
 /**
@@ -28,7 +27,7 @@ import static lombok.AccessLevel.PRIVATE;
  * they are on a supported platform). Native libraries can also be
  * placed in {@code java.library.path} for slightly faster startup
  * times.
- *
+ * <p/>
  * TODO: move to a separate no-dependency project.
  */
 @NoArgsConstructor(access = PRIVATE)
@@ -57,9 +56,11 @@ public final class JniLoader {
     if (paths == null || paths.length == 0)
       throw new ExceptionInInitializerError("invalid parameters");
 
+    File javaLibPath = new File(System.getProperty("java.library.path"));
+
     for (String path : paths) {
       if (loaded) return;
-      liberalLoad(path);
+      liberalLoad(javaLibPath.getAbsolutePath() + "/" + path);
       if (loaded) return;
       File extracted = extract(path);
       if (extracted != null)
@@ -72,13 +73,13 @@ public final class JniLoader {
 
   private static void liberalLoad(String path) {
     try {
-      log.info("loading " + path);
+      log.fine("attempting to load " + path);
       System.load(path);
       log.info("successfully loaded " + path);
       loaded = true;
     } catch (Throwable e) {
       if (e instanceof SecurityException || e instanceof UnsatisfiedLinkError)
-        log.log(INFO, "skipping load of " + path, e);
+        log.log(FINE, "skipping load of " + path, e);
       else throw new ExceptionInInitializerError(e);
     }
   }
