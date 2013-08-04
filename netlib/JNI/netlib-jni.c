@@ -51,3 +51,35 @@ inline void check_memory(JNIEnv * env, void * arg) {
 	(*env)->ThrowNew(env, (*env)->FindClass(env, "java/lang/OutOfMemoryError"),
 		"Out of memory transferring array to native code in F2J JNI");
 }
+
+inline jint jboolean2jint(jboolean b) {
+    switch (b) {
+        case JNI_TRUE: return 1;
+        default: return 0;
+    }
+}
+
+inline jboolean jint2jboolean(jint i) {
+    switch (i) {
+        case 1: return JNI_TRUE;
+        default: return JNI_FALSE;
+    }
+}
+
+
+jint* jbooleanArray2jintArray(JNIEnv * env, jboolean * a, jint size) {
+	jint * j = (jint*) malloc(size);
+	int i;
+	for (i = 0 ; i < size ; i++) {
+	    j[i] = jboolean2jint(a[i]);
+	}
+	return j;
+}
+
+void jintArray2jbooleanArray(JNIEnv * env, jint * a, jboolean * b, jint size) {
+	int i;
+	for (i = 0 ; i < size ; i++) {
+	    b[i] = jint2jboolean(a[i]);
+	}
+}
+

@@ -1,5 +1,6 @@
 package com.github.fommil.netlib.generator;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -59,7 +60,10 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   protected boolean cblas_hack;
 
   @Parameter
-  protected boolean lapack_hack;
+  protected boolean lapacke_hack;
+
+  @Parameter
+  protected boolean extractChar;
 
   @Override
   protected String generate(List<Method> methods) throws Exception {
@@ -84,7 +88,11 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
       f.add("params", getCMethodParams(method));
 
       if (method.getReturnType() == Void.TYPE) {
-        f.add("assignReturn", "");
+        if (lapacke_hack && Iterables.getLast(names).equals("info")) {
+          f.add("assignReturn", "int returnValue = ");
+        } else {
+          f.add("assignReturn", "");
+        }
         f.add("return", "");
       } else {
         f.add("assignReturn", jType2C(method.getReturnType()) + " returnValue = ");
@@ -98,12 +106,16 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
         String param = params.get(i);
         String name = names.get(i);
         ST before = jniTemplates.getInstanceOf(param + "_init");
+        if (lapacke_hack && name.equals("info"))
+          before = jniTemplates.getInstanceOf(param + "_info_init");
         if (before != null) {
           before.add("name", name);
           init.add(before.render());
         }
 
         ST after = jniTemplates.getInstanceOf(param + "_clean");
+        if (lapacke_hack && name.equals("info"))
+          after = jniTemplates.getInstanceOf(param + "_info_clean");
         if (after != null) {
           after.add("name", name);
           clean.add(after.render());
@@ -150,14 +162,20 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     iterateRelevantParameters(method, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
+        if (lapacke_hack && name.equals("info"))
+          return;
+
+        if (param == Object.class)
+          throw new UnsupportedOperationException(param  + " " + name);
+
         if (!param.isPrimitive()) {
           name = "jni_" + name;
-          if (param.getSimpleName().endsWith("W")) {
+          // NOTE: direct comparisons against StringW.class don't work as expected
+          if (!param.getSimpleName().equals("StringW") && param.getSimpleName().endsWith("W")) {
             name = "&" + name;
           }
         }
 
-        // TODO: clean up the hacks
         if (param == String.class) {
           if (cblas_hack) {
             if (name.contains("trans"))
@@ -168,13 +186,11 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
               name = "getCblasSide(" + name + ")";
             else if (name.contains("diag"))
               name = "getCblasDiag(" + name + ")";
-          } else if (lapack_hack) {
-            if (name.contains("trans") || name.contains("uplo") ||
-                name.contains("side") || name.contains("diag") ||
-                name.contains("compq"))
-              name = name + "[0]";
           }
         }
+
+        if (param == String.class && extractChar)
+          name = name + "[0]";
 
         params.add(name);
       }

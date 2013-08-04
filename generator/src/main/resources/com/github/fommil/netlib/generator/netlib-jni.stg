@@ -42,6 +42,19 @@ jfloatArray_clean(name) ::= "$array_clean(name)$"
 jintArray_init(name, type="jint") ::= "$array_init(type, name)$"
 jintArray_clean(name) ::= "$array_clean(name)$"
 
+jbooleanArray_init(name) ::= <<
+jboolean * jni_$name$_raw = (*env)->GetPrimitiveArrayCritical(env, $name$, JNI_FALSE);
+check_memory(env, jni_$name$_raw);
+jint jni_$name$_size = (*env)->GetArrayLength(env, $name$);
+jint* jni_$name$ = jbooleanArray2jintArray(env, jni_$name$_raw, jni_$name$_size);
+>>
+
+jbooleanArray_clean(name) ::= <<
+jintArray2jbooleanArray(env, jni_$name$, jni_$name$_raw, jni_$name$_size);
+free(jni_$name$);
+(*env)->ReleasePrimitiveArrayCritical(env, $name$, jni_$name$_raw, 0);
+>>
+
 jstring_init(name) ::= <<
 char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, $name$, JNI_FALSE);
 >>
@@ -80,3 +93,22 @@ jintw_clean(name) ::= <<
 (*env)->SetIntField(env, $name$, jni_$name$Id, jni_$name$);
 >>
 
+jintw_info_init(name) ::= <<
+jclass jni_$name$Class = (*env)->GetObjectClass(env, $name$);
+jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "I");
+>>
+
+jintw_info_clean(name) ::= <<
+(*env)->SetIntField(env, $name$, jni_$name$Id, returnValue);
+>>
+
+jstringw_init(name) ::= <<
+jclass jni_$name$Class = (*env)->GetObjectClass(env, $name$);
+jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "Ljava/lang/String;");
+jstring jni_$name$String = (jstring)((*env)->GetObjectField(env, $name$, jni_$name$Id));
+char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, jni_$name$String, JNI_FALSE);
+>>
+
+jstringw_clean(name) ::= <<
+(*env)->SetObjectField(env, $name$, jni_$name$Id, (*env)->NewStringUTF(env, jni_$name$));
+>>
