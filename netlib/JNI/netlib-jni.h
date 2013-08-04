@@ -5,7 +5,7 @@ typedef jobject jdoublew;
 typedef jobject jintw;
 
 // convenience methods for dealing with the CBLAS (not BLAS) specific enums
-// our API is using the Fortran-style char*[] system.
+// our API is using the Fortran-style char* system.
 
 enum CBLAS_TRANSPOSE getCblasTrans(const char *);
 
