@@ -153,7 +153,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     return "j" + param.getSimpleName().toLowerCase();
   }
 
-  private List<String> getCMethodParams(Method method) {
+  private List<String> getCMethodParams(final Method method) {
     final LinkedList<String> params = Lists.newLinkedList();
     if (firstParam != null && !method.getName().matches(noFirstParam)) {
       params.add(firstParam);
@@ -166,7 +166,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
           return;
 
         if (param == Object.class)
-          throw new UnsupportedOperationException(param  + " " + name);
+          throw new UnsupportedOperationException(method + " " + param  + " " + name);
 
         if (!param.isPrimitive()) {
           name = "jni_" + name;

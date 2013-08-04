@@ -58,7 +58,7 @@
                             <prefix>cblas_</prefix>
                             <firstParam>CblasColMajor</firstParam>
                             <noFirstParam>.*(dot|nrm2|asum|amax|swap|copy|rot|xpy|cal).*</noFirstParam>
-                            <exclude>(lsame)</exclude>
+                            <exclude>${prefer.f2j}</exclude>
                             <cblas_hack>true</cblas_hack>
                             <includes>
                                 <param>cblas.h</param>
@@ -78,8 +78,8 @@
                             <prefix>LAPACKE_</prefix>
                             <suffix>_work</suffix>
                             <firstParam>LAPACK_COL_MAJOR</firstParam>
-                            <noFirstParam>(s|d)(disna|gtcon|gttrf|lapy[23]|larfg|larnv|lasrt|ptcon|pttrf|stebz|sterf)</noFirstParam>
-                            <exclude>.*(gees|gges).*</exclude>
+                            <noFirstParam>[sd](disna|gtcon|gttrf|lapy[23]|larfg|larnv|lasrt|ptcon|pttrf|stebz|sterf|lamch)</noFirstParam>
+                            <exclude>${prefer.f2j}</exclude>
                             <extractChar>true</extractChar>
                             <lapacke_hack>true</lapacke_hack>
                             <includes>

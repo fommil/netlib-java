@@ -112,3 +112,15 @@ char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, jni_$name$String, JNI
 jstringw_clean(name) ::= <<
 (*env)->SetObjectField(env, $name$, jni_$name$Id, (*env)->NewStringUTF(env, jni_$name$));
 >>
+
+jbooleanw_init(name) ::= <<
+jclass jni_$name$Class = (*env)->GetObjectClass(env, $name$);
+jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "Z");
+jboolean jni_$name$_raw = (*env)->GetBooleanField(env, $name$, jni_$name$Id);
+jint jni_$name$ = jboolean2jint(jni_$name$_raw);
+>>
+
+jbooleanw_clean(name) ::= <<
+jni_$name$_raw = jint2jboolean(jni_$name$);
+(*env)->SetIntField(env, $name$, jni_$name$Id, jni_$name$_raw);
+>>

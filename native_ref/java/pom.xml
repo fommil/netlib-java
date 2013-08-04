@@ -51,8 +51,7 @@
                             <scan>org.netlib.blas</scan>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
                             <extending>com.github.fommil.netlib.F2jBLAS</extending>
-                            <!-- LSAME isn't part of official BLAS -->
-                            <unsupported>(lsame)</unsupported>
+                            <unsupported>${prefer.f2j}</unsupported>
                             <natives>
                                 <param>netlib-native_ref-linux_64.so</param>
                                 <param>netlib-native_ref-osx_64.so</param>
@@ -69,8 +68,7 @@
                             <scan>org.netlib.lapack</scan>
                             <implementing>com.github.fommil.netlib.LAPACK</implementing>
                             <extending>com.github.fommil.netlib.F2jLAPACK</extending>
-                            <!-- GEES etc needs an ill-defined callback -->
-                            <unsupported>.*(gees|dgges).*</unsupported>
+                            <unsupported>${prefer.f2j}</unsupported>
                             <natives>
                                 <param>netlib-native_ref-linux_64.so</param>
                                 <param>netlib-native_ref-osx_64.so</param>

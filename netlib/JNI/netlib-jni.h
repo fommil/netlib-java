@@ -4,6 +4,7 @@ typedef jobject jfloatw;
 typedef jobject jdoublew;
 typedef jobject jintw;
 typedef jobject jstringw;
+typedef jobject jbooleanw;
 
 
 // convenience methods for dealing with the CBLAS (not BLAS) specific enums
