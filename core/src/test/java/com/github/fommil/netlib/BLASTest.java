@@ -26,8 +26,8 @@ public class BLASTest extends TestCase {
   @Test
 	public void testDotSpeed() {
 		int[] sizes = new int[]{10, 100, 1000, 10000, 20000, 50000, 75000,
-			100000, 200000, 500000, 1000000, 10000000
-		}; // , 50000000 };
+			100000, 200000, 500000, 1000000, 10000000, 50000000
+		};
 
         Stopwatch stopwatch = new Stopwatch();
 		for (int size : sizes) {

@@ -18,6 +18,14 @@
     This configuration uses macports' distribution of dragonegg and gcc 4.6:
 
       sudo port install dragonegg-3.4-gcc-4.8
+
+    To get the i5 AVX instructions, CLANG must be used for assembly
+
+      http://stackoverflow.com/questions/9840207
+
+    (although I haven't noticed much difference) with these extra GCC flags
+
+      -Xassembler -w -march=corei7-avx -mtune=corei7-avx
     -->
 
     <dependencies>
