@@ -125,7 +125,7 @@
                         <javahClassName>com.github.fommil.netlib.NativeRefLAPACK</javahClassName>
                     </javahClassNames>
                     <compilerMiddleOptions>
-                        <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
+                        <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
                     <!-- numberOfConcurrentCompilation would be nice, but always fails :-( -->
                     <!-- http://jira.codehaus.org/browse/MOJO-1955 -->
