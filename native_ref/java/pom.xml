@@ -51,6 +51,7 @@
                             <scan>org.netlib.blas</scan>
                             <implementing>com.github.fommil.netlib.BLAS</implementing>
                             <extending>com.github.fommil.netlib.F2jBLAS</extending>
+                            <unsupported>.*lsame.*</unsupported>
                             <natives>
                                 <param>netlib-native_ref-linux_64.so</param>
                                 <param>netlib-native_ref-osx_64.so</param>

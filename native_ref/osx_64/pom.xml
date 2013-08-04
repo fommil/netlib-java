@@ -56,16 +56,36 @@
                             <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
                             <scan>org.netlib.blas</scan>
                             <prefix>cblas_</prefix>
-                            <firstParam>F2J_JNI_ORDER</firstParam>
+                            <firstParam>CblasColMajor</firstParam>
                             <noFirstParam>.*(dot|nrm2|asum|amax|swap|copy|rot|xpy|cal).*</noFirstParam>
                             <exclude>.*lsame.*</exclude>
-                            <!--<includes>-->
-                            <!--<param>lapacke.h</param>-->
-                            <!--<param>arpack.h</param>-->
-                            <!--</includes>-->
+                            <cblas_hack>true</cblas_hack>
+                            <includes>
+                                <param>cblas.h</param>
+                            </includes>
                         </configuration>
                     </execution>
-                    <!-- TODO: LAPACK/ARPACK.c -->
+                    <execution>
+                        <id>lapack</id>
+                        <goals>
+                            <goal>native-jni</goal>
+                        </goals>
+                        <configuration>
+                            <implementing>com.github.fommil.netlib.NativeRefLAPACK</implementing>
+                            <outputDir>${project.build.directory}/netlib-native</outputDir>
+                            <outputName>com_github_fommil_netlib_NativeRefLAPACK.c</outputName>
+                            <scan>org.netlib.lapack</scan>
+                            <prefix>LAPACKE_</prefix>
+                            <suffix>_work</suffix>
+                            <firstParam>LAPACK_COL_MAJOR</firstParam>
+                            <noFirstParam>(s|d)disna</noFirstParam>
+                            <lapack_hack>true</lapack_hack>
+                            <includes>
+                                <param>lapacke.h</param>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <!-- TODO: ARPACK.c -->
                 </executions>
             </plugin>
             <plugin>
@@ -77,6 +97,7 @@
                     <javahVerbose>true</javahVerbose>
                     <javahClassNames>
                         <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
+                        <javahClassName>com.github.fommil.netlib.NativeRefLAPACK</javahClassName>
                     </javahClassNames>
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -fPIC -DADD_</compilerMiddleOption>
@@ -94,7 +115,8 @@
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <linkerMiddleOption>-static-libgfortran /opt/local/lib/gcc48/libquadmath.a -static-libgcc</linkerMiddleOption>
+                        <linkerMiddleOption>-static-libgfortran /opt/local/lib/gcc48/libquadmath.a -static-libgcc
+                        </linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
                         <source>

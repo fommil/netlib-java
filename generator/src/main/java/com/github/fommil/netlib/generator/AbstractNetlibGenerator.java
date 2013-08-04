@@ -1,7 +1,9 @@
 package com.github.fommil.netlib.generator;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.thoughtworks.paranamer.*;
@@ -49,6 +51,12 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
   @Parameter(required = true)
   protected String scan;
 
+  /**
+   * Method names to exclude (regex);
+   */
+  @Parameter
+  protected String exclude;
+
   @Component
   protected MavenProject project;
 
@@ -89,7 +97,14 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
       File jar = getFile(input);
       JarMethodScanner scanner = new JarMethodScanner(jar);
 
-      List<Method> methods = scanner.getStaticMethods(scan);
+      List<Method> methods = Lists.newArrayList(
+          Iterables.filter(scanner.getStaticMethods(scan), new Predicate<Method>() {
+            @Override
+            public boolean apply(Method input) {
+              return exclude == null || !input.getName().matches(exclude);
+            }
+          }));
+
       String generated = generate(methods);
 
       output.getParentFile().mkdirs();

@@ -39,6 +39,8 @@ jdoubleArray_init(name, type="jdouble") ::= "$array_init(type, name)$"
 jdoubleArray_clean(name) ::= "$array_clean(name)$"
 jfloatArray_init(name, type="jfloat") ::= "$array_init(type, name)$"
 jfloatArray_clean(name) ::= "$array_clean(name)$"
+jintArray_init(name, type="jint") ::= "$array_init(type, name)$"
+jintArray_clean(name) ::= "$array_clean(name)$"
 
 jstring_init(name) ::= <<
 char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, $name$, JNI_FALSE);
@@ -50,7 +52,7 @@ jstring_clean(name) ::= <<
 
 jfloatw_init(name) ::= <<
 jclass jni_$name$Class = (*env)->GetObjectClass(env, $name$);
-jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "D");
+jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "F");
 jfloat jni_$name$ = (*env)->GetFloatField(env, $name$, jni_$name$Id);
 >>
 
@@ -66,5 +68,15 @@ jdouble jni_$name$ = (*env)->GetDoubleField(env, $name$, jni_$name$Id);
 
 jdoublew_clean(name) ::= <<
 (*env)->SetDoubleField(env, $name$, jni_$name$Id, jni_$name$);
+>>
+
+jintw_init(name) ::= <<
+jclass jni_$name$Class = (*env)->GetObjectClass(env, $name$);
+jfieldID jni_$name$Id = (*env)->GetFieldID(env, jni_$name$Class, "val", "I");
+jint jni_$name$ = (*env)->GetIntField(env, $name$, jni_$name$Id);
+>>
+
+jintw_clean(name) ::= <<
+(*env)->SetIntField(env, $name$, jni_$name$Id, jni_$name$);
 >>
 

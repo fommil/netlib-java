@@ -1,56 +1,40 @@
 #include <jni.h>
 #include <cblas.h>
 
-enum CBLAS_TRANSPOSE getTrans(const char * fortranChar){
-	// enum CBLAS_TRANSPOSE {CblasNoTrans=111, CblasTrans=112, CblasConjTrans=113, AtlasConj=114};
-	// can be "N" or "T"
-	if (fortranChar[0] == 'N'){
-		return (enum CBLAS_TRANSPOSE) 111;
+// these CBLAS get* helpers are really irritating because
+// the first thing the cblas_ methods do is to do a reverse
+// lookup for the char and then pass it to the fortran lib!
+
+enum CBLAS_TRANSPOSE getCblasTrans(const char * fortranChar) {
+	switch (fortranChar[0]) {
+	    case 'N': return CblasNoTrans;
+		case 'T': return CblasTrans;
+		default: return -1;
 	}
-	if (fortranChar[0] == 'T'){
-		return (enum CBLAS_TRANSPOSE) 112;
-	}
-	printf("ERROR in F2J JNI: getTrans() got %s", fortranChar);
-	return -1;
 }
 
-enum CBLAS_UPLO getUpLo(const char * fortranChar){
-	// enum CBLAS_UPLO  {CblasUpper=121, CblasLower=122};
-	// can be "U" or "L"
-	if (fortranChar[0] == 'U'){
-		return (enum CBLAS_UPLO) 121;
+enum CBLAS_UPLO getCblasUpLo(const char * fortranChar) {
+	switch (fortranChar[0]) {
+	    case 'U': return CblasUpper;
+		case 'L': return CblasLower;
+		default: return -1;
 	}
-	if (fortranChar[0] == 'L'){
-		return (enum CBLAS_UPLO) 122;
-	}
-	printf("ERROR in F2J JNI: getUpLo() got %s", fortranChar);
-	return -1;
 }
 
-enum CBLAS_SIDE getSide(const char * fortranChar){
-	// enum CBLAS_SIDE  {CblasLeft=141, CblasRight=142};
-	// can be "L" or "R"
-	if (fortranChar[0] == 'L'){
-		return (enum CBLAS_SIDE) 141;
+enum CBLAS_SIDE getCblasSide(const char * fortranChar) {
+	switch (fortranChar[0]) {
+	    case 'L': return CblasLeft;
+		case 'R': return CblasRight;
+		default: return -1;
 	}
-	if (fortranChar[0] == 'R'){
-		return (enum CBLAS_SIDE) 142;
-	}
-	printf("ERROR in F2J JNI: getSide() got %s", fortranChar);
-	return -1;
 }
 
-enum CBLAS_DIAG getDiag(const char * fortranChar){
-	// enum CBLAS_DIAG  {CblasNonUnit=131, CblasUnit=132};
-	// can be "U" or "N"
-	if (fortranChar[0] == 'N'){
-		return (enum CBLAS_DIAG) 131;
+enum CBLAS_DIAG getCblasDiag(const char * fortranChar) {
+	switch (fortranChar[0]) {
+	    case 'N': return CblasNonUnit;
+		case 'U': return CblasUnit;
+		default: return -1;
 	}
-	if (fortranChar[0] == 'U'){
-		return (enum CBLAS_DIAG) 132;
-	}
-	printf("ERROR in F2J JNI: getDiag() got %s", fortranChar);
-	return -1;
 }
 
 inline void check_memory(JNIEnv * env, void * arg) {

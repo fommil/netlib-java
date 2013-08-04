@@ -1,26 +1,20 @@
 #include <jni.h>
-#include <cblas.h>
-//#include <lapacke.h>
-//#include <arpack.h>
 
 typedef jobject jfloatw;
 typedef jobject jdoublew;
-
-
-// enum CBLAS_ORDER {CblasRowMajor=101, CblasColMajor=102 };
-// this is the ordering used by F2J
-#define F2J_JNI_ORDER (enum CBLAS_ORDER) 102
+typedef jobject jintw;
 
 // convenience methods for dealing with the CBLAS (not BLAS) specific enums
 // our API is using the Fortran-style char*[] system.
 
-enum CBLAS_TRANSPOSE getTrans(const char *);
+enum CBLAS_TRANSPOSE getCblasTrans(const char *);
 
-enum CBLAS_UPLO getUpLo(const char *);
+enum CBLAS_UPLO getCblasUpLo(const char *);
 
-enum CBLAS_SIDE getSide(const char *);
+enum CBLAS_SIDE getCblasSide(const char *);
 
-enum CBLAS_DIAG getDiag(const char *);
+enum CBLAS_DIAG getCblasDiag(const char *);
+
 
 /* Convenience method for checking if we ran out of memory */
 void check_memory(JNIEnv *, void *);
