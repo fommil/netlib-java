@@ -37,8 +37,14 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   /**
    * Prepended to the native function name.
    */
-  @Parameter(defaultValue = "")
-  protected String prefix;
+  @Parameter
+  protected String prefix = "";
+
+  /**
+   * Suffixed to the native function name.
+   */
+  @Parameter
+  protected String suffix = "";
 
   /**
    * Prepended to the native function parameter list.
@@ -46,11 +52,14 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   @Parameter
   protected String firstParam;
 
-  @Parameter(defaultValue = "")
+  @Parameter
   protected String noFirstParam;
 
-  @Parameter(defaultValue = "")
-  protected String exclude;
+  @Parameter
+  protected boolean cblas_hack;
+
+  @Parameter
+  protected boolean lapack_hack;
 
   @Override
   protected String generate(List<Method> methods) throws Exception {
@@ -62,15 +71,12 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     includes.add(outputName.replace(".c", ".h"));
     t.add("includes", includes);
 
-    List <String> members = Lists.newArrayList();
+    List<String> members = Lists.newArrayList();
     for (Method method : methods) {
-      if (method.getName().matches(exclude))
-        continue;
-
       ST f = jniTemplates.getInstanceOf("function");
       f.add("returns", jType2C(method.getReturnType()));
       f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
-      f.add("name", prefix + method.getName());
+      f.add("name", prefix + method.getName() + suffix);
       List<String> params = getNetlibCParameterTypes(method);
       List<String> names = getNetlibJavaParameterNames(method);
       f.add("paramTypes", params);
@@ -151,16 +157,25 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
           }
         }
 
-        // hack for CBLAS
-        if (name.contains("trans")) {
-          name = "getTrans(" + name + ")";
-        } else if (name.contains("uplo")) {
-          name = "getUpLo(" + name + ")";
-        } else if (name.contains("side")) {
-          name = "getSide(" + name + ")";
-        } else if (name.contains("diag")) {
-          name = "getDiag(" + name + ")";
+        // TODO: clean up the hacks
+        if (param == String.class) {
+          if (cblas_hack) {
+            if (name.contains("trans"))
+              name = "getCblasTrans(" + name + ")";
+            else if (name.contains("uplo"))
+              name = "getCblasUpLo(" + name + ")";
+            else if (name.contains("side"))
+              name = "getCblasSide(" + name + ")";
+            else if (name.contains("diag"))
+              name = "getCblasDiag(" + name + ")";
+          } else if (lapack_hack) {
+            if (name.contains("trans") || name.contains("uplo") ||
+                name.contains("side") || name.contains("diag") ||
+                name.contains("compq"))
+              name = name + "[0]";
+          }
         }
+
         params.add(name);
       }
     });

@@ -9,9 +9,6 @@ import org.stringtemplate.v4.ST;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Set;
-
-import static com.google.common.collect.Sets.newHashSet;
 
 /**
  * Generates the Java part of a JNI implementation of a netlib interface.
@@ -40,23 +37,19 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
    * {@link UnsupportedOperationException} may be thrown by excluded
    * methods we are implementing).
    *
-   * @see #excluded
+   * @see #unsupported
    */
   @Parameter
   protected String extending;
 
   /**
-   * Method names that we do not support (comma separated).
-   *
-   * @see #extending
+   * Methods we don't support.
    */
   @Parameter
-  protected String excluded;
+  protected String unsupported;
 
   @Override
   protected String generate(List<Method> methods) throws Exception {
-    Set<String> excludes = newHashSet(excluded != null ? excluded.split(",") : new String[0]);
-
     List<String> members = Lists.newArrayList();
 
     ST loader = jTemplates.getInstanceOf("staticJniLoader");
@@ -65,7 +58,7 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
 
     for (Method method : methods) {
       ST m = jTemplates.getInstanceOf("nativeImplMethod");
-      if (excludes.contains(method.getName())) {
+      if (unsupported != null && method.getName().matches(unsupported)) {
         if (extending == null)
           m = jTemplates.getInstanceOf("unsupportedMethod");
         else
