@@ -191,6 +191,11 @@
                     <artifactId>native-maven-plugin</artifactId>
                     <version>1.0-alpha-7</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
