@@ -15,7 +15,8 @@
 
     <modules>
         <module>java</module>
-        <module>osx_64</module>
+        <!-- Native modules can't always build, so we build them separately -->
+        <!--<module>osx_64</module>-->
     </modules>
 
     <properties>

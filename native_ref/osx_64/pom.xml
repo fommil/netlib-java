@@ -101,7 +101,9 @@
                             <prefix>LAPACKE_</prefix>
                             <suffix>_work</suffix>
                             <firstParam>LAPACK_COL_MAJOR</firstParam>
-                            <noFirstParam>[sd](disna|gtcon|gttrf|lapy[23]|larfg|larnv|lasrt|ptcon|pttrf|stebz|sterf|lamch)</noFirstParam>
+                            <noFirstParam>
+                                [sd](disna|gtcon|gttrf|lapy[23]|larfg|larnv|lasrt|ptcon|pttrf|stebz|sterf|lamch)
+                            </noFirstParam>
                             <exclude>${prefer.f2j}</exclude>
                             <extractChar>true</extractChar>
                             <lapacke_hack>true</lapacke_hack>
@@ -190,6 +192,41 @@
                         </source>
                     </sources>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>runtime</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${project.build.directory}</classesDirectory>
+                            <includes>
+                                <include>${project.artifactId}.jnilib</include>
+                            </includes>
+                            <classifier>natives</classifier>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>source</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${project.build.directory}</classesDirectory>
+                            <includes>
+                                <include>netlib-native/**/*</include>
+                                <include>native/**/*</include>
+                            </includes>
+                            <classifier>sources</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
