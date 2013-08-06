@@ -56,11 +56,13 @@ public final class JniLoader {
     if (paths == null || paths.length == 0)
       throw new ExceptionInInitializerError("invalid parameters");
 
-    File javaLibPath = new File(System.getProperty("java.library.path"));
+    String[] javaLibPath = System.getProperty("java.library.path").split(File.pathSeparator);
 
     for (String path : paths) {
-      if (loaded) return;
-      liberalLoad(javaLibPath.getAbsolutePath() + "/" + path);
+      for (String libPath : javaLibPath) {
+        if (loaded) return;
+        liberalLoad(new File(libPath).getAbsolutePath() + "/" + path);
+      }
       if (loaded) return;
       File extracted = extract(path);
       if (extracted != null)
@@ -77,17 +79,22 @@ public final class JniLoader {
       System.load(path);
       log.info("successfully loaded " + path);
       loaded = true;
+    } catch (UnsatisfiedLinkError e) {
+      log.log(FINE, "skipping load of " + path);
+    } catch (SecurityException e) {
+      log.log(FINE, "skipping load of " + path, e);
     } catch (Throwable e) {
-      if (e instanceof SecurityException || e instanceof UnsatisfiedLinkError)
-        log.log(FINE, "skipping load of " + path, e);
-      else throw new ExceptionInInitializerError(e);
+      throw new ExceptionInInitializerError(e);
     }
   }
 
   private static File extract(String path) {
     try {
-      URL url = JniLoader.class.getResource(path);
+      long start = System.currentTimeMillis();
+      URL url = JniLoader.class.getResource("/" + path);
       if (url == null) return null;
+
+      log.fine("attempting to extract " + url);
 
       @Cleanup InputStream in = JniLoader.class.getResourceAsStream("/" + path);
       File file = file(path);
@@ -98,6 +105,9 @@ public final class JniLoader {
       ReadableByteChannel src = newChannel(in);
       @Cleanup FileChannel dest = new FileOutputStream(file).getChannel();
       dest.transferFrom(src, 0, Long.MAX_VALUE);
+
+      long end = System.currentTimeMillis();
+      log.fine("extracted " + path + " in " + (end - start) + " millis");
 
       return file;
     } catch (Throwable e) {
@@ -113,7 +123,7 @@ public final class JniLoader {
 
     String dir = System.getProperty(JNI_EXTRACT_DIR_PROP);
     if (dir == null)
-      return createTempFile("", name);
+      return createTempFile("netlib", name);
 
     File file = new File(dir, name);
     if (file.exists() && !file.isFile())
