@@ -124,11 +124,10 @@
                     <linkerExecutable>dragonegg</linkerExecutable> -->
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
+                        <!-- <linkerMiddleOption>-framework JavaVM</linkerMiddleOption> -->
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <linkerMiddleOption>-static-libgfortran /usr/lib/gcc48/libquadmath.a -static-libgcc
-                        </linkerMiddleOption>
+                        <linkerMiddleOption>-static-libgfortran -static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
                         <source>
