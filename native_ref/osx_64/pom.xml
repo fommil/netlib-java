@@ -208,7 +208,7 @@
                             <includes>
                                 <include>${project.artifactId}.jnilib</include>
                             </includes>
-                            <classifier>natives</classifier>
+                            <classifier></classifier>
                         </configuration>
                     </execution>
                     <execution>
