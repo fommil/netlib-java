@@ -120,8 +120,8 @@
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
-                    <compilerExecutable>dragonegg</compilerExecutable>
-                    <linkerExecutable>dragonegg</linkerExecutable>
+                    <!-- <compilerExecutable>dragonegg</compilerExecutable>
+                    <linkerExecutable>dragonegg</linkerExecutable> -->
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
