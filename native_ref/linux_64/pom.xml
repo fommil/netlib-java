@@ -122,7 +122,8 @@
                     <!-- <compilerExecutable>dragonegg</compilerExecutable>
                     <linkerExecutable>dragonegg</linkerExecutable> -->
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-static</linkerMiddleOption>
+                        <!-- TODO: static build on linux -->
+                        <linkerMiddleOption>-shared</linkerMiddleOption>
                         <!-- <linkerMiddleOption>-framework JavaVM</linkerMiddleOption> -->
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
