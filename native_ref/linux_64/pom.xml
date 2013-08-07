@@ -11,21 +11,12 @@
     </parent>
 
     <artifactId>netlib-native_ref-osx_64</artifactId>
-    <packaging>jnilib</packaging>
+    <packaging>so</packaging>
 
     <!--
-    NOTE: OS X does not come with a Fortran compiler.
-    This configuration uses macports' distribution of dragonegg and gcc 4.6:
+    This configuration uses dragonegg:
 
-      sudo port install dragonegg-3.4-gcc-4.8
-
-    To get the i5 AVX instructions, CLANG must be used for assembly
-
-      http://stackoverflow.com/questions/9840207
-
-    (although I haven't noticed much difference) with these extra GCC flags
-
-      -Xassembler -w -march=corei7-avx -mtune=corei7-avx
+      sudo apt-get install dragonegg
     -->
 
     <dependencies>
@@ -120,7 +111,7 @@
                 <artifactId>native-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <javahOS>darwin</javahOS>
+                    <javahOS>linux</javahOS>
                     <javahVerbose>true</javahVerbose>
                     <javahClassNames>
                         <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
@@ -129,20 +120,14 @@
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
-                    <!-- numberOfConcurrentCompilation would be nice, but always fails :-( -->
-                    <!-- http://jira.codehaus.org/browse/MOJO-1955 -->
-                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.8</compilerExecutable>
-                    <linkerExecutable>dragonegg-3.4-gcc-mp-4.8</linkerExecutable>
-                    <!-- dragonegg 3m3s 5.0MB -->
-                    <!--<compilerExecutable>gcc-mp-4.8</compilerExecutable>-->
-                    <!--<linkerExecutable>gcc-mp-4.8</linkerExecutable>-->
-                    <!-- gcc-4.7 3m34s 5.0MB -->
+                    <compilerExecutable>dragonegg</compilerExecutable>
+                    <linkerExecutable>dragonegg</linkerExecutable>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
+                        <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <linkerMiddleOption>-static-libgfortran /opt/local/lib/gcc48/libquadmath.a -static-libgcc
+                        <linkerMiddleOption>-static-libgfortran /usr/lib/gcc48/libquadmath.a -static-libgcc
                         </linkerMiddleOption>
                     </linkerMiddleOptions>
                     <sources>
