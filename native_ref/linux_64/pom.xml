@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>netlib-native_ref-osx_64</artifactId>
+    <artifactId>netlib-native_ref-linux_64</artifactId>
     <packaging>so</packaging>
 
     <!--
@@ -51,7 +51,6 @@
         </dependency>
     </dependencies>
 
-    <!-- http://svn.codehaus.org/mojo/trunk/mojo/maven-native/native-maven-plugin/src/it/jni/native/macosx/pom.xml -->
     <build>
         <plugins>
             <plugin>
@@ -123,11 +122,11 @@
                     <!-- <compilerExecutable>dragonegg</compilerExecutable>
                     <linkerExecutable>dragonegg</linkerExecutable> -->
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-shared</linkerMiddleOption>
+                        <linkerMiddleOption>-static</linkerMiddleOption>
                         <!-- <linkerMiddleOption>-framework JavaVM</linkerMiddleOption> -->
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <linkerMiddleOption>-static-libgfortran -static-libgcc</linkerMiddleOption>
+                        <!-- <linkerMiddleOption>-static-libgfortran -static-libgcc</linkerMiddleOption> -->
                     </linkerMiddleOptions>
                     <sources>
                         <source>
