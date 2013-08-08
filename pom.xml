@@ -5,9 +5,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--
+    # Deploying snapshots is tricky because of the natives...
+
     mvn clean
     mvn -pl generator compile
     mvn compile
+    mvn deploy -Psonatype-oss-release
+
+    # OS X
+    cd native_ref/osx_64
+    mvn compile
+    mvn deploy -Psonatype-oss-release
+
+    # Linux
+    cd native_ref/osx_64
+    mvn compile
+    mvn deploy -Psonatype-oss-release
+
+    # TODO: Windows
+
+    # Oober project
+    cd all
     mvn deploy -Psonatype-oss-release
     -->
 
@@ -21,6 +39,7 @@
         <module>core</module>
         <module>legacy</module>
         <module>native_ref</module>
+        <!--<module>all</module>-->
     </modules>
 
     <properties>
@@ -144,15 +163,17 @@
                 <artifactId>stringtemplate</artifactId>
                 <version>4.0.2</version>
             </dependency>
-
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <!-- mvn versions:display-plugin-updates -->
     <build>
@@ -195,6 +216,13 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <argLine>-Xmx2g</argLine>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
