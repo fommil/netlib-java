@@ -25,30 +25,6 @@
             <artifactId>native_ref-java</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-            <classifier>javadoc</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -56,51 +32,12 @@
             <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
-                <version>${project.parent.version}</version>
                 <executions>
                     <execution>
                         <id>blas</id>
-                        <goals>
-                            <goal>native-jni</goal>
-                        </goals>
-                        <configuration>
-                            <implementing>com.github.fommil.netlib.NativeRefBLAS</implementing>
-                            <outputDir>${project.build.directory}/netlib-native</outputDir>
-                            <outputName>com_github_fommil_netlib_NativeRefBLAS.c</outputName>
-                            <scan>org.netlib.blas</scan>
-                            <prefix>cblas_</prefix>
-                            <firstParam>CblasColMajor</firstParam>
-                            <noFirstParam>.*(dot|nrm2|asum|amax|swap|copy|rot|xpy|cal).*</noFirstParam>
-                            <exclude>${prefer.f2j}</exclude>
-                            <cblas_hack>true</cblas_hack>
-                            <includes>
-                                <param>cblas.h</param>
-                            </includes>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>lapack</id>
-                        <goals>
-                            <goal>native-jni</goal>
-                        </goals>
-                        <configuration>
-                            <implementing>com.github.fommil.netlib.NativeRefLAPACK</implementing>
-                            <outputDir>${project.build.directory}/netlib-native</outputDir>
-                            <outputName>com_github_fommil_netlib_NativeRefLAPACK.c</outputName>
-                            <scan>org.netlib.lapack</scan>
-                            <prefix>LAPACKE_</prefix>
-                            <suffix>_work</suffix>
-                            <firstParam>LAPACK_COL_MAJOR</firstParam>
-                            <noFirstParam>
-                                [sd](disna|gtcon|gttrf|lapy[23]|larfg|larnv|lasrt|ptcon|pttrf|stebz|sterf|lamch)
-                            </noFirstParam>
-                            <exclude>${prefer.f2j}</exclude>
-                            <extractChar>true</extractChar>
-                            <lapacke_hack>true</lapacke_hack>
-                            <includes>
-                                <param>lapacke.h</param>
-                            </includes>
-                        </configuration>
                     </execution>
                     <!-- TODO: ARPACK.c -->
                 </executions>
@@ -111,70 +48,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>linux</javahOS>
-                    <javahVerbose>true</javahVerbose>
-                    <javahClassNames>
-                        <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
-                        <javahClassName>com.github.fommil.netlib.NativeRefLAPACK</javahClassName>
-                    </javahClassNames>
-                    <compilerMiddleOptions>
-                        <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>
-                    </compilerMiddleOptions>
-                    <!-- <compilerExecutable>dragonegg</compilerExecutable>
-                    <linkerExecutable>dragonegg</linkerExecutable> -->
                     <linkerMiddleOptions>
                         <!-- TODO: static build on linux -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <!-- <linkerMiddleOption>-framework JavaVM</linkerMiddleOption> -->
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <!-- Static fortran/quadmath/gcc allows distribution to non-dev environments -->
-                        <!-- <linkerMiddleOption>-static-libgfortran -static-libgcc</linkerMiddleOption> -->
                     </linkerMiddleOptions>
-                    <sources>
-                        <source>
-                            <directory>${project.build.directory}/netlib-native</directory>
-                            <includes>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/JNI</directory>
-                            <includes>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/BLAS</directory>
-                            <includes>
-                                <include>*.f</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/CBLAS</directory>
-                            <includes>
-                                <include>*.f</include>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/LAPACK</directory>
-                            <includes>
-                                <include>*.f</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/LAPACKE</directory>
-                            <includes>
-                                <include>*.f</include>
-                                <include>*.c</include>
-                            </includes>
-                        </source>
-                        <source>
-                            <directory>../../netlib/ARPACK</directory>
-                            <includes>
-                                <include>*.f</include>
-                            </includes>
-                        </source>
-                    </sources>
                 </configuration>
             </plugin>
             <plugin>
@@ -183,32 +61,9 @@
                 <executions>
                     <execution>
                         <id>runtime</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classesDirectory>${project.build.directory}</classesDirectory>
-                            <includes>
-                                <include>${project.artifactId}.jnilib</include>
-                            </includes>
-                            <classifier>natives</classifier>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>source</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classesDirectory>${project.build.directory}</classesDirectory>
-                            <includes>
-                                <include>netlib-native/**/*</include>
-                                <include>native/**/*</include>
-                            </includes>
-                            <classifier>sources</classifier>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

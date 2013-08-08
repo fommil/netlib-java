@@ -20,15 +20,6 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.f2j</groupId>
-            <artifactId>arpack_combined_all</artifactId>
-            <classifier>javadoc</classifier>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
