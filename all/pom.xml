@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.googlecode.netlib-java</groupId>
+    <groupId>${project.parent.groupId}</groupId>
     <artifactId>all</artifactId>
     <packaging>pom</packaging>
 
@@ -24,11 +24,13 @@
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>netlib-native_ref-osx_64</artifactId>
             <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>netlib-native_ref-linux_64</artifactId>
             <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
         </dependency>
         <!-- TODO Windows -->
     </dependencies>
