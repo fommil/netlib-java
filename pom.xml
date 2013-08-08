@@ -97,17 +97,20 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>codehaus-snapshots</id>
-            <url>https://nexus.codehaus.org/content/repositories/snapshots/</url>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-plugins-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-    </repositories>
+        </pluginRepository>
+    </pluginRepositories>
 
     <!-- mvn versions:display-dependency-updates -->
     <dependencyManagement>
