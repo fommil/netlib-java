@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <jni.h>
 
 typedef jobject jfloatw;
@@ -22,5 +23,5 @@ void check_memory(JNIEnv *, void *);
 /* Convenience for converting between jboolean and jint representations of booleans */
 jint jboolean2jint(jboolean b);
 jboolean jint2jboolean(jint i);
-jint* jbooleanArray2jintArray(JNIEnv * env, jboolean * a, jint size);
-void jintArray2jbooleanArray(JNIEnv * env, jint * a, jboolean * b, jint size);
+jint* jbooleanArray2jintArray(jboolean * a, jint size);
+void jintArray2jbooleanArray(jint * a, jboolean * b, jint size);

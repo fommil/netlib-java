@@ -46,11 +46,11 @@ jbooleanArray_init(name) ::= <<
 jboolean * jni_$name$_raw = (*env)->GetPrimitiveArrayCritical(env, $name$, JNI_FALSE);
 check_memory(env, jni_$name$_raw);
 jint jni_$name$_size = (*env)->GetArrayLength(env, $name$);
-jint* jni_$name$ = jbooleanArray2jintArray(env, jni_$name$_raw, jni_$name$_size);
+jint* jni_$name$ = jbooleanArray2jintArray(jni_$name$_raw, jni_$name$_size);
 >>
 
 jbooleanArray_clean(name) ::= <<
-jintArray2jbooleanArray(env, jni_$name$, jni_$name$_raw, jni_$name$_size);
+jintArray2jbooleanArray(jni_$name$, jni_$name$_raw, jni_$name$_size);
 free(jni_$name$);
 (*env)->ReleasePrimitiveArrayCritical(env, $name$, jni_$name$_raw, 0);
 >>
@@ -61,6 +61,10 @@ char * jni_$name$ = (char *)(*env)->GetStringUTFChars(env, $name$, JNI_FALSE);
 
 jstring_clean(name) ::= <<
 (*env)->ReleaseStringUTFChars(env, $name$, jni_$name$);
+>>
+
+jboolean_init(name) ::= <<
+jint jni_$name$ = jboolean2jint($name$);
 >>
 
 jfloatw_init(name) ::= <<

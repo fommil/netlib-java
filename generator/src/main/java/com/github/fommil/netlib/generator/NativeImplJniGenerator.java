@@ -63,6 +63,9 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   protected boolean lapacke_hack;
 
   @Parameter
+  protected boolean fortran_hack;
+
+  @Parameter
   protected boolean extractChar;
 
   @Override
@@ -168,7 +171,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
         if (param == Object.class)
           throw new UnsupportedOperationException(method + " " + param  + " " + name);
 
-        if (!param.isPrimitive()) {
+        if (param == Boolean.TYPE || !param.isPrimitive()) {
           name = "jni_" + name;
           // NOTE: direct comparisons against StringW.class don't work as expected
           if (!param.getSimpleName().equals("StringW") && param.getSimpleName().endsWith("W")) {
@@ -189,8 +192,11 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
           }
         }
 
-        if (param == String.class && extractChar)
+        if (!fortran_hack && param == String.class && extractChar)
           name = name + "[0]";
+
+        if (fortran_hack && param.isPrimitive())
+          name = "&" + name;
 
         params.add(name);
       }

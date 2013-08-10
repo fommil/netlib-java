@@ -27,7 +27,8 @@
         <jvm.better>lsame|lsamen|second|dsecnd</jvm.better>
         <!-- LAPACK routines that do not have a named ARPACKE equivalent -->
         <lapacke.unsupported>(ieeeck|ilaenv|ilaver|iparmq|([sd](gbtf2|gebd2|gbtf2|gebd2|gegs|gegv|gehd2|gelsx|geql2|gerq2|gesc2|getc2|gtts2|isnan|labad|labrd|lacn2|lacon|ladiv|lae2|laebz|laed0|laed1|laed2|laed3|laed4|laed5|laed6|laed7|laed8|laed9|laeda|laein|laev2|laexc|lag2|lags2|lagtf|lagtm|lagts|lagv2|lahqr|lahr2|lahrd|laic1|laisnan|laln2|lals0|lalsa|lalsd|lamc1|lamc2|lamc3|lamc4|lamc5|lamrg|laneg|langb|langt|lanhs|lansb|lansp|lanst|lantb|lantp|lanv2|lapll|lapmt|laqgb|laqge|laqp2|laqps|laqr0|laqr1|laqr2|laqr3|laqr4|laqr5|laqsb|laqsp|laqsy|laqtr|lar1v|lar2v|larf|largv|larra|larrb|larrc|larrd|larre|larrf|larrj|larrk|larrr|larrv|lartg|lartv|laruv|larz|larzb|larzt|las2|lascl|lasd0|lasd1|lasd2|lasd3|lasd4|lasd5|lasd6|lasd7|lasd8|lasda|lasdq|lasdt|lasq1|lasq2|lasq3|lasq4|lasq5|lasq6|lasr|lassq|lasv2|lasy2|lasyf|latbs|latdf|latps|latrd|latrs|latrz|latzm|lauu2|lazq3|lazq4|org2l|org2r|orgl2|orgr2|orm2l|orm2r|orml2|ormr2|ormr3|pbtf2|potf2|ptts2|rscl|sygs2|sytd2|sytf2|tgex2|tgsy2|trti2|tzrqf)))</lapacke.unsupported>
-        <prefer.f2j>(${lapacke.callback}|${jvm.better}|${lapacke.unsupported})</prefer.f2j>
+        <arpack.noprototypes>(dgetv0|dlaqrb|dmout|dnaitr|dnapps|dnaup2|dnconv|dneigh|dngets|dsaitr|dsapps|dsaup2|dsconv|dseigt|dsesrt|dsgets|dsortc|dsortr|dstatn|dstats|dstqrb|dvout|icnteq|icopy|iset|iswap|ivout|second|sgetv0|slaqrb|smout|snaitr|snapps|snaup2|snconv|sneigh|sngets|ssaitr|ssapps|ssaup2|ssconv|sseigt|ssesrt|ssgets|ssortc|ssortr|sstatn|sstats|sstqrb|svout)</arpack.noprototypes>
+        <prefer.f2j>(${lapacke.callback}|${jvm.better}|${lapacke.unsupported}|${arpack.noprototypes})</prefer.f2j>
     </properties>
 
     <dependencies>
@@ -94,7 +95,26 @@
                                 </includes>
                             </configuration>
                         </execution>
-                        <!-- TODO: ARPACK.c -->
+                        <execution>
+                            <id>arpack</id>
+                            <goals>
+                                <goal>native-jni</goal>
+                            </goals>
+                            <configuration>
+                                <implementing>com.github.fommil.netlib.NativeRefARPACK</implementing>
+                                <outputDir>${project.build.directory}/netlib-native</outputDir>
+                                <outputName>com_github_fommil_netlib_NativeRefARPACK.c</outputName>
+                                <scan>org.netlib.arpack</scan>
+                                <suffix>_</suffix>
+                                <exclude>${prefer.f2j}</exclude>
+                                <extractChar>true</extractChar>
+                                <exclude>${prefer.f2j}</exclude>
+                                <fortran_hack>true</fortran_hack>
+                                <includes>
+                                    <param>arpack.h</param>
+                                </includes>
+                            </configuration>
+                        </execution>
                     </executions>
                 </plugin>
                 <plugin>
@@ -107,6 +127,7 @@
                         <javahClassNames>
                             <javahClassName>com.github.fommil.netlib.NativeRefBLAS</javahClassName>
                             <javahClassName>com.github.fommil.netlib.NativeRefLAPACK</javahClassName>
+                            <javahClassName>com.github.fommil.netlib.NativeRefARPACK</javahClassName>
                         </javahClassNames>
                         <compilerMiddleOptions>
                             <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>

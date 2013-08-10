@@ -1,4 +1,4 @@
-#include <jni.h>
+#include <netlib-jni.h>
 #include <cblas.h>
 
 // these CBLAS get* helpers are really irritating because
@@ -67,7 +67,7 @@ inline jboolean jint2jboolean(jint i) {
 }
 
 
-jint* jbooleanArray2jintArray(JNIEnv * env, jboolean * a, jint size) {
+jint* jbooleanArray2jintArray(jboolean * a, jint size) {
 	jint * j = (jint*) malloc(size);
 	int i;
 	for (i = 0 ; i < size ; i++) {
@@ -76,7 +76,7 @@ jint* jbooleanArray2jintArray(JNIEnv * env, jboolean * a, jint size) {
 	return j;
 }
 
-void jintArray2jbooleanArray(JNIEnv * env, jint * a, jboolean * b, jint size) {
+void jintArray2jbooleanArray(jint * a, jboolean * b, jint size) {
 	int i;
 	for (i = 0 ; i < size ; i++) {
 	    b[i] = jint2jboolean(a[i]);

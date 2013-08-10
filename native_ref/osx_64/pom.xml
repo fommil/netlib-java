@@ -48,7 +48,9 @@
                     <execution>
                         <id>lapack</id>
                     </execution>
-                    <!-- TODO: ARPACK.c -->
+                    <execution>
+                        <id>arpack</id>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
