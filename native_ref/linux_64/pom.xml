@@ -17,6 +17,16 @@
     This configuration uses dragonegg:
 
       sudo apt-get install dragonegg
+
+    End users must have gfortran installed:
+
+      sudo apt-get install libgfortran3
+
+    It is impossible to compile a library on Ubuntu that has static
+    references to the fortran libraries, as the static fortran library
+    has not been compiled with -fPIC. The only workaround would be
+    to compile gcc from scratch, with the flags added, and then compile
+    these natives. That is not a wise move.
     -->
 
     <dependencies>
@@ -50,8 +60,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>linux</javahOS>
+                    <compilerEndOptions>
+                        <compilerEndOption>-fplugin=/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/dragonegg.so</compilerEndOption>
+                    </compilerEndOptions>
                     <linkerMiddleOptions>
-                        <!-- TODO: static build on linux -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                     </linkerMiddleOptions>

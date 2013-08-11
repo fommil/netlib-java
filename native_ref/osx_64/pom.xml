@@ -26,6 +26,10 @@
     (although I haven't noticed much difference) with these extra GCC flags
 
       -Xassembler -w -march=corei7-avx -mtune=corei7-avx
+
+    Dragonegg can be pushed even further with:
+
+      -fplugin-arg-dragonegg-enable-gcc-optzns -O4
     -->
 
     <dependencies>
