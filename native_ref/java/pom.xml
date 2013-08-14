@@ -15,6 +15,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.fommil</groupId>
+            <artifactId>jniloader</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
