@@ -18,7 +18,7 @@ Some typical results:
 
 The following are some runs with various sized arrays in pure Java (black) and reference native (red) for `ddot` (dot product of vectors):
 
-[![native win](http://i39.tinypic.com/rvvbz7.png)]
+![native win](http://i39.tinypic.com/rvvbz7.png)
 
 they start to become similar at about 50,000,000 elements.
 
