@@ -7,9 +7,8 @@ This project is currently undergoing a major (API preserving) rewrite and will b
 
 If you need access to the old native codebase, look in the `ant` branch.
 
-The TRUNK reference implementation of BLAS.java (not machine optimised)
-is between 60% and 10% faster than the Java implementation for vector multiplication.
-Native code tends to work best for arrays of about a million entries.
+The TRUNK reference implementation of BLAS (not machine optimised)
+is about ten times faster than the Java implementation for vector multiplication.
 
 Some typical results:
 
