@@ -10,27 +10,25 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>all</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>perf</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>all</artifactId>
             <version>${project.parent.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-osx_64</artifactId>
-            <version>${project.parent.version}</version>
-            <classifier>natives</classifier>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-linux_64</artifactId>
-            <version>${project.parent.version}</version>
-            <classifier>natives</classifier>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>test</scope>
         </dependency>
-        <!-- TODO Windows -->
     </dependencies>
 </project>

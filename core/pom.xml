@@ -27,12 +27,6 @@
             <artifactId>arpack_combined_all</artifactId>
             <classifier>javadoc</classifier>
         </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
