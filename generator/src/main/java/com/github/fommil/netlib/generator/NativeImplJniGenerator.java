@@ -80,66 +80,71 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
 
     List<String> members = Lists.newArrayList();
     for (Method method : methods) {
-      ST f = jniTemplates.getInstanceOf("function");
-      f.add("returns", jType2C(method.getReturnType()));
-      f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
-      f.add("name", prefix + method.getName() + suffix);
-      List<String> params = getNetlibCParameterTypes(method);
-      List<String> names = getNetlibJavaParameterNames(method);
-      f.add("paramTypes", params);
-      f.add("paramNames", names);
-      f.add("params", getCMethodParams(method));
-
-      if (method.getReturnType() == Void.TYPE) {
-        if (lapacke_hack && Iterables.getLast(names).equals("info")) {
-          f.add("assignReturn", "int returnValue = ");
-        } else {
-          f.add("assignReturn", "");
-        }
-        f.add("return", "");
-      } else {
-        f.add("assignReturn", jType2C(method.getReturnType()) + " returnValue = ");
-        f.add("return", "return returnValue;");
-      }
-
-      List<String> init = Lists.newArrayList();
-      List<String> clean = Lists.newArrayList();
-
-      for (int i = 0; i < params.size(); i++) {
-        String param = params.get(i);
-        String name = names.get(i);
-        ST before = jniTemplates.getInstanceOf(param + "_init");
-        if (lapacke_hack && name.equals("info"))
-          before = jniTemplates.getInstanceOf(param + "_info_init");
-        if (before != null) {
-          before.add("name", name);
-          init.add(before.render());
-        }
-
-        ST after = jniTemplates.getInstanceOf(param + "_clean");
-        if (lapacke_hack && name.equals("info"))
-          after = jniTemplates.getInstanceOf(param + "_info_clean");
-        if (after != null) {
-          after.add("name", name);
-          clean.add(after.render());
-        }
-      }
-      Collections.reverse(clean);
-
-      f.add("init", init);
-      f.add("clean", clean);
-      members.add(f.render());
+      members.add(render(method, false));
+//      if (hasOffsets(method))
+//        members.add(render(method, true));
     }
-
 
     t.add("members", members);
 
     return t.render();
   }
 
-  private List<String> getNetlibCParameterTypes(Method method) {
+  private String render(Method method, boolean offsets) {
+    ST f = jniTemplates.getInstanceOf("function");
+    f.add("returns", jType2C(method.getReturnType()));
+    f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
+    f.add("name", prefix + method.getName() + suffix);
+    List<String> params = getNetlibCParameterTypes(method, offsets);
+    List<String> names = getNetlibJavaParameterNames(method, offsets);
+    f.add("paramTypes", params);
+    f.add("paramNames", names);
+    f.add("params", getCMethodParams(method, offsets));
+
+    if (method.getReturnType() == Void.TYPE) {
+      if (lapacke_hack && Iterables.getLast(names).equals("info")) {
+        f.add("assignReturn", "int returnValue = ");
+      } else {
+        f.add("assignReturn", "");
+      }
+      f.add("return", "");
+    } else {
+      f.add("assignReturn", jType2C(method.getReturnType()) + " returnValue = ");
+      f.add("return", "return returnValue;");
+    }
+
+    List<String> init = Lists.newArrayList();
+    List<String> clean = Lists.newArrayList();
+
+    for (int i = 0; i < params.size(); i++) {
+      String param = params.get(i);
+      String name = names.get(i);
+      ST before = jniTemplates.getInstanceOf(param + "_init");
+      if (lapacke_hack && name.equals("info"))
+        before = jniTemplates.getInstanceOf(param + "_info_init");
+      if (before != null) {
+        before.add("name", name);
+        init.add(before.render());
+      }
+
+      ST after = jniTemplates.getInstanceOf(param + "_clean");
+      if (lapacke_hack && name.equals("info"))
+        after = jniTemplates.getInstanceOf(param + "_info_clean");
+      if (after != null) {
+        after.add("name", name);
+        clean.add(after.render());
+      }
+    }
+    Collections.reverse(clean);
+
+    f.add("init", init);
+    f.add("clean", clean);
+    return f.render();
+  }
+
+  private List<String> getNetlibCParameterTypes(Method method, boolean offsets) {
     final List<String> types = Lists.newArrayList();
-    iterateRelevantParameters(method, new ParameterCallback() {
+    iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
         types.add(jType2C(param));
@@ -156,20 +161,20 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     return "j" + param.getSimpleName().toLowerCase();
   }
 
-  private List<String> getCMethodParams(final Method method) {
+  private List<String> getCMethodParams(final Method method, boolean offsets) {
     final LinkedList<String> params = Lists.newLinkedList();
     if (firstParam != null && !method.getName().matches(noFirstParam)) {
       params.add(firstParam);
     }
 
-    iterateRelevantParameters(method, new ParameterCallback() {
+    iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
         if (lapacke_hack && name.equals("info"))
           return;
 
         if (param == Object.class)
-          throw new UnsupportedOperationException(method + " " + param  + " " + name);
+          throw new UnsupportedOperationException(method + " " + param + " " + name);
 
         if (param == Boolean.TYPE || !param.isPrimitive()) {
           name = "jni_" + name;

@@ -121,9 +121,9 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
    * @param method
    * @return parameters names for the netlib interface.
    */
-  protected List<String> getNetlibJavaParameterNames(Method method) {
+  protected List<String> getNetlibJavaParameterNames(Method method, boolean offsets) {
     final List<String> params = Lists.newArrayList();
-    iterateRelevantParameters(method, new ParameterCallback() {
+    iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
         params.add(name);
@@ -136,9 +136,9 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
    * @param method
    * @return canonical parameter types for the netlib interface.
    */
-  protected List<String> getNetlibJavaParameterTypes(Method method) {
+  protected List<String> getNetlibJavaParameterTypes(Method method, boolean offsets) {
     final List<String> types = Lists.newArrayList();
-    iterateRelevantParameters(method, new ParameterCallback() {
+    iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
       public void process(int i, Class<?> param, String name) {
         types.add(param.getCanonicalName());
@@ -158,7 +158,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
    * @param method
    * @param callback
    */
-  protected void iterateRelevantParameters(Method method, ParameterCallback callback) {
+  protected void iterateRelevantParameters(Method method, boolean offsets, ParameterCallback callback) {
     if (method.getParameterTypes().length == 0)
       return;
 
@@ -172,7 +172,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     Class<?> last = null;
     for (int i = 0; i < method.getParameterTypes().length; i++) {
       Class<?> param = method.getParameterTypes()[i];
-      if (last != null && last.isArray() && param.equals(Integer.TYPE)) {
+      if (!offsets && last != null && last.isArray() && param.equals(Integer.TYPE)) {
         last = param;
         continue;
       }
@@ -185,6 +185,17 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
 
       callback.process(i, param, name);
     }
+  }
+
+  public boolean hasOffsets(Method method) {
+    Class<?> last = null;
+    for (int i = 0; i < method.getParameterTypes().length; i++) {
+      Class<?> param = method.getParameterTypes()[i];
+      if (last != null && last.isArray() && param.equals(Integer.TYPE))
+        return true;
+      last = param;
+    }
+    return false;
   }
 
 }

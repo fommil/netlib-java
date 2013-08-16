@@ -24,13 +24,13 @@ public abstract class AbstractJavaGenerator extends AbstractNetlibGenerator {
      * @param method
      * @return parameters to pass to the F2J implementation.
      */
-    protected List<String> getF2jJavaParameters(Method method) {
+    protected List<String> getF2jJavaParameters(Method method, final boolean offsets) {
         final List<String> args = Lists.newArrayList();
-        iterateRelevantParameters(method, new ParameterCallback() {
+        iterateRelevantParameters(method, offsets, new ParameterCallback() {
             @Override
             public void process(int i, Class<?> param, String name) {
                 args.add(name);
-                if (param.isArray()) args.add("0");
+                if (param.isArray() && !offsets) args.add("0");
             }
         });
         return args;

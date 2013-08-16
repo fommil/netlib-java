@@ -57,18 +57,11 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
     members.add(loader.render());
 
     for (Method method : methods) {
-      ST m = jTemplates.getInstanceOf("nativeImplMethod");
-      if (unsupported != null && method.getName().matches(unsupported)) {
-        if (extending == null)
-          m = jTemplates.getInstanceOf("unsupportedMethod");
-        else
-          continue;
-      }
-      m.add("returns", method.getReturnType());
-      m.add("method", method.getName());
-      m.add("paramTypes", getNetlibJavaParameterTypes(method));
-      m.add("paramNames", getNetlibJavaParameterNames(method));
-      members.add(m.render());
+      ST m = getTemplate(method);
+      if (m == null) continue;
+      members.add(render(m, method, false));
+//      if (hasOffsets(method))
+//        members.add(render(getTemplate(method), method, false));
     }
 
     ST t = jTemplates.getInstanceOf("implClass");
@@ -79,5 +72,24 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
     t.add("parent", extending != null ? extending : implementing);
 
     return t.render();
+  }
+
+  private ST getTemplate(Method method) {
+    ST m = jTemplates.getInstanceOf("nativeImplMethod");
+    if (unsupported != null && method.getName().matches(unsupported)) {
+      if (extending == null)
+        m = jTemplates.getInstanceOf("unsupportedMethod");
+      else
+        return null;
+    }
+    return m;
+  }
+
+  private String render(ST m, Method method, boolean offsets) {
+    m.add("returns", method.getReturnType());
+    m.add("method", method.getName());
+    m.add("paramTypes", getNetlibJavaParameterTypes(method, offsets));
+    m.add("paramNames", getNetlibJavaParameterNames(method, offsets));
+    return m.render();
   }
 }
