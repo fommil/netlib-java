@@ -32,6 +32,10 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>generator</artifactId>
                 <version>${project.parent.version}</version>
