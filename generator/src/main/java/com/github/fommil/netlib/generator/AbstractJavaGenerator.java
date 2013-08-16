@@ -28,7 +28,7 @@ public abstract class AbstractJavaGenerator extends AbstractNetlibGenerator {
         final List<String> args = Lists.newArrayList();
         iterateRelevantParameters(method, offsets, new ParameterCallback() {
             @Override
-            public void process(int i, Class<?> param, String name) {
+            public void process(int i, Class<?> param, String name, String offsetName) {
                 args.add(name);
                 if (param.isArray() && !offsets) args.add("0");
             }

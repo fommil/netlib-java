@@ -81,8 +81,8 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     List<String> members = Lists.newArrayList();
     for (Method method : methods) {
       members.add(render(method, false));
-//      if (hasOffsets(method))
-//        members.add(render(method, true));
+      if (hasOffsets(method))
+        members.add(render(method, true));
     }
 
     t.add("members", members);
@@ -93,7 +93,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   private String render(Method method, boolean offsets) {
     ST f = jniTemplates.getInstanceOf("function");
     f.add("returns", jType2C(method.getReturnType()));
-    f.add("fqn", (implementing + "." + method.getName()).replace(".", "_"));
+    f.add("fqn", (implementing + "." + method.getName()).replace(".", "_") + (offsets ? "_offsets" : ""));
     f.add("name", prefix + method.getName() + suffix);
     List<String> params = getNetlibCParameterTypes(method, offsets);
     List<String> names = getNetlibJavaParameterNames(method, offsets);
@@ -146,7 +146,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     final List<String> types = Lists.newArrayList();
     iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
-      public void process(int i, Class<?> param, String name) {
+      public void process(int i, Class<?> param, String name, String offsetName) {
         types.add(jType2C(param));
       }
     });
@@ -161,15 +161,15 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
     return "j" + param.getSimpleName().toLowerCase();
   }
 
-  private List<String> getCMethodParams(final Method method, boolean offsets) {
+  private List<String> getCMethodParams(final Method method, final boolean offsets) {
     final LinkedList<String> params = Lists.newLinkedList();
     if (firstParam != null && !method.getName().matches(noFirstParam)) {
       params.add(firstParam);
     }
 
-    iterateRelevantParameters(method, offsets, new ParameterCallback() {
+    iterateRelevantParameters(method, false, new ParameterCallback() {
       @Override
-      public void process(int i, Class<?> param, String name) {
+      public void process(int i, Class<?> param, String name, String offsetName) {
         if (lapacke_hack && name.equals("info"))
           return;
 
@@ -202,6 +202,13 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
 
         if (fortran_hack && param.isPrimitive())
           name = "&" + name;
+
+        if (offsets & offsetName != null) {
+          String arrayType = "j" + param.getComponentType().getSimpleName();
+          if (arrayType.equals("jboolean"))
+            arrayType = "jint";
+          name = name + " + " + offsetName + "*sizeof(" + arrayType + ")";
+        }
 
         params.add(name);
       }

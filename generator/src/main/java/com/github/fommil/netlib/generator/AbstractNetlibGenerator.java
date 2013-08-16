@@ -14,6 +14,7 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -125,7 +126,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     final List<String> params = Lists.newArrayList();
     iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
-      public void process(int i, Class<?> param, String name) {
+      public void process(int i, Class<?> param, String name, String offsetName) {
         params.add(name);
       }
     });
@@ -140,7 +141,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
     final List<String> types = Lists.newArrayList();
     iterateRelevantParameters(method, offsets, new ParameterCallback() {
       @Override
-      public void process(int i, Class<?> param, String name) {
+      public void process(int i, Class<?> param, String name, String offsetName) {
         types.add(param.getCanonicalName());
       }
     });
@@ -148,7 +149,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
   }
 
   protected interface ParameterCallback {
-    void process(int i, Class<?> param, String name);
+    void process(int i, Class<?> param, String name, @Nullable String offsetName);
   }
 
   /**
@@ -169,21 +170,24 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
       getLog().warn(e);
     }
 
-    Class<?> last = null;
     for (int i = 0; i < method.getParameterTypes().length; i++) {
       Class<?> param = method.getParameterTypes()[i];
-      if (!offsets && last != null && last.isArray() && param.equals(Integer.TYPE)) {
-        last = param;
+      if (i > 0 && !offsets && param == Integer.TYPE && method.getParameterTypes()[i - 1].isArray()) {
         continue;
       }
-      last = param;
       String name;
       if (names.length > 0)
         name = names[i];
       else
         name = "arg" + i;
 
-      callback.process(i, param, name);
+      String offsetName = null;
+      if (i < method.getParameterTypes().length - 1
+          && param.isArray()
+          && method.getParameterTypes()[i + 1] == Integer.TYPE)
+      offsetName = names[i+1];
+
+      callback.process(i, param, name, offsetName);
     }
   }
 
