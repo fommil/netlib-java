@@ -84,6 +84,16 @@ nativeImplMethod(returns, method, paramTypes, paramNames) ::= <<
 public native $returns$ $method$($params(paramTypes,paramNames)$);
 >>
 
+nativeImplMethod_offsets(returns, method, paramTypes, paramNames, return="return ") ::= <<
+@Override
+public $returns$ $method$($params(paramTypes,paramNames)$) {
+  $return$$method$_offsets($paramNames; separator=", "$);
+}
+
+public native $returns$ $method$_offsets($params(paramTypes,paramNames)$);
+>>
+
+
 unsupportedMethod(returns, method, paramTypes, paramNames) ::= <<
 @Override
 public $returns$ $method$($params(paramTypes,paramNames)$) {
