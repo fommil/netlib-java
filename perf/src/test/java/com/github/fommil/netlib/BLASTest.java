@@ -1,42 +1,33 @@
 package com.github.fommil.netlib;
 
 import com.google.common.base.Stopwatch;
-import junit.framework.TestCase;
 import lombok.extern.java.Log;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Log
-public class BLASTest extends TestCase {
-  private final BLAS jBLAS = BLAS.getInstance();
+public class BLASTest {
+  private final BLAS blas = BLAS.getInstance();
 
   @Test
-  public void testDot() {
-    testDot1(jBLAS);
+  public void ddot() {
+    testDot1(blas);
   }
 
-  /**
-   * We test the JNI and the Java code at the same time so that we can compare results.
-   * Future JUnit tests should probably test against prior results so that we can write
-   * tests for the BLAS interface and then send the appropriate implementation to it.
-   *
-   * @see #testDot()
-   */
   @Test
-  public void testDotSpeed() {
-    int[] sizes = new int[]{10, 100, 1000, 10000, 20000, 50000, 75000,
-        100000, 200000, 500000, 1000000, 10000000
-    };
-
+  public void ddotPerf() {
     Stopwatch stopwatch = new Stopwatch();
-    for (int size : sizes) {
+    double factor = 6 / 100.0;
+    for (int i = 1; i <= 100; i++) {
+      int size = (int) Math.pow(10, factor * i);
       final double[] array1 = randomArray(size);
       final double[] array2 = randomArray(size);
 
       stopwatch.start();
-      double outJ = jBLAS.ddot(size, array1, 1, array2, 1);
+      double outJ = blas.ddot(size, array1, 1, array2, 1);
       stopwatch.stop();
 
       System.out.println(size + "," + stopwatch.elapsed(TimeUnit.NANOSECONDS));
@@ -45,16 +36,22 @@ public class BLASTest extends TestCase {
 
   @Test
   public void offsets() {
-    double [] matrix = new double[]{
-        1,1,1,1,1,
-        1,1,1,1,1,
-        1,1,1,1,1,
-        1,1,1,1,1,
-        1,1,1,1,1
+    double[] matrix = new double[]{
+        1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1
     };
-    jBlas.dscal(n, 2.0, data, i, m)
-
-
+    blas.dscal(5, 2.0, matrix, 2, 5);
+    double[] expected = new double[]{
+        1, 1, 2, 1, 1,
+        1, 1, 2, 1, 1,
+        1, 1, 2, 1, 1,
+        1, 1, 2, 1, 1,
+        1, 1, 2, 1, 1
+    };
+    Assert.assertArrayEquals(expected, matrix, 0.0);
   }
 
   // return array of size n with normally distributed elements
