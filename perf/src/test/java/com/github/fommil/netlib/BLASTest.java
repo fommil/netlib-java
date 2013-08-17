@@ -43,6 +43,20 @@ public class BLASTest extends TestCase {
     }
   }
 
+  @Test
+  public void offsets() {
+    double [] matrix = new double[]{
+        1,1,1,1,1,
+        1,1,1,1,1,
+        1,1,1,1,1,
+        1,1,1,1,1,
+        1,1,1,1,1
+    };
+    jBlas.dscal(n, 2.0, data, i, m)
+
+
+  }
+
   // return array of size n with normally distributed elements
   // this is a bottleneck when running the tests
   private double[] randomArray(int n) {
