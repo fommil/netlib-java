@@ -21,16 +21,21 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-osx_64</artifactId>
+            <artifactId>netlib-native_ref-osx-x86_64</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-linux_64</artifactId>
+            <artifactId>netlib-native_ref-linux-x86_64</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
         </dependency>
-        <!-- TODO Windows -->
+        <!-- <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-win-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+        </dependency> -->
     </dependencies>
 </project>
