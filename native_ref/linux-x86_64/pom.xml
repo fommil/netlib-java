@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>netlib-native_ref-linux_64</artifactId>
+    <artifactId>netlib-native_ref-linux-x86_64</artifactId>
     <packaging>so</packaging>
 
     <!--

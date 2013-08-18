@@ -10,26 +10,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>netlib-native_ref-osx_64</artifactId>
-    <packaging>jnilib</packaging>
+    <artifactId>netlib-native_ref-win-x86_64</artifactId>
+    <packaging>dll</packaging>
 
     <!--
-    NOTE: OS X does not come with a Fortran compiler.
-    This configuration uses macports' distribution of dragonegg:
+    This build uses MinGW-w64, which can be installed from:
 
-      sudo port install dragonegg-3.4-gcc-4.8
-
-    To get the i5 AVX instructions, CLANG must be used for assembly
-
-      http://stackoverflow.com/questions/9840207
-
-    (although I haven't noticed much difference) with these extra GCC flags
-
-      -Xassembler -w -march=corei7-avx -mtune=corei7-avx
-
-    Dragonegg can be pushed even further with:
-
-      -fplugin-arg-dragonegg-enable-gcc-optzns -O4
+      http://sourceforge.net/projects/mingw-w64
     -->
 
     <dependencies>
@@ -62,15 +49,21 @@
                 <artifactId>native-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <javahOS>darwin</javahOS>
-                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.8</compilerExecutable>
-                    <linkerExecutable>dragonegg-3.4-gcc-mp-4.8</linkerExecutable>
+                    <!-- WIN32 is a misnomer -->
+                    <javahOS>win32</javahOS>
+                    <javahPath>${java.home}\..\bin\javah</javahPath>
+                    <compilerExecutable>C:\Program Files\mingw64\bin\gcc</compilerExecutable>
+                    <linkerExecutable>C:\Program Files\mingw64\bin\gcc</linkerExecutable>
+                    <compilerMiddleOptions>
+                        <compilerMiddleOption>-O3 -DADD_</compilerMiddleOption>
+                    </compilerMiddleOptions>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>/opt/local/lib/gcc48/libquadmath.a</linkerMiddleOption>
+                        <!-- TODO static binaries -->
+                        <!--<linkerMiddleOption>/opt/local/lib/gcc48/libquadmath.a</linkerMiddleOption>-->
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>

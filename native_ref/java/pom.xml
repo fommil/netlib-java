@@ -52,9 +52,9 @@
                             <extending>com.github.fommil.netlib.F2jBLAS</extending>
                             <unsupported>${prefer.f2j}</unsupported>
                             <natives>
-                                <param>netlib-native_ref-linux_64.so</param>
-                                <param>netlib-native_ref-osx_64.jnilib</param>
-                                <param>netlib-native_ref-win_64.jnilib</param>
+                                <param>netlib-native_ref-linux-x86_64.so</param>
+                                <param>netlib-native_ref-osx-x86_64.jnilib</param>
+                                <param>netlib-native_ref-win-x86_64.jnilib</param>
                             </natives>
                         </configuration>
                     </execution>
@@ -70,9 +70,9 @@
                             <extending>com.github.fommil.netlib.F2jLAPACK</extending>
                             <unsupported>${prefer.f2j}</unsupported>
                             <natives>
-                                <param>netlib-native_ref-linux_64.so</param>
-                                <param>netlib-native_ref-osx_64.jnilib</param>
-                                <param>netlib-native_ref-win_64.jnilib</param>
+                                <param>netlib-native_ref-linux-x86_64.so</param>
+                                <param>netlib-native_ref-osx-x86_64.jnilib</param>
+                                <param>netlib-native_ref-win-x86_64.jnilib</param>
                             </natives>
                         </configuration>
                     </execution>
@@ -88,9 +88,9 @@
                             <extending>com.github.fommil.netlib.F2jARPACK</extending>
                             <unsupported>${prefer.f2j}</unsupported>
                             <natives>
-                                <param>netlib-native_ref-linux_64.so</param>
-                                <param>netlib-native_ref-osx_64.jnilib</param>
-                                <param>netlib-native_ref-win_64.jnilib</param>
+                                <param>netlib-native_ref-linux-x86_64.so</param>
+                                <param>netlib-native_ref-osx-x86_64.jnilib</param>
+                                <param>netlib-native_ref-win-x86_64.jnilib</param>
                             </natives>
                         </configuration>
                     </execution>
