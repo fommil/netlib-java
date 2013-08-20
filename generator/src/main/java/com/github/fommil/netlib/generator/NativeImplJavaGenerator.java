@@ -54,6 +54,7 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
 
     ST loader = jTemplates.getInstanceOf("staticJniLoader");
     loader.add("libs", natives);
+    loader.add("prop", getTargetPackage() + "." + getTargetClassName() + ".natives");
     members.add(loader.render());
 
     for (Method method : methods) {
