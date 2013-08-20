@@ -204,10 +204,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
           name = "&" + name;
 
         if (offsets & offsetName != null) {
-          String arrayType = "j" + param.getComponentType().getSimpleName();
-          if (arrayType.equals("jboolean"))
-            arrayType = "jint";
-          name = name + " + " + offsetName + "*sizeof(" + arrayType + ")";
+          name = name + " + " + offsetName;
         }
 
         params.add(name);
