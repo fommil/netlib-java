@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -54,7 +55,7 @@ public class BLASTest {
         1, 1, 2, 1, 1,
         1, 1, 2, 1, 1
     };
-    Assert.assertArrayEquals(expected, matrix, 0.0);
+    Assert.assertArrayEquals(Arrays.toString(matrix), expected, matrix, 0.0);
   }
 
   // return array of size n with normally distributed elements
