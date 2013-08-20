@@ -93,7 +93,7 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
   private String render(Method method, boolean offsets) {
     ST f = jniTemplates.getInstanceOf("function");
     f.add("returns", jType2C(method.getReturnType()));
-    f.add("fqn", (implementing + "." + method.getName()).replace(".", "_") + (offsets ? "_offsets" : ""));
+    f.add("fqn", (implementing + "." + method.getName()).replace(".", "_") + (offsets ? "_1offsets" : ""));
     f.add("name", prefix + method.getName() + suffix);
     List<String> params = getNetlibCParameterTypes(method, offsets);
     List<String> names = getNetlibJavaParameterNames(method, offsets);
