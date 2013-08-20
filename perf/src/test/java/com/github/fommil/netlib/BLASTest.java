@@ -22,13 +22,16 @@ public class BLASTest {
     Stopwatch stopwatch = new Stopwatch();
     double factor = 6 / 100.0;
     for (int i = 1; i <= 100; i++) {
+      stopwatch.reset();
       int size = (int) Math.pow(10, factor * i);
-      final double[] array1 = randomArray(size);
-      final double[] array2 = randomArray(size);
 
-      stopwatch.start();
-      double outJ = blas.ddot(size, array1, 1, array2, 1);
-      stopwatch.stop();
+      for (int j = 0 ; j < 10; j++) {
+        final double[] array1 = randomArray(size);
+        final double[] array2 = randomArray(size);
+        stopwatch.start();
+        blas.ddot(size, array1, 1, array2, 1);
+        stopwatch.stop();
+      }
 
       System.out.println(size + "," + stopwatch.elapsed(TimeUnit.NANOSECONDS));
     }
