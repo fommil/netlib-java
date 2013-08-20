@@ -15,11 +15,11 @@ Some typical results:
 * 1000 runs of `dgesvd` takes 401.6 milliseconds with pure Java, reference native takes 41.97 milliseconds.
 * 1000 runs of `dsygv` takes 137.2 milliseconds with pure Java, reference native takes 8.9 milliseconds.
 
-The following are some runs with various sized arrays in pure Java (black) and reference native (red) for `ddot` (dot product of vectors):
+The following are 10 runs each of various sized arrays in pure Java (black) and reference native (red) for `ddot` (dot product of vectors):
 
-![native win](http://i41.tinypic.com/157z02g.png)
+![native vs java](http://i43.tinypic.com/2dr5gew.png)
 
-they start to become similar at about 50,000,000 elements.
+Amazingly, Pure Java starts to get as fast as the Fortran code for arrays of about 1,000 elements (and higher).
 
 ```sh
 mvn test | grep -x '[0-9]*,[0-9]*' > ~/java.csv
