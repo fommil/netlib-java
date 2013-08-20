@@ -18,6 +18,7 @@
     </modules>
 
     <properties>
+        <natives>netlib-native_ref-linux-x86_64.so,netlib-native_ref-osx-x86_64.jnilib,netlib-native_ref-win-x86_64.jnilib</natives>
         <!-- GEES etc needs an ill-defined callback -->
         <lapacke.callback>([ds](gees|gges|geesx|ggesx))</lapacke.callback>
         <!-- LSAME, SECOND etc are more efficient on the JVM -->

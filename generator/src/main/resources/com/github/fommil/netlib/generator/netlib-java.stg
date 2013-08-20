@@ -101,8 +101,9 @@ public $returns$ $method$($params(paramTypes,paramNames)$) {
 }
 >>
 
-staticJniLoader(libs) ::= <<
+staticJniLoader(prop, libs) ::= <<
 static {
-  com.github.fommil.jni.JniLoader.load("$libs; separator="\", \""$");
+  String natives = System.getProperty("$prop$", "$libs$");
+  com.github.fommil.jni.JniLoader.load(natives.split(","));
 }
 >>

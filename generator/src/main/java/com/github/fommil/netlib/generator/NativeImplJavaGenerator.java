@@ -27,10 +27,10 @@ public class NativeImplJavaGenerator extends AbstractJavaGenerator {
   protected String implementing;
 
   /**
-   * The name of the native library.
+   * The default name of the native libraries. CSV.
    */
   @Parameter(required = true)
-  protected String[] natives;
+  protected String natives;
 
   /**
    * The implementation that we are extending (if not specified,
