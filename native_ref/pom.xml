@@ -191,7 +191,7 @@
                             <configuration>
                                 <classesDirectory>${project.build.directory}</classesDirectory>
                                 <includes>
-                                    <include>${project.artifactId}.jnilib</include>
+                                    <include>${project.artifactId}.*</include>
                                 </includes>
                                 <classifier>natives</classifier>
                             </configuration>
