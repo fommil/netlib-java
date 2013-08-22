@@ -14,9 +14,17 @@
     <packaging>dll</packaging>
 
     <!--
-    This build uses MinGW-w64, which can be installed from:
+    This build is cross-compiled from Ubuntu using
 
-      http://sourceforge.net/projects/mingw-w64
+      sudo apt-get install gfortran-mingw-w64-x86-64
+
+    and downloading the JDK from
+
+      http://download.oracle.com/otn-pub/java/jdk/7u25-b17/jdk-7u25-windows-x64.exe
+
+    and installing in
+
+      /opt/win-x86_64/jdk
     -->
 
     <dependencies>
@@ -52,8 +60,9 @@
                     <!-- WIN32 is a misnomer -->
                     <javahOS>win32</javahOS>
                     <javahPath>${java.home}\..\bin\javah</javahPath>
-                    <compilerExecutable>C:\Program Files\mingw64\bin\gcc</compilerExecutable>
-                    <linkerExecutable>C:\Program Files\mingw64\bin\gcc</linkerExecutable>
+                    <jdkIncludePath>/opt/win-x86_64/jdk/include</jdkIncludePath>
+                    <compilerExecutable>x86_64-w64-mingw32-gcc</compilerExecutable>
+                    <linkerExecutable>x86_64-w64-mingw32-gcc</linkerExecutable>
                     <compilerMiddleOptions>
                         <compilerMiddleOption>-O3 -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
