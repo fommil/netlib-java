@@ -18,12 +18,13 @@
 
       sudo apt-get install gfortran-mingw-w64-x86-64
 
-    with the Windows JDK obtained as per
+    with the Windows 64 bit JDK obtained as per
 
-
+      http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
       http://stackoverflow.com/a/14617087/1041691
 
       mkdir java ; cd java
+      # obtain the JDK via a browser
       WINEPREFIX=$PWD wine jdk-7u25-windows-x64.exe
       sudo mkdir -p /opt/win-x86_64
       sudo mv drive_c/Program\ Files/Java/jdk1.7.0_25 /opt/win-x86_64/jdk7
