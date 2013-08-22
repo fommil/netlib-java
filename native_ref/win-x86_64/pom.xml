@@ -66,16 +66,14 @@
                     <compilerExecutable>x86_64-w64-mingw32-gcc</compilerExecutable>
                     <linkerExecutable>x86_64-w64-mingw32-gcc</linkerExecutable>
                     <compilerMiddleOptions>
-                        <compilerMiddleOption>-O3 -DADD_</compilerMiddleOption>
+                        <!-- silencing warnings because jint* int* are actually safe on this platform -->
+                        <compilerMiddleOption>-w -O3 -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
-                        <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
+                        <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
-                        <!-- TODO static binaries -->
-                        <!--<linkerMiddleOption>/opt/local/lib/gcc48/libquadmath.a</linkerMiddleOption>-->
-                        <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
+                        <!-- TODO static fortran binaries -->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
