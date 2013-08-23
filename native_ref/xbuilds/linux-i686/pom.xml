@@ -68,9 +68,11 @@
                 <configuration>
                     <javahOS>linux</javahOS>
                     <jdkIncludePath>/opt/linux-i686/jdk7/include</jdkIncludePath>
-                    <compilerExecutable>gcc -m32</compilerExecutable>
-                    <linkerExecutable>gcc -m32</linkerExecutable>
+                    <compilerStartOptions>
+                        <compilerStartOption>-m32</compilerStartOption>
+                    </compilerStartOptions>
                     <linkerMiddleOptions>
+                        <linkerMiddleOption>-m32</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
