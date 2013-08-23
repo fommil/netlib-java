@@ -71,9 +71,12 @@
                         <compilerMiddleOption>-w -O3 -DADD_</compilerMiddleOption>
                     </compilerMiddleOptions>
                     <linkerMiddleOptions>
+<!-- check binary link with
+  x86_64-w64-mingw32-objdump -p target/netlib-native_ref-win-x86_64.dll | grep DLL
+-->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
+<!--                        <linkerMiddleOption>-lgfortran</linkerMiddleOption> -->
+                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgfortran.a</linkerMiddleOption>
                         <!-- TODO static fortran binaries -->
                     </linkerMiddleOptions>
                 </configuration>
