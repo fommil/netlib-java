@@ -32,6 +32,9 @@
     to compile gcc from scratch, with the flags added, and then compile
     these natives. That is not a wise move.
     -->
+    <properties>
+        <netlib.src>../../netlib</netlib.src>
+    </properties>
 
     <dependencies>
         <dependency>

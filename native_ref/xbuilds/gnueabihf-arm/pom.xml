@@ -26,6 +26,9 @@
 
       /opt/linux-gnueabihf/jdk8
     -->
+    <properties>
+        <netlib.src>../../../netlib</netlib.src>
+    </properties>
 
     <dependencies>
         <dependency>

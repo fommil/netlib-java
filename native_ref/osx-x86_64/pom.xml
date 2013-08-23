@@ -13,6 +13,10 @@
     <artifactId>netlib-native_ref-osx-x86_64</artifactId>
     <packaging>jnilib</packaging>
 
+    <properties>
+        <netlib.src>../../netlib</netlib.src>
+    </properties>
+
     <!--
     NOTE: OS X does not come with a Fortran compiler.
     This configuration uses macports' distribution of dragonegg:
