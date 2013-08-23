@@ -62,7 +62,6 @@
                 <configuration>
                     <!-- WIN32 is a misnomer -->
                     <javahOS>win32</javahOS>
-                    <!--<javahPath>/opt/win-x86_64/jdk7/bin/javah.exe</javahPath>-->
                     <jdkIncludePath>/opt/win-x86_64/jdk7/include</jdkIncludePath>
                     <compilerExecutable>x86_64-w64-mingw32-gcc</compilerExecutable>
                     <linkerExecutable>x86_64-w64-mingw32-gcc</linkerExecutable>
@@ -75,12 +74,7 @@
   x86_64-w64-mingw32-objdump -p target/netlib-native_ref-win-x86_64.dll | grep DLL
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
-<!--                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgfortran.a</linkerMiddleOption>-->
-<!--                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libquadmath.a</linkerMiddleOption>
-                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgcc.a</linkerMiddleOption>
--->
+                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgfortran.a</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
