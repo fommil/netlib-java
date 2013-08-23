@@ -5,26 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--
-    # Deploying snapshots is tricky because of the natives...
+    # Deploying requires two machines (OS X and Linux)...
 
+    # OS X
     mvn clean
     mvn -pl generator compile
     mvn compile
     mvn deploy -Psonatype-oss-release
 
-    # OS X
-    cd native_ref/osx_64
-    mvn compile
-    mvn deploy -Psonatype-oss-release
-
     # Linux
-    cd native_ref/osx_64
+    cd native_ref/xbuilds
     mvn compile
     mvn deploy -Psonatype-oss-release
 
-    # TODO: Windows
-
-    # Oober project
+    # (OS X or Linux) Oober project
     cd all
     mvn deploy -Psonatype-oss-release
     -->
