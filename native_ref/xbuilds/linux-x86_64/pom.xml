@@ -25,7 +25,7 @@
     these natives. That is not a wise move.
     -->
     <properties>
-        <netlib.src>../../netlib</netlib.src>
+        <netlib.src>../../../netlib</netlib.src>
     </properties>
 
     <dependencies>

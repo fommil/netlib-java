@@ -30,7 +30,7 @@
       sudo mv drive_c/Program\ Files\ (x86)/Java/jdk1.7.0_25 /opt/win-i686/jdk7
     -->
     <properties>
-        <netlib.src>../../netlib</netlib.src>
+        <netlib.src>../../../netlib</netlib.src>
     </properties>
 
     <dependencies>
