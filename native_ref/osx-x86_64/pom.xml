@@ -67,11 +67,11 @@
                     <linkerExecutable>dragonegg-3.4-gcc-mp-4.8</linkerExecutable>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
-                        <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
-                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
                         <linkerMiddleOption>/opt/local/lib/gcc48/libquadmath.a</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
+                        <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
+                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

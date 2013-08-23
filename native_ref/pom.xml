@@ -140,39 +140,39 @@
                                 </includes>
                             </source>
                             <source>
-                                <directory>../../netlib/JNI</directory>
+                                <directory>${project.parent.relativePath}/../../netlib/JNI</directory>
                                 <includes>
                                     <include>*.c</include>
                                 </includes>
                             </source>
                             <source>
-                                <directory>../../netlib/BLAS</directory>
+                                <directory>${project.parent.relativePath}/../../netlib/BLAS</directory>
                                 <includes>
                                     <include>*.f</include>
                                 </includes>
                             </source>
                             <source>
-                                <directory>../../netlib/CBLAS</directory>
-                                <includes>
-                                    <include>*.f</include>
-                                    <include>*.c</include>
-                                </includes>
-                            </source>
-                            <source>
-                                <directory>../../netlib/LAPACK</directory>
-                                <includes>
-                                    <include>*.f</include>
-                                </includes>
-                            </source>
-                            <source>
-                                <directory>../../netlib/LAPACKE</directory>
+                                <directory>${project.parent.relativePath}/../../netlib/CBLAS</directory>
                                 <includes>
                                     <include>*.f</include>
                                     <include>*.c</include>
                                 </includes>
                             </source>
                             <source>
-                                <directory>../../netlib/ARPACK</directory>
+                                <directory>${project.parent.relativePath}/../../netlib/LAPACK</directory>
+                                <includes>
+                                    <include>*.f</include>
+                                </includes>
+                            </source>
+                            <source>
+                                <directory>${project.parent.relativePath}/../../netlib/LAPACKE</directory>
+                                <includes>
+                                    <include>*.f</include>
+                                    <include>*.c</include>
+                                </includes>
+                            </source>
+                            <source>
+                                <directory>${project.parent.relativePath}/../../netlib/ARPACK</directory>
                                 <includes>
                                     <include>*.f</include>
                                 </includes>
