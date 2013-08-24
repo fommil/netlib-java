@@ -14,9 +14,10 @@
     <packaging>dll</packaging>
 
     <!--
-    This build is cross-compiled from Ubuntu using
+    This build is cross-compiled from Ubuntu using the official MinGW snapshot
+    downloaded from (I used mingw-w32-bin_x86_64-linux_20130622)
 
-      sudo apt-get install gfortran-mingw-w64-i686
+      http://sourceforge.net/projects/mingw-w64/
 
     with the Windows 32 bit JDK obtained as per
 
