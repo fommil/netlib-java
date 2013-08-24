@@ -16,7 +16,7 @@
     <!--
     This is built for Linux i686 on an x86_64 architecture.
 
-      sudo apt-get install libc6-dev-i386 gfortran
+      sudo apt-get install libc6-dev-i386 lib32gfortran3 gfortran
 
     get the 32 bit JDK from
 
@@ -71,11 +71,14 @@
                     <compilerStartOptions>
                         <compilerStartOption>-m32</compilerStartOption>
                     </compilerStartOptions>
+                    <linkerStartOptions>
+                        <linkerStartOption>-m32</linkerStartOption>
+                    </linkerStartOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-m32</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <!-- TODO static fortran -->
+                        <!-- 32 bit fortran lib must be passed explicitly -->
+                        <linkerMiddleOption>/usr/lib32/libgfortran.so.3</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
