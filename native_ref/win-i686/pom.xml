@@ -31,7 +31,7 @@
       sudo mv drive_c/Program\ Files\ (x86)/Java/jdk1.7.0_25 /opt/win-i686/jdk7
     -->
     <properties>
-        <netlib.src>../../../netlib</netlib.src>
+        <netlib.src>../../netlib</netlib.src>
     </properties>
 
     <dependencies>
@@ -80,8 +80,9 @@
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw32/mingw/lib/libgfortran.a</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw32/mingw/lib/libquadmath.a</linkerMiddleOption>
-<!--                        <linkerMiddleOption>/opt/mingw32/mingw/lib/libgcc_s.a</linkerMiddleOption>-->
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
+                        <!-- otherwise an "@..." symbol is added to the function name! -->
+                        <linkerMiddleOption>-Wl,--kill-at</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
