@@ -14,9 +14,10 @@
     <packaging>dll</packaging>
 
     <!--
-    This build is cross-compiled from Ubuntu using
+    This build is cross-compiled from OS X using the official MinGW snapshot
+    downloaded from (I used mingw-w64-bin_x86_64-darwin_20130622)
 
-      sudo apt-get install gfortran-mingw-w64-x86-64
+      http://sourceforge.net/projects/mingw-w64/
 
     with the Windows 64 bit JDK obtained as per
 
@@ -77,9 +78,9 @@
   x86_64-w64-mingw32-objdump -p target/netlib-native_ref-win-x86_64.dll | grep DLL
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgfortran.a</linkerMiddleOption>
-                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libquadmath.a</linkerMiddleOption>
-                        <linkerMiddleOption>/usr/lib/gcc/x86_64-w64-mingw32/4.6/libgcc.a</linkerMiddleOption>
+                        <linkerMiddleOption>/opt/mingw64/mingw/lib/libgfortran.a</linkerMiddleOption>
+                        <linkerMiddleOption>/opt/mingw64/mingw/lib/libquadmath.a</linkerMiddleOption>
+                        <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

@@ -22,8 +22,6 @@
     <modules>
         <module>linux-x86_64</module>
         <module>linux-i686</module>
-        <module>win-x86_64</module>
-        <module>win-i686</module>
         <module>gnueabihf-arm</module>
     </modules>
 

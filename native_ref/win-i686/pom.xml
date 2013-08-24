@@ -14,8 +14,8 @@
     <packaging>dll</packaging>
 
     <!--
-    This build is cross-compiled from Ubuntu using the official MinGW snapshot
-    downloaded from (I used mingw-w32-bin_x86_64-linux_20130622)
+    This build is cross-compiled from OS X using the official MinGW snapshot
+    downloaded from (I used mingw-w64-bin_i686-darwin_20130622)
 
       http://sourceforge.net/projects/mingw-w64/
 
