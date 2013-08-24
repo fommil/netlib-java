@@ -78,6 +78,8 @@
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>/usr/lib/gcc/i686-w64-mingw32/4.6/libgfortran.a</linkerMiddleOption>
+                        <linkerMiddleOption>/usr/lib/gcc/i686-w64-mingw32/4.6/libquadmath.a</linkerMiddleOption>
+                        <linkerMiddleOption>/usr/lib/gcc/i686-w64-mingw32/4.6/libgcc.a</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

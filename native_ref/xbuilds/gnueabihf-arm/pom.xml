@@ -65,12 +65,12 @@
                     <compilerExecutable>arm-linux-gnueabihf-gcc</compilerExecutable>
                     <linkerExecutable>arm-linux-gnueabihf-gcc</linkerExecutable>
                     <linkerMiddleOptions>
+<!-- Inspect binary with
+arm-linux-gnueabihf-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
+-->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <!--<linkerMiddleOption>-static-libgfortran</linkerMiddleOption>-->
-                        <linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>
-                        <!--<linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>-->
-                        <!--<linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>-->
+                        <!-- TODO static gfortran -->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
