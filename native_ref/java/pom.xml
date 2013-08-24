@@ -41,6 +41,10 @@
                 <version>${project.parent.version}</version>
                 <executions>
                     <execution>
+                        <!--
+                        HACK: these override the parent executions of the same name
+                        and stop it from running.
+                        -->
                         <id>blas</id>
                         <goals>
                             <goal>native-java</goal>
