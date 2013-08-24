@@ -33,6 +33,12 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-linux-i686</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>netlib-native_ref-win-x86_64</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
