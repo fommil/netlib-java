@@ -61,7 +61,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>linux</javahOS>
-                    <jdkIncludePath>/opt/gnueabihf-arm/jdk8</jdkIncludePath>
+                    <jdkIncludePath>/opt/gnueabihf-arm/jdk8/include</jdkIncludePath>
                     <compilerExecutable>arm-linux-gnueabihf-gcc</compilerExecutable>
                     <linkerExecutable>arm-linux-gnueabihf-gcc</linkerExecutable>
                     <linkerMiddleOptions>
