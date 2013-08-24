@@ -24,7 +24,7 @@
 
     installed into
 
-      /opt/linux-gnueabihf/jdk8
+      /opt/gnueabihf-arm/jdk8
     -->
     <properties>
         <netlib.src>../../../netlib</netlib.src>
@@ -61,13 +61,16 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>linux</javahOS>
-                    <jdkIncludePath>/opt/linux-gnueabihf/jdk8</jdkIncludePath>
+                    <jdkIncludePath>/opt/gnueabihf-arm/jdk8</jdkIncludePath>
                     <compilerExecutable>arm-linux-gnueabihf-gcc</compilerExecutable>
                     <linkerExecutable>arm-linux-gnueabihf-gcc</linkerExecutable>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <!--<linkerMiddleOption>-static-libgfortran</linkerMiddleOption>-->
+                        <linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>
+                        <!--<linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>-->
+                        <!--<linkerMiddleOption>/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/libgfortran.a</linkerMiddleOption>-->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
