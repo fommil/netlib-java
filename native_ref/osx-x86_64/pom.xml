@@ -19,9 +19,9 @@
 
     <!--
     NOTE: OS X does not come with a Fortran compiler.
-    This configuration uses macports' distribution of dragonegg:
+    This configuration uses macports' distribution of gcc:
 
-      sudo port install dragonegg-3.4-gcc-4.8
+      sudo port install gfortran48
 
     To get the i5 AVX instructions, CLANG must be used for assembly
 
@@ -30,10 +30,6 @@
     (although I haven't noticed much difference) with these extra GCC flags
 
       -Xassembler -w -march=corei7-avx -mtune=corei7-avx
-
-    Dragonegg can be pushed even further with:
-
-      -fplugin-arg-dragonegg-enable-gcc-optzns -O4
     -->
 
     <dependencies>
@@ -67,8 +63,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>darwin</javahOS>
-                    <compilerExecutable>dragonegg-3.4-gcc-mp-4.8</compilerExecutable>
-                    <linkerExecutable>dragonegg-3.4-gcc-mp-4.8</linkerExecutable>
+                    <compilerExecutable>gcc-mp-4.8</compilerExecutable>
+                    <linkerExecutable>gcc-mp-4.8</linkerExecutable>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-dynamiclib</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgfortran</linkerMiddleOption>

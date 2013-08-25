@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>netlib-native_ref-osx-x86_64</artifactId>
+    <artifactId>netlib-native_ref-osx-i686</artifactId>
     <packaging>jnilib</packaging>
 
     <properties>
