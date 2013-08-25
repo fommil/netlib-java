@@ -1,13 +1,15 @@
 package com.github.fommil.netlib;
 
 import com.google.common.base.Stopwatch;
-import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.Test;
 
-@Log
+import java.util.logging.Logger;
+
 public class LAPACKTest {
   private LAPACK jLAPACK = LAPACK.getInstance();
+
+  private static Logger log = Logger.getLogger(LAPACKTest.class.getName());
 
   @Test
   public void dgesvd() {
