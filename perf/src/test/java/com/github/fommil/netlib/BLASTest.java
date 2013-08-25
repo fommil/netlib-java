@@ -1,7 +1,6 @@
 package com.github.fommil.netlib;
 
 import com.google.common.base.Stopwatch;
-import lombok.extern.java.Log;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +8,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-@Log
 public class BLASTest {
   private final BLAS blas = BLAS.getInstance();
 
