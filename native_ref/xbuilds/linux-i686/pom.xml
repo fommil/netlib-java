@@ -16,7 +16,7 @@
     <!--
     This is built for Linux i686 on an x86_64 architecture.
 
-      sudo apt-get install libc6-dev-i386 lib32gfortran3-dev gfortran
+      sudo apt-get install libc6-dev-i386 lib32gfortran-4.8-dev gfortran
 
     get the 32 bit JDK from
 
