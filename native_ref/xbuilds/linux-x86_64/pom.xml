@@ -61,7 +61,6 @@
                     <javahOS>linux</javahOS>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <!-- TODO: static fortran -->
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
