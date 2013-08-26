@@ -51,12 +51,6 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-osx-i686</artifactId>
-            <version>${project.parent.version}</version>
-            <classifier>natives</classifier>
-        </dependency>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
             <artifactId>netlib-native_ref-gnueabihf-arm</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>

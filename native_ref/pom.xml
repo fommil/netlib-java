@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-        <natives>netlib-native_ref-gnueabihf-arm.so,netlib-native_ref-linux-x86_64.so,netlib-native_ref-osx-x86_64.jnilib,netlib-native_ref-win-x86_64.dll,netlib-native_ref-linux-i686.so,netlib-native_ref-win-i686.dll,netlib-native_ref-osx-i686.dll</natives>
+        <natives>netlib-native_ref-gnueabihf-arm.so,netlib-native_ref-linux-x86_64.so,netlib-native_ref-osx-x86_64.jnilib,netlib-native_ref-win-x86_64.dll,netlib-native_ref-linux-i686.so,netlib-native_ref-win-i686.dll</natives>
         <!-- GEES etc needs an ill-defined callback -->
         <lapacke.callback>([ds](gees|gges|geesx|ggesx))</lapacke.callback>
         <!-- LSAME, SECOND etc are more efficient on the JVM -->
