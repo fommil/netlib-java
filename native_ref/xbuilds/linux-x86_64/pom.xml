@@ -15,6 +15,8 @@
 
     <!--
     This is built natively for Linux x86_64 on an x86_64 architecture.
+    Ubuntu Wheezy is best as it compiles for GLIBC_2.2.5 whereas Ubuntu
+    requires the more recent GLIBC_2.13.
 
       sudo apt-get install gfortran openjdk-7-jdk
 
