@@ -77,9 +77,9 @@
 <!-- Inspect binary with
 arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
 -->
+                        <linkerMiddleOption>-s</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <!-- TODO static gfortran -->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

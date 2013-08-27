@@ -31,8 +31,11 @@ png("out.png", width=800, height=800)
 par(cex = 1.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5, family="Palatino")
 java = read.csv("~/java.csv")
 native = read.csv("~/native_ref.csv")
+# 10^9 => nanoseconds and 10 repeats
+java[,2] = java[,2] / 10000000000
+native[,2] = native[,2] / 10000000000
 ylim = c(min(java[,2], native[,2]), max(java[,2], native[,2]))
-plot(java, xlab="Array size", ylab="Time (nanoseconds)", log="xy", lwd=2, pch=4, xaxt="n", yaxt="n", ylim=ylim, main="ddot Performance")
+plot(java, xlab="Array size", ylab="Time (seconds)", log="xy", lwd=2, pch=4, xaxt="n", yaxt="n", ylim=ylim, main="ddot Performance")
 lines(java, lwd=2)
 points(native, lwd=2, col="red", pch=4)
 lines(native, lwd=2, col="red")
