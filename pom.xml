@@ -21,6 +21,10 @@
     # (OS X or Linux) Oober project
     cd all
     mvn deploy -Psonatype-oss-release
+    
+      
+    # To clean up
+    curl -X DELETE -u <username>:<password> https://oss.sonatype.org/content/repositories/snapshots/com/github/fommil/netlib/
     -->
 
     <groupId>com.github.fommil.netlib</groupId>
