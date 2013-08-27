@@ -14,9 +14,18 @@
     <packaging>so</packaging>
 
     <!--
-    This is built for gnueabihf (i.e. RPi HW float) on an x86_64 architecture.
+    This is built using a custom cross compiler from Debian,
+    using the "rpi" config file in this directory.
+        
+        http://elinux.org/RPi_Linaro_GCC_Compilation
+        http://crosstool-ng.org
+        http://stackoverflow.com/a/13384349/1041691
 
-      sudo apt-get install gfortran-arm-linux-gnueabihf
+    (don't forget to use `CT_DEBUG_CT_SAVE_STEPS=1`)
+
+    Note that although Ubuntu has a gnueabihf compiler, it
+    is targeted a ludicrously niche ARMv7 chip that is not
+    backwards compatible with the Raspberry Pi.
 
     And obtain a JDK for ARM from
 
