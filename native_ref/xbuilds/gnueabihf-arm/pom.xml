@@ -71,11 +71,11 @@
                 <configuration>
                     <javahOS>linux</javahOS>
                     <jdkIncludePath>/opt/gnueabihf-arm/jdk8/include</jdkIncludePath>
-                    <compilerExecutable>arm-linux-gnueabihf-gcc</compilerExecutable>
-                    <linkerExecutable>arm-linux-gnueabihf-gcc</linkerExecutable>
+                    <compilerExecutable>arm-rpi-linux-gnueabi-gcc</compilerExecutable>
+                    <linkerExecutable>arm-rpi-linux-gnueabi-gcc</linkerExecutable>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
-arm-linux-gnueabihf-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
+arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
