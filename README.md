@@ -15,6 +15,16 @@ Some typical results:
 * 1000 runs of `dgesvd` takes 401.6 milliseconds with pure Java, reference native takes 41.97 milliseconds.
 * 1000 runs of `dsygv` takes 137.2 milliseconds with pure Java, reference native takes 8.9 milliseconds.
 
+A quick test is the LINPACK metric:
+
+```
+cd perf
+mvn compile
+
+mvn java:exec
+mvn java:exec -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK
+```
+
 The following are 10 runs each of various sized arrays in pure Java (black) and reference native (red) for `ddot` (dot product of vectors):
 
 ![native vs java](http://i43.tinypic.com/2dr5gew.png)
