@@ -28,9 +28,9 @@ public class Linpack {
 
   double second() {
     if (second_orig == -1) {
-      second_orig = System.currentTimeMillis();
+      second_orig = System.nanoTime();
     }
-    return (System.currentTimeMillis() - second_orig) / 1000;
+    return (System.nanoTime() - second_orig) / 1000000000.0;
   }
 
   public void run_benchmark() {
@@ -94,19 +94,10 @@ public class Linpack {
 	    "  Precision: " + eps_result);
 */
     residn_result = resid / (n * norma * normx * eps_result);
-    residn_result += 0.005; // for rounding
-    residn_result = (int) (residn_result * 100);
-    residn_result /= 100;
 
     time_result = total;
-    time_result += 0.005; // for rounding
-    time_result = (int) (time_result * 100);
-    time_result /= 100;
 
     mflops_result = ops / (1.0e6 * total);
-    mflops_result += 0.0005; // for rounding
-    mflops_result = (int) (mflops_result * 1000);
-    mflops_result /= 1000;
 
     System.out.println("Mflops/s: " + mflops_result +
         "  Time: " + time_result + " secs" +
