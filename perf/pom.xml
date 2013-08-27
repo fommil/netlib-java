@@ -13,6 +13,10 @@
     <artifactId>perf</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <exec.mainClass>com.github.fommil.netlib.Linpack</exec.mainClass>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
