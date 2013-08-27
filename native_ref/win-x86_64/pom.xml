@@ -69,10 +69,10 @@
                     <jdkIncludePath>/opt/win-x86_64/jdk7/include</jdkIncludePath>
                     <compilerExecutable>x86_64-w64-mingw32-gcc</compilerExecutable>
                     <linkerExecutable>x86_64-w64-mingw32-gcc</linkerExecutable>
-                    <compilerStartOptions>
+                    <compilerEndOptions>
                         <!-- silencing warnings because jint* int* are actually safe on this platform -->
-                        <compilerStartOption>-w</compilerStartOption>
-                    </compilerStartOptions>
+                        <compilerEndOption>-w</compilerEndOption>
+                    </compilerEndOptions>
                     <linkerMiddleOptions>
 <!-- check binary link with
   x86_64-w64-mingw32-objdump -p target/netlib-native_ref-win-x86_64.dll | grep DLL

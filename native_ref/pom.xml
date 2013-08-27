@@ -131,9 +131,15 @@
                             <javahClassName>com.github.fommil.netlib.NativeRefLAPACK</javahClassName>
                             <javahClassName>com.github.fommil.netlib.NativeRefARPACK</javahClassName>
                         </javahClassNames>
+                        <compilerStartOptions>
+                            <compilerStartOption>-O3</compilerStartOption>
+                        </compilerStartOptions>
                         <compilerMiddleOptions>
-                            <compilerMiddleOption>-O3 -Wall -fPIC -DADD_</compilerMiddleOption>
+                            <compilerMiddleOption>-Wall -fPIC -DADD_</compilerMiddleOption>
                         </compilerMiddleOptions>
+                        <linkerStartOptions>
+                            <linkerStartOption>-s</linkerStartOption>
+                        </linkerStartOptions>
                         <sources>
                             <source>
                                 <directory>${project.build.directory}/netlib-native</directory>

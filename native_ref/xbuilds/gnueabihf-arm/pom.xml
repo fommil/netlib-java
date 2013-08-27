@@ -73,11 +73,13 @@
                     <jdkIncludePath>/opt/gnueabihf-arm/jdk8/include</jdkIncludePath>
                     <compilerExecutable>arm-rpi-linux-gnueabi-gcc</compilerExecutable>
                     <linkerExecutable>arm-rpi-linux-gnueabi-gcc</linkerExecutable>
+                    <compilerStartOptions>
+                        <compilerStartOption>-Os</compilerStartOption>
+                    </compilerStartOptions>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
 arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
 -->
-                        <linkerMiddleOption>-s</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                     </linkerMiddleOptions>
