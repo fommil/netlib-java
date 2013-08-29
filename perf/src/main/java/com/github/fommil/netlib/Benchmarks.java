@@ -45,6 +45,7 @@ public class Benchmarks {
       log.info("writing to " + file);
       @Cleanup CSVWriter csv = new CSVWriter(new FileWriter(file));
       for (int i = 0; i < reps; i++) {
+        log.info(file + " rep " + i);
         for (int j = sets; j > 0; j--) {
           int size = (int) Math.pow(10, factor * j);
           if (size < 10) continue;
