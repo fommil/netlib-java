@@ -18,7 +18,7 @@ public class Dgemm implements Benchmark.Parameterised {
 
     Stopwatch watch = new Stopwatch();
     watch.start();
-    BLAS.getInstance().dgemm("n", "n", m, m, m, 1, a, m, b, m, 0, c, m);
+    BLAS.getInstance().dgemm("N", "N", m, m, m, 1, a, m, b, m, 0, c, m);
     watch.stop();
 
     return watch.elapsed(TimeUnit.NANOSECONDS);

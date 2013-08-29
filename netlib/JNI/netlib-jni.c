@@ -8,7 +8,9 @@
 enum CBLAS_TRANSPOSE getCblasTrans(const char * fortranChar) {
 	switch (fortranChar[0]) {
 	    case 'N': return CblasNoTrans;
+	    case 'n': return CblasNoTrans;
 		case 'T': return CblasTrans;
+		case 't': return CblasTrans;
 		default: return -1;
 	}
 }
@@ -16,7 +18,9 @@ enum CBLAS_TRANSPOSE getCblasTrans(const char * fortranChar) {
 enum CBLAS_UPLO getCblasUpLo(const char * fortranChar) {
 	switch (fortranChar[0]) {
 	    case 'U': return CblasUpper;
+	    case 'u': return CblasUpper;
 		case 'L': return CblasLower;
+		case 'l': return CblasLower;
 		default: return -1;
 	}
 }
@@ -24,7 +28,9 @@ enum CBLAS_UPLO getCblasUpLo(const char * fortranChar) {
 enum CBLAS_SIDE getCblasSide(const char * fortranChar) {
 	switch (fortranChar[0]) {
 	    case 'L': return CblasLeft;
+	    case 'l': return CblasLeft;
 		case 'R': return CblasRight;
+		case 'r': return CblasRight;
 		default: return -1;
 	}
 }
@@ -32,7 +38,9 @@ enum CBLAS_SIDE getCblasSide(const char * fortranChar) {
 enum CBLAS_DIAG getCblasDiag(const char * fortranChar) {
 	switch (fortranChar[0]) {
 	    case 'N': return CblasNonUnit;
+	    case 'n': return CblasNonUnit;
 		case 'U': return CblasUnit;
+		case 'u': return CblasUnit;
 		default: return -1;
 	}
 }
