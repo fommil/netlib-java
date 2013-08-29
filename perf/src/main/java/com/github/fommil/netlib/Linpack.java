@@ -1,5 +1,10 @@
 package com.github.fommil.netlib;
 
+import com.google.common.base.Stopwatch;
+import lombok.extern.java.Log;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * Routines that give a bit of a workout of BLAS.
  *
@@ -11,102 +16,41 @@ package com.github.fommil.netlib;
  * @author Bonnie Toy (C translation)
  * @see <a href="http://www.netlib.org/linpack/">LINPACK</a>
  */
-public class Linpack {
+@Log
+public class Linpack implements Benchmark {
 
   private BLAS blas = BLAS.getInstance();
 
   public static void main(String[] args) {
-    Linpack l = new Linpack();
-    l.run_benchmark();
+    Linpack linpack = new Linpack();
+    linpack.benchmark();
   }
 
-  double abs(double d) {
-    return (d >= 0) ? d : -d;
-  }
-
-  double second_orig = -1;
-
-  double second() {
-    if (second_orig == -1) {
-      second_orig = System.nanoTime();
-    }
-    return (System.nanoTime() - second_orig) / 1000000000.0;
-  }
-
-  public void run_benchmark() {
-    double mflops_result = 0.0;
-    double residn_result = 0.0;
-    double time_result = 0.0;
-    double eps_result = 0.0;
-
+  @Override
+  public long benchmark() {
     double a[][] = new double[200][201];
     double b[] = new double[200];
-    double x[] = new double[200];
-    double cray, ops, total, norma, normx;
-    double resid, time;
-    double kf;
-    int n, i, ntimes, info, lda, ldaa, kflops;
+    int n = 100, lda = 201;
     int ipvt[] = new int[200];
 
-    //double mflops_result;
-    //double residn_result;
-    //double time_result;
-    //double eps_result;
+    double ops = (2.0 * (n * n * n)) / 3.0 + 2.0 * (n * n);
 
-    lda = 201;
-    ldaa = 200;
-    cray = .056;
-    n = 100;
+    matgen(a, n, b);
 
-    ops = (2.0e0 * (n * n * n)) / 3.0 + 2.0 * (n * n);
-
-    norma = matgen(a, lda, n, b);
-    time = second();
-    info = dgefa(a, lda, n, ipvt);
+    Stopwatch watch = new Stopwatch();
+    watch.start();
+    dgefa(a, lda, n, ipvt);
     dgesl(a, lda, n, ipvt, b, 0);
-    total = second() - time;
+    watch.stop();
 
-    for (i = 0; i < n; i++) {
-      x[i] = b[i];
-    }
-    norma = matgen(a, lda, n, b);
-    for (i = 0; i < n; i++) {
-      b[i] = -b[i];
-    }
-    dmxpy(n, b, n, lda, x, a);
-    resid = 0.0;
-    normx = 0.0;
-    for (i = 0; i < n; i++) {
-      resid = (resid > abs(b[i])) ? resid : abs(b[i]);
-      normx = (normx > abs(x[i])) ? normx : abs(x[i]);
-    }
+    long total = watch.elapsed(TimeUnit.NANOSECONDS);
+    double mflops = 1000 * ops / total;
 
-    eps_result = epslon((double) 1.0);
-/*
-
-    residn_result = resid/( n*norma*normx*eps_result );
-    time_result = total;
-    mflops_result = ops/(1.0e6*total);
-
-    return ("Mflops/s: " + mflops_result +
-	    "  Time: " + time_result + " secs" +
-	    "  Norm Res: " + residn_result +
-	    "  Precision: " + eps_result);
-*/
-    residn_result = resid / (n * norma * normx * eps_result);
-
-    time_result = total;
-
-    mflops_result = ops / (1.0e6 * total);
-
-    System.out.println("Mflops/s: " + mflops_result +
-        "  Time: " + time_result + " secs" +
-        "  Norm Res: " + residn_result +
-        "  Precision: " + eps_result);
+    log.info("Mflops: " + mflops);
+    return total;
   }
 
-
-  final double matgen(double a[][], int lda, int n, double b[]) {
+  final double matgen(double a[][], int n, double b[]) {
     double norma;
     int init, i, j;
 
@@ -348,82 +292,6 @@ matrix in column order. --dmd 3/3/97
             b[k] = t;
           }
         }
-      }
-    }
-  }
-
-
-  /*
-    estimate unit roundoff in quantities of size x.
-
-    this program should function properly on all systems
-    satisfying the following two assumptions,
-    1.  the base used in representing dfloating point
-    numbers is not a power of three.
-    2.  the quantity  a  in statement 10 is represented to
-    the accuracy used in dfloating point variables
-    that are stored in memory.
-    the statement number 10 and the go to 10 are intended to
-    force optimizing compilers to generate code satisfying
-    assumption 2.
-    under these assumptions, it should be true that,
-    a  is not exactly equal to four-thirds,
-    b  has a zero for its last bit or digit,
-    c  is not exactly equal to one,
-    eps  measures the separation of 1.0 from
-    the next larger dfloating point number.
-    the developers of eispack would appreciate being informed
-    about any systems where these assumptions do not hold.
-
-    *****************************************************************
-    this routine is one of the auxiliary routines used by eispack iii
-    to avoid machine dependencies.
-    *****************************************************************
-
-    this version dated 4/6/83.
-  */
-  final double epslon(double x) {
-    double a, b, c, eps;
-
-    a = 4.0e0 / 3.0e0;
-    eps = 0;
-    while (eps == 0) {
-      b = a - 1.0;
-      c = b + b + b;
-      eps = abs(c - 1.0);
-    }
-    return (eps * abs(x));
-  }
-
-
-  /*
-    purpose:
-    multiply matrix m times vector x and add the result to vector y.
-
-    parameters:
-
-    n1 integer, number of elements in vector y, and number of rows in
-    matrix m
-
-    y double [n1], vector of length n1 to which is added
-    the product m*x
-
-    n2 integer, number of elements in vector x, and number of columns
-    in matrix m
-
-    ldm integer, leading dimension of array m
-
-    x double [n2], vector of length n2
-
-    m double [ldm][n2], matrix of n1 rows and n2 columns
-  */
-  final void dmxpy(int n1, double y[], int n2, int ldm, double x[], double m[][]) {
-    int j, i;
-
-    // cleanup odd vector
-    for (j = 0; j < n2; j++) {
-      for (i = 0; i < n1; i++) {
-        y[i] += x[j] * m[j][i];
       }
     }
   }
