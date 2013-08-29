@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--
+
+    mvn compile assembly:single
+    java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+    -->
+
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
@@ -14,7 +22,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <exec.mainClass>com.github.fommil.netlib.Linpack</exec.mainClass>
+        <exec.mainClass>com.github.fommil.netlib.Benchmarks</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -22,6 +30,11 @@
             <groupId>net.sf.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fommil</groupId>
+            <artifactId>java-logging</artifactId>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
@@ -44,6 +57,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${exec.mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
