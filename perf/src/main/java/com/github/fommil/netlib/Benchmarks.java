@@ -49,7 +49,7 @@ public class Benchmarks {
           int size = (int) Math.pow(10, factor * j);
           if (size < 10) continue;
           long result = b.benchmark(size);
-          csv.writeNext(new String[]{Long.toString(result)});
+          csv.writeNext(new String[]{Integer.toString(size), Long.toString(result)});
         }
       }
     }
