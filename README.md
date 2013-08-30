@@ -61,14 +61,14 @@ faster by about the 3rd or 4th iteration (that's the JIT kicking in).
 
 One should expect machine optimised natives to out-perform the reference native implementation.
 
-![linpack](http://i39.tinypic.com/280trgl.png)
+![linpack](http://i41.tinypic.com/29cpbwz.png)
 
 The following performance charts give an idea of the performance ratios of Java vs the native
 reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
 
-![ddot](http://i43.tinypic.com/dot9qs.png)
+![ddot](http://i40.tinypic.com/xc7r7d.png)
 
-![dgemm](http://i44.tinypic.com/w0ro7t.png)
+![dgemm](http://i43.tinypic.com/ff3hac.png)
 
 
 
