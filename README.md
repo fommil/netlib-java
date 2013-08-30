@@ -33,24 +33,33 @@ Machine Optimised Natives
 
 High performance BLAS / LAPACK are available
 [commercially](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
-and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software).
+and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software) for
+specific CPU chipsets.
 
-Due to the nature of machine-optimised binaries, we cannot ship them with netlib-java due either to
-proprietary licenses or because the only way to obtain them is to custom build them for
-a specific machine.
+Due to the nature of machine-optimised binaries, we cannot bundle them with `netlib-java`.
 
 However, we have made it as simple as possible (without sacrificing performance)
 for developers to use existing optimised implementations:
 the primary goal of the `native_ref` module is to show how this can be achieved.
 
-Java has a reputation with (mostly) older generation developers, because they remember the 1990s
-when Java was very slow. Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
+[The author](https://github.com/fommil/) may be available to assist with builds (and further
+improvements to `netlib-java`) on a commercial basis. Make contact for availability (budget estimates
+are appreciated).
+
+
+Performance
+===========
+
+Java has a reputation with (mostly) older generation developers, because they remember
+when Java first came out and was very slow.
+Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
 ensures that Java applications keep pace with C++ applications (or indeed, Fortran applications!).
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
-faster by about the 3rd or 4th iteration (that's the JIT kicking in). One should expect machine
-optimised natives to out-perform the reference native implementation.
+faster by about the 3rd or 4th iteration (that's the JIT kicking in).
+
+One should expect machine optimised natives to out-perform the reference native implementation.
 
 ![linpack](http://i39.tinypic.com/280trgl.png)
 
