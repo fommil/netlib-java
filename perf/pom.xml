@@ -10,6 +10,10 @@
     java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
     java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
 
+    and potentially (e.g. on raspberrypi)
+
+    java -minimal -Djvm.type=minimal -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+    java -server -Djvm.type=minimal -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
     -->
 
     <parent>

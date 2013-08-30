@@ -59,9 +59,15 @@ public class Benchmarks {
   private static String getTarget(Object o) {
     return (getProperty("os.name") + "-"
         + getProperty("os.arch") + "-"
+        + getJvm()
         + o.getClass().getSimpleName() + "-"
         + BLAS.getInstance().getClass().getSimpleName()
     ).toLowerCase().replace(" ", "_");
+  }
+
+  private static String getJvm() {
+    if (getProperty("jvm.type") == null) return "";
+    return getProperty("jvm.type") + "-";
   }
 
   // return array of size n with normally distributed elements
