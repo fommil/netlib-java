@@ -12,7 +12,7 @@ shipped as standard for all major operating systems:
 
 * OS X (`x86_64`)
 * Linux (`i686`, `x86_64`, Raspberry Pi (`armhf`): `GLIBC_2.2.5+` and `libgfortran3`)
-* Windows 8 (32 and 64 bit)
+* Windows (32 and 64 bit)
 
 Native loading is provided by [JNILoader](https://github.com/fommil/jniloader): disabled by default.
 Enabling reference natives is as simple as setting system properties on JVM startup:
