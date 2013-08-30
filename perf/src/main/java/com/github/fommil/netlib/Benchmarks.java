@@ -19,8 +19,8 @@ import static java.lang.System.getProperty;
 public class Benchmarks {
 
   public static void main(String[] args) throws Exception {
-    int reps = 10;
-    int sets = 100;
+    int reps = Integer.valueOf(getProperty("perf.reps", "10"));
+    int sets = Integer.valueOf(getProperty("perf.max", "100"));
 
     List<Benchmark> benchmarks = Lists.newArrayList();
     benchmarks.add(new Linpack());
