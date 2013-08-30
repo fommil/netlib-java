@@ -13,7 +13,7 @@
     and potentially (e.g. on raspberrypi)
 
     java -minimal -Djvm.type=minimal -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-    java -server -Djvm.type=minimal -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+    java -server -Djvm.type=server -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
     -->
 
     <parent>
