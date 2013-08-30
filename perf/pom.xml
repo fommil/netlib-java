@@ -12,8 +12,12 @@
 
     and potentially (e.g. on raspberrypi)
 
-    java -minimal -Djvm.type=minimal -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-    java -server -Djvm.type=server -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/usr/bin/java -Dperf.max=75 -Djvm.type=jdk7 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/usr/bin/java -jamvm -Dperf.max=75 -Djvm.type=jamvm -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/usr/bin/java -avian -Dperf.max=75 -Djvm.type=avian -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/opt/jdk8/bin/java -Dperf.max=75 -Djvm.type=jdk8 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/opt/jdk8/bin/java -minimal -Dperf.max=75 -Djvm.type=jdk8_min -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/opt/jdk8/bin/java -Dperf.max=75 -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
     -->
 
     <parent>
