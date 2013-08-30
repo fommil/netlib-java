@@ -24,7 +24,7 @@ Enabling reference natives is as simple as setting system properties on JVM star
 If the natives fail to load, the Java implementation is the fallback.
 
 *Improvements to startup time (several seconds) can be achieved by providing the exact binary name to load,
-e.g. on OS X `com.github.fommil.netlib.NativeRefBLAS.natives=netlib-native_ref-osx-x86_64.jnilib`,
+e.g. on OS X `-Dcom.github.fommil.netlib.NativeRefBLAS.natives=netlib-native_ref-osx-x86_64.jnilib`,
 and placing the file in a directory which is passed as `-Djava.library.path=...`.*
 
 
