@@ -3,65 +3,111 @@ netlib-java [![Build Status](https://travis-ci.org/fommil/netlib-java.png?branch
 
 Mission-critical software components for linear algebra systems.
 
-This project is currently undergoing a major (API preserving) rewrite and will be back shortly with easy-to-use native binaries.
+Java wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
+[LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK).
 
-If you need access to the old native codebase, look in the `ant` branch.
+Pure Java implementations are provided to ensure full portability by [F2J](http://icl.cs.utk.edu/f2j/),
+with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
+shipped as standard for all major operating systems:
 
-The TRUNK reference implementation of BLAS (not machine optimised)
-is about ten times faster than the Java implementation for vector multiplication.
+* OS X (`x86_64`)
+* Linux (`i686`, `x86_64`, Raspberry Pi (`armhf`): `GLIBC_2.2.5+` and `libgfortran3`)
+* Windows 8 (32 and 64 bit)
 
-Some typical results:
+Native loading is provided by [JNILoader](https://github.com/fommil/jniloader): disabled by default.
+Enabling reference natives is as simple as setting system properties on JVM startup:
 
-* 1000 runs of `dgesvd` takes 401.6 milliseconds with pure Java, reference native takes 41.97 milliseconds.
-* 1000 runs of `dsygv` takes 137.2 milliseconds with pure Java, reference native takes 8.9 milliseconds.
+* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
+* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
+* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK`
 
-A quick test is the LINPACK metric:
+If the natives fail to load, the Java implementation is the fallback.
 
+*Improvements to startup time (several seconds) can be achieved by providing the exact binary name to load,
+e.g. on OS X `com.github.fommil.netlib.NativeRefBLAS.natives=netlib-native_ref-osx-x86_64.jnilib`,
+and placing the file in a directory which is passed as `-Djava.library.path=...`.*
+
+
+Machine Optimised Natives
+=========================
+
+High performance BLAS / LAPACK are available
+[commercially](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
+and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software).
+
+Due to the nature of machine-optimised binaries, we cannot ship them with netlib-java due either to
+proprietary licenses or because the only way to obtain them is to custom build them for
+a specific machine.
+
+However, we have made it as simple as possible (without sacrificing performance)
+for developers to use existing optimised implementations:
+the primary goal of the `native_ref` module is to show how this can be achieved.
+
+Java has a reputation with (mostly) older generation developers, because they remember the 1990s
+when Java was very slow. Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
+ensures that Java applications keep pace with C++ applications (or indeed, Fortran applications!).
+
+The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
+Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
+faster by about the 3rd or 4th iteration (that's the JIT kicking in). One should expect machine
+optimised natives to out-perform the reference native implementation.
+
+![linpack](http://i39.tinypic.com/280trgl.png)
+
+The following performance charts give an idea of the performance ratios of Java vs the native
+reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
+
+![ddot](http://i43.tinypic.com/dot9qs.png)
+
+![dgemm](http://i44.tinypic.com/w0ro7t.png)
+
+
+
+Installation
+============
+
+Snapshots are distributed on Sonatype's Snapshot Repository:
+
+```xml
+<dependency>
+  <groupId>com.github.fommil.netlib</groupId>
+  <artifactId>all</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
 ```
-cd perf
-mvn compile
 
-mvn exec:java
-mvn exec:java -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK
+If the above fails, ensure you have the following in your `pom.xml`:
+
+```xml
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 ```
 
-The following are 10 runs each of various sized arrays in pure Java (black) and reference native (red) for `ddot` (dot product of vectors):
 
-![native vs java](http://i43.tinypic.com/2dr5gew.png)
 
-Amazingly, Pure Java starts to get as fast as the Fortran code for arrays of about 1,000 elements (and higher).
+Donations
+=========
 
-```sh
-mvn test | grep -x '[0-9]*,[0-9]*' > ~/java.csv
-mvn test -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK | grep -x '[0-9]*,[0-9]*' > ~/native_ref.csv
-```
+Please consider supporting the maintenance of this open source project with a donation:
 
-```R
-png("out.png", width=800, height=800)
-par(cex = 1.5, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5, family="Palatino")
-java = read.csv("~/java.csv")
-native = read.csv("~/native_ref.csv")
-# 10^9 => nanoseconds and 10 repeats
-java[,2] = java[,2] / 10000000000
-native[,2] = native[,2] / 10000000000
-ylim = c(min(java[,2], native[,2]), max(java[,2], native[,2]))
-plot(java, xlab="Array size", ylab="Time (seconds)", log="xy", lwd=2, pch=4, xaxt="n", yaxt="n", ylim=ylim, main="ddot Performance")
-lines(java, lwd=2)
-points(native, lwd=2, col="red", pch=4)
-lines(native, lwd=2, col="red")
+[![Donate via Paypal](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=B2HW5ATB8C3QW&lc=GB&item_name=netlib&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
-x1 <- floor(log10(range(java[,1])))
-pow <- seq(x1[1], x1[2]+1)
-ticksat <- as.vector(sapply(pow, function(p) (1:10)*10^p))
-axis(1, 10^pow)
-axis(1, ticksat, labels=NA, tcl=-0.25, lwd=0, lwd.ticks=1)
 
-y1 <- floor(log10(range(java[,2])))
-pow <- seq(y1[1], y1[2]+1)
-ticksat <- as.vector(sapply(pow, function(p) (1:10)*10^p))
-axis(2, 10^pow)
-axis(2, ticksat, labels=NA, tcl=-0.25, lwd=0, lwd.ticks=1)
+Contributing
+============
 
-legend("topleft", c("F2J","Reference Netlib"), lty=c(1,1), lwd=c(2,2), col=c("black","red"), bty="n")
-dev.off()
-```
+Contributors are encouraged to fork this repository and issue pull
+requests. Contributors implicitly agree to assign an unrestricted licence
+to Sam Halliday, but retain the copyright of their code (this means
+we both have the freedom to update the licence for those contributions).
+
