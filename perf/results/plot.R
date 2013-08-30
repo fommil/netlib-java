@@ -78,7 +78,9 @@ getPlotParams = function(t, i) {
 		}
 	}
 	
-	if (regexpr("linux", t) > 0) {
+	if (regexpr("arm", t) > 0) {
+		sym = 8
+	} else if (regexpr("linux", t) > 0) {
 		sym = 3
 	} else if (regexpr("mac", t) > 0) {
 		sym = 20
