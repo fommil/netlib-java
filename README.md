@@ -55,21 +55,26 @@ when Java first came out and was very slow.
 Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
 ensures that Java applications keep pace with C++ applications (or indeed, Fortran applications!).
 
+The following performance charts give an idea of the performance ratios of Java vs the native
+reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
+
+Also shown are pure C performance runs that show that **dropping to C at the application
+layer gives no performance benefit**. If anything, the Java version is more reliable.
+
+One should expect machine optimised natives to out-perform the reference native implementation, as can
+be seen by the performance obtained using Apple's
+[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html).
+
+![dgemm](http://i42.tinypic.com/2eltvr4.png)
+
+![ddot](http://i40.tinypic.com/xc7r7d.png)
+
+
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
 faster by about the 3rd or 4th iteration (that's the JIT kicking in).
 
-One should expect machine optimised natives to out-perform the reference native implementation.
-
 ![linpack](http://i41.tinypic.com/29cpbwz.png)
-
-The following performance charts give an idea of the performance ratios of Java vs the native
-reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
-
-![ddot](http://i40.tinypic.com/xc7r7d.png)
-
-![dgemm](http://i43.tinypic.com/ff3hac.png)
-
 
 
 Installation

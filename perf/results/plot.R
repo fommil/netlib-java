@@ -78,7 +78,13 @@ getPlotParams = function(t, i) {
 		}
 	}
 	
-	if (regexpr("arm", t) > 0) {
+	if (regexpr("CBLAS", i) > 0) {
+		col = "green"
+		sym = 10
+	} else if (regexpr("veclib", i) > 0) {
+		col = "green"
+		sym = 13
+	} else if (regexpr("arm", t) > 0) {
 		sym = 8
 	} else if (regexpr("linux", t) > 0) {
 		sym = 3
@@ -87,6 +93,7 @@ getPlotParams = function(t, i) {
 	} else {
 		sym = 4
 	}
+	
 	c(col, sym)
 }
 
