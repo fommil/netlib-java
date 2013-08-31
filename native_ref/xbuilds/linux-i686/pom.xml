@@ -71,6 +71,9 @@
                     <compilerEndOptions>
                         <compilerEndOption>-m32</compilerEndOption>
                     </compilerEndOptions>
+                    <linkerStartOptions>
+                        <linkerStartOption>-Wl,-s</linkerStartOption>
+                    </linkerStartOptions>
                     <linkerEndOptions>
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>

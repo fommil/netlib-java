@@ -61,6 +61,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <javahOS>linux</javahOS>
+                    <linkerStartOptions>
+                        <linkerStartOption>-Wl,-s</linkerStartOption>
+                    </linkerStartOptions>
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>

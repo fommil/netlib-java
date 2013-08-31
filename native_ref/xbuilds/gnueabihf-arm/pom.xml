@@ -76,6 +76,9 @@
                     <compilerStartOptions>
                         <compilerStartOption>-Os</compilerStartOption>
                     </compilerStartOptions>
+                    <linkerStartOptions>
+                        <linkerStartOption>-Wl,-s</linkerStartOption>
+                    </linkerStartOptions>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
 arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
