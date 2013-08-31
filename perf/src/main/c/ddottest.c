@@ -2,11 +2,11 @@
 
 cp ../../../../native_ref/<target binary> libnetlib.so
 
-gcc -O3 dgemmtest.c common.c -o dgemmtest -L. -lnetlib -I../../../../netlib/CBLAS
-./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-CBLAS.csv
+gcc -O3 ddottest.c common.c -o ddottest -L. -lnetlib -I../../../../netlib/CBLAS
+./ddottest  > ../../../results/mac_os_x-x86_64-ddot-CBLAS.csv
 
-gcc -O3 dgemmtest.c common.c -o dgemmtest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
-./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-veclib.csv
+gcc -O3 ddottest.c common.c -o ddottest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
+./ddottest  > ../../../results/mac_os_x-x86_64-ddot-veclib.csv
 
 */
 
@@ -20,19 +20,17 @@ long benchmark(int size) {
     int m = sqrt(size);
 	long requestStart, requestEnd;
 
-    double* a = random_array(m * m);
-    double* b = random_array(m * m);
-    double* c = calloc(m * m, sizeof(double));
+    double* a = random_array(m);
+    double* b = random_array(m);
 
 	requestStart = currentTimeNanos();
 
-    cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, m, m, 1, a, m, b, m, 0, c, m);
+    cblas_ddot(size, a, 1, b, 1);
 
 	requestEnd = currentTimeNanos();
 
     free(a);
     free(b);
-    free(c);
 
     return (requestEnd - requestStart);
   }

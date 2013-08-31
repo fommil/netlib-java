@@ -4,8 +4,10 @@ library(stringr)
 # (pretty ugly) performance charts of netlib-java on various
 # platforms.
 
+# convert -density 300 -depth 8 -quality 85 a.pdf a.png
+
 benchmarks = c("linpack")
-pBenchmarks = c("ddot", "dgemm")
+pBenchmarks = c("ddot", "dgemm", "dgetri")
 targets = c("linux-amd64", "linux-i386", "mac_os_x-x86_64", "windows_8-amd64", "windows_8-x86")
 impls = c("f2jblas", "nativerefblas")
 
