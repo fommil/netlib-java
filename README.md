@@ -4,7 +4,8 @@ netlib-java [![Build Status](https://travis-ci.org/fommil/netlib-java.png?branch
 Mission-critical software components for linear algebra systems.
 
 Java wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
-[LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK).
+[LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
+that performs **as fast as the C interfaces**.
 
 Pure Java implementations are provided to ensure full portability by [F2J](http://icl.cs.utk.edu/f2j/),
 with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
