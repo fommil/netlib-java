@@ -54,7 +54,7 @@ Performance
 Java has a reputation with older generation developers because
 Java applications were slow in the 1990s.
 Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
-ensures that Java applications keep pace with - or exceeds the performance -
+ensures that Java applications keep pace with --- or exceed the performance of ---
 C / C++ / Fortran applications.
 
 The following performance charts give an idea of the performance ratios of Java vs the native
