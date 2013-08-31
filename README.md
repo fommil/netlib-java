@@ -5,7 +5,7 @@ Mission-critical software components for linear algebra systems.
 
 Java wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
-that performs **as fast as the C interfaces**.
+that performs **as fast as the C / Fortran interfaces**.
 
 Pure Java implementations are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability,
 with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
@@ -51,31 +51,45 @@ are appreciated).
 Performance
 ===========
 
-Java has a reputation with (mostly) older generation developers, because they remember
-when Java first came out and was very slow.
+Java has a reputation with older generation developers because
+Java applications were slow in the 1990s.
 Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
-ensures that Java applications keep pace with C++ applications (or indeed, Fortran applications!).
+ensures that Java applications keep pace with - or exceeds the performance -
+C / C++ / Fortran applications.
 
 The following performance charts give an idea of the performance ratios of Java vs the native
-reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
+reference implementation. Also shown are pure C performance runs that show that
+**dropping to C at the application layer gives no performance benefit**.
+If anything, the Java version is faster for smaller matrices.
 
-Also shown are pure C performance runs that show that **dropping to C at the application
-layer gives no performance benefit**. If anything, the Java version is more reliable.
-
-One should expect machine optimised natives to out-perform the reference native implementation, as can
+One should expect machine optimised natives to out-perform the reference implementation, as can
 be seen by the performance obtained using Apple's
-[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html).
+[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html)
+(it is quite clear that a different algorithm kicks in for arrays larger than 1,000
+elements... *perhaps prematurely given the performance up to 5,000 elements*).
 
-![dgemm](http://i42.tinypic.com/2eltvr4.png)
+*NOTE: a different machine is used for each OS.*
 
-![ddot](http://i40.tinypic.com/xc7r7d.png)
+DGEMM measures matrix / matrix multiplication:
+
+![dgemm](http://i41.tinypic.com/14pixj.png)
+
+DGETRI measures matrix factorisation and inversion:
+
+![dgetri](http://i40.tinypic.com/m79onq.png)
+
+
+DDOT measures vector dot product:
+
+![ddot](http://i43.tinypic.com/k7034.png)
+
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
 faster by about the 3rd or 4th iteration (that's the JIT kicking in).
 
-![linpack](http://i41.tinypic.com/29cpbwz.png)
+![linpack](http://i43.tinypic.com/66kume.png)
 
 
 Installation
