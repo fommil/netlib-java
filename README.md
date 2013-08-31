@@ -62,11 +62,10 @@ reference implementation. Also shown are pure C performance runs that show that
 **dropping to C at the application layer gives no performance benefit**.
 If anything, the Java version is faster for smaller matrices.
 
-One should expect machine optimised natives to out-perform the reference implementation, as can
-be seen by the performance obtained using Apple's
+One should expect machine optimised natives to out-perform the reference implementation
+– especially for larger arrays – as demonstrated below by Apple's
 [veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html)
-(it is quite clear that a different algorithm kicks in for arrays larger than 1,000
-elements... *perhaps prematurely given the performance up to 5,000 elements*).
+and Intel's [MKL](http://software.intel.com/en-us/intel-mkl).
 
 *NOTE: a different machine is used for each OS.*
 
@@ -77,7 +76,6 @@ DGEMM measures matrix / matrix multiplication:
 DGETRI measures matrix factorisation and inversion:
 
 ![dgetri](http://i40.tinypic.com/m79onq.png)
-
 
 DDOT measures vector dot product:
 
