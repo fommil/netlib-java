@@ -76,13 +76,24 @@ public abstract class $name$ {
   static {
     try {
       String className = System.getProperty(PROPERTY_KEY, FALLBACK);
-      Class klass = Class.forName(className);
-      INSTANCE = ($name$) klass.newInstance();
+      $name$ impl;
+      try {
+        impl = load(className);
+      } catch (Throwable e) {
+        log.warning("Failed to load " + className + ", falling back to F2J.");
+        impl = load(FALLBACK);
+      }
+      INSTANCE = impl;
       log.config("Implementation provided by " + INSTANCE.getClass());
       $initCode$
     } catch (Exception e) {
       throw new ExceptionInInitializerError(e);
     }
+  }
+
+  private static $name$ load(String className) throws Exception {
+    Class klass = Class.forName(className);
+    return ($name$) klass.newInstance();
   }
 
   /**
