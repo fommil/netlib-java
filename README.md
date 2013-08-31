@@ -87,7 +87,7 @@ DDOT measures vector dot product:
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
-faster by about the 3rd or 4th iteration (that's the JIT kicking in).
+faster (than its start speed) by about the 20th iteration (that's the JIT kicking in).
 
 ![linpack](http://i43.tinypic.com/66kume.png)
 
