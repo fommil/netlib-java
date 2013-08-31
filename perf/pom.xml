@@ -37,12 +37,10 @@
         <dependency>
             <groupId>net.sf.opencsv</groupId>
             <artifactId>opencsv</artifactId>
-            <version>2.3</version>
         </dependency>
         <dependency>
             <groupId>com.github.fommil</groupId>
             <artifactId>java-logging</artifactId>
-            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
