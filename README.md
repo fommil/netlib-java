@@ -71,15 +71,15 @@ and Intel's [MKL](http://software.intel.com/en-us/intel-mkl).
 
 DGEMM measures matrix / matrix multiplication:
 
-![dgemm](http://i41.tinypic.com/14pixj.png)
+![dgemm](http://i40.tinypic.com/315enn5.png)
 
 DGETRI measures matrix factorisation and inversion:
 
-![dgetri](http://i40.tinypic.com/m79onq.png)
+![dgetri](http://i40.tinypic.com/2evt0tj.png)
 
 DDOT measures vector dot product:
 
-![ddot](http://i43.tinypic.com/k7034.png)
+![ddot](http://i42.tinypic.com/wgqgdz.png)
 
 
 
