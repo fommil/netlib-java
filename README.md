@@ -1,4 +1,4 @@
-netlib-java [![Build Status](https://travis-ci.org/fommil/netlib-java.png?branch=master)](https://travis-ci.org/fommil/netlib-java)
+netlib-java
 ===========
 
 Mission-critical components for linear algebra systems.

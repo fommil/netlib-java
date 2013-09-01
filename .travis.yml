@@ -1,5 +1,0 @@
-language: java
-jdk:
-  - oraclejdk7
-before_script:
-  - mvn -pl generator compile
