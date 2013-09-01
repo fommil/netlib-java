@@ -71,15 +71,20 @@ Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent
 *NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
 Raspberry Pi for ARM; and iMac for Windows 8.*
 
-DGEMM measures matrix / matrix multiplication:
+The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
+measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
+performance:
 
 ![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsad92ee47.png)
 
-DGETRI measures matrix factorisation and inversion:
+The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
+measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
+and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
 
 ![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsa4fd0d9e.png)
 
-DDOT measures vector dot product:
+The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
+[vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
 ![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps656df909.png)
 
