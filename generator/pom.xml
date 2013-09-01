@@ -41,8 +41,8 @@
         <version>7</version>
         <relativePath></relativePath>
     </parent>
-    <name>netlib for Java</name>
-    <description>Mission-critical software components for linear algebra systems.</description>
+    <name>netlib for Java (Generator)</name>
+    <description>Mission-critical components for linear algebra systems.</description>
     <url>https://github.com/fommil/netlib-java</url>
     <licenses>
         <license>
