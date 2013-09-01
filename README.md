@@ -64,23 +64,24 @@ If anything, the Java version is faster for smaller matrices.
 
 One should expect machine optimised natives to out-perform the reference implementation
 – especially for larger arrays – as demonstrated below by Apple's
-[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html)
-and Intel's [MKL](http://software.intel.com/en-us/intel-mkl).
+[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html),
+Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
+[ATLAS](https://sourceforge.net/projects/math-atlas/).
 
-*NOTE: a different machine is used for each OS. Macbook Air for OS X and Virtual Box (Debian 64bit, Ubuntu 32 bit),
-Raspberry Pi for ARM and iMac for Windows 8.*
+*NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
+Raspberry Pi for ARM; and iMac for Windows 8.*
 
 DGEMM measures matrix / matrix multiplication:
 
-![dgemm](http://i40.tinypic.com/315enn5.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsad92ee47.png)
 
 DGETRI measures matrix factorisation and inversion:
 
-![dgetri](http://i40.tinypic.com/2evt0tj.png)
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsa4fd0d9e.png)
 
 DDOT measures vector dot product:
 
-![ddot](http://i42.tinypic.com/wgqgdz.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps656df909.png)
 
 
 
