@@ -49,9 +49,8 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>${project.groupId}</groupId>
+                    <groupId>com.github.fommil.netlib</groupId>
                     <artifactId>generator</artifactId>
-                    <version>${project.parent.version}</version>
                     <executions>
                         <execution>
                             <id>blas</id>
