@@ -4,7 +4,7 @@ library(stringr)
 # (pretty ugly) performance charts of netlib-java on various
 # platforms.
 
-# convert -density 300 -depth 8 -quality 85 a.pdf a.png
+# for A in ddot dgemm dgetri linpack ; do convert -density 300 -depth 8 -quality 85 $A.pdf $A.png ; done
 
 benchmarks = c("linpack")
 pBenchmarks = c("ddot", "dgemm", "dgetri")

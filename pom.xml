@@ -75,11 +75,12 @@
             <url>http://opensource.org/licenses/BSD-3-Clause</url>
         </license>
     </licenses>
-    <scm>
+    <!-- SCM appears to not support the multi-module setup we have here -->
+    <!-- <scm>
         <url>https://github.com/fommil/netlib-java</url>
         <connection>scm:git:git@github.com:fommil/netlib-java.git</connection>
         <developerConnection>scm:git:git@github.com:fommil/netlib-java.git</developerConnection>
-    </scm>
+    </scm> -->
     <developers>
         <developer>
             <name>Sam Halliday</name>
