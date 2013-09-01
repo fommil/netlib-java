@@ -1,19 +1,11 @@
 netlib-java [![Build Status](https://travis-ci.org/fommil/netlib-java.png?branch=master)](https://travis-ci.org/fommil/netlib-java)
 ===========
 
-<<<<<<< HEAD
-Mission-critical software components for linear algebra systems.
-
-Java wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
-[LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
-that performs **as fast as the C interfaces**.
-=======
 Mission-critical components for linear algebra systems.
 
 `netlib-java` is a wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces**.
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
 
 Pure Java implementations are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability,
 with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
@@ -59,26 +51,6 @@ are appreciated).
 Performance
 ===========
 
-<<<<<<< HEAD
-Java has a reputation with (mostly) older generation developers, because they remember
-when Java first came out and was very slow.
-Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
-ensures that Java applications keep pace with C++ applications (or indeed, Fortran applications!).
-
-The following performance charts give an idea of the performance ratios of Java vs the native
-reference implementation for dot product of vectors (`ddot`) and matrix multiplication (`dgemm`):
-
-Also shown are pure C performance runs that show that **dropping to C at the application
-layer gives no performance benefit**. If anything, the Java version is more reliable.
-
-One should expect machine optimised natives to out-perform the reference native implementation, as can
-be seen by the performance obtained using Apple's
-[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html).
-
-![dgemm](http://i42.tinypic.com/2eltvr4.png)
-
-![ddot](http://i40.tinypic.com/xc7r7d.png)
-=======
 Java has a reputation with older generation developers because
 Java applications were slow in the 1990s.
 Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
@@ -116,20 +88,12 @@ The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 
 ![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps656df909.png)
 
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
-
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
-<<<<<<< HEAD
-faster by about the 3rd or 4th iteration (that's the JIT kicking in).
-
-![linpack](http://i41.tinypic.com/29cpbwz.png)
-=======
 faster (than its start speed) by about the 20th iteration (that's the JIT kicking in).
 
 ![linpack](http://i43.tinypic.com/66kume.png)
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
 
 
 Installation

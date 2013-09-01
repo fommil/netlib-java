@@ -5,18 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--
-<<<<<<< HEAD
-    # Deploying requires two machines (OS X and Linux)...
-
-    # OS X
-    mvn clean
-    mvn -pl generator compile
-    mvn compile
-    mvn deploy -Psonatype-oss-release
-
-    # Linux
-    cd native_ref/xbuilds
-=======
     NOTE: generator is not part of the reactor and
     must be build/released separately.
 
@@ -30,19 +18,11 @@
     # Linux (Debian Wheezy 64 bit, see xbuild poms for apt-get and crosstool-ng setup)
     cd native_ref/xbuilds
     mvn clean
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
     mvn compile
     mvn deploy -Psonatype-oss-release
 
     # (OS X or Linux) Oober project
     cd all
-<<<<<<< HEAD
-    mvn deploy -Psonatype-oss-release
-    
-      
-    # To clean up
-    curl -X DELETE -u <username>:<password> https://oss.sonatype.org/content/repositories/snapshots/com/github/fommil/netlib/
-=======
     mvn clean
     mvn deploy -Psonatype-oss-release
 
@@ -60,7 +40,6 @@
     -> "Staging Repositories"
     -> "close"
     -> wait for confirmation -> "release"
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
     -->
 
     <groupId>com.github.fommil.netlib</groupId>
@@ -69,17 +48,9 @@
     <packaging>pom</packaging>
 
     <modules>
-<<<<<<< HEAD
-        <module>generator</module>
         <module>core</module>
         <module>legacy</module>
         <module>native_ref</module>
-        <!--<module>all</module>-->
-=======
-        <module>core</module>
-        <module>legacy</module>
-        <module>native_ref</module>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
     </modules>
 
     <properties>
@@ -95,22 +66,10 @@
         <version>7</version>
     </parent>
     <name>netlib for Java</name>
-<<<<<<< HEAD
-    <description>Mission-critical software components for linear algebra systems.</description>
-    <url>https://github.com/fommil/netlib-java</url>
-    <licenses>
-        <license>
-            <!-- GPL is only for the "generator" module and is not required by dependents. -->
-            <name>GPL</name>
-            <url>http://www.gnu.org/licenses/gpl.txt</url>
-        </license>
-        <license>
-=======
     <description>Mission-critical components for linear algebra systems.</description>
     <url>https://github.com/fommil/netlib-java</url>
     <licenses>
         <license>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
             <!-- Being the license of the original Fortran code. -->
             <name>BSD 3 Clause</name>
             <url>http://opensource.org/licenses/BSD-3-Clause</url>
@@ -144,8 +103,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-<<<<<<< HEAD
-=======
         <repository>
             <id>sonatype-releases</id>
             <url>https://oss.sonatype.org/content/repositories/releases/</url>
@@ -156,7 +113,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
     </repositories>
 
     <pluginRepositories>
@@ -170,8 +126,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-<<<<<<< HEAD
-=======
         <pluginRepository>
             <id>sonatype-releases</id>
             <url>https://oss.sonatype.org/content/repositories/releases/</url>
@@ -182,7 +136,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
     </pluginRepositories>
 
     <!-- mvn versions:display-dependency-updates -->
@@ -205,32 +158,6 @@
                 <version>2.0.1</version>
             </dependency>
             <dependency>
-<<<<<<< HEAD
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-plugin-api</artifactId>
-                <version>2.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.plugin-tools</groupId>
-                <artifactId>maven-plugin-annotations</artifactId>
-                <version>3.2</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-core</artifactId>
-                <version>3.0.5</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.thoughtworks.paranamer</groupId>
-                <artifactId>paranamer</artifactId>
-                <version>2.5.6</version>
-            </dependency>
-            <dependency>
-=======
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
                 <groupId>net.sourceforge.f2j</groupId>
                 <artifactId>arpack_combined_all</artifactId>
                 <version>0.1</version>
@@ -243,20 +170,9 @@
                 <version>0.1</version>
             </dependency>
             <dependency>
-<<<<<<< HEAD
-                <groupId>org.antlr</groupId>
-                <artifactId>stringtemplate</artifactId>
-                <version>4.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.fommil</groupId>
-                <artifactId>jniloader</artifactId>
-                <version>1.0-SNAPSHOT</version>
-=======
                 <groupId>com.github.fommil</groupId>
                 <artifactId>jniloader</artifactId>
                 <version>1.0</version>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
             </dependency>
             <dependency>
                 <groupId>net.sf.opencsv</groupId>
@@ -266,11 +182,7 @@
             <dependency>
                 <groupId>com.github.fommil</groupId>
                 <artifactId>java-logging</artifactId>
-<<<<<<< HEAD
-                <version>1.1-SNAPSHOT</version>
-=======
                 <version>1.1</version>
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -312,14 +224,6 @@
                     </configuration>
                 </plugin>
                 <plugin>
-<<<<<<< HEAD
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.2</version>
-                </plugin>
-                <plugin>
-=======
->>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>native-maven-plugin</artifactId>
                     <version>1.0-alpha-7</version>
