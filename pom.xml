@@ -201,6 +201,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>com.github.fommil.netlib</groupId>
+                    <artifactId>generator</artifactId>
+                    <version>1.0</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>1.4</version>
