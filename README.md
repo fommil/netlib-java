@@ -1,11 +1,19 @@
 netlib-java [![Build Status](https://travis-ci.org/fommil/netlib-java.png?branch=master)](https://travis-ci.org/fommil/netlib-java)
 ===========
 
+<<<<<<< HEAD
 Mission-critical software components for linear algebra systems.
 
 Java wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C interfaces**.
+=======
+Mission-critical components for linear algebra systems.
+
+`netlib-java` is a wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
+[LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
+that performs **as fast as the C / Fortran interfaces**.
+>>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
 
 Pure Java implementations are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability,
 with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
@@ -51,6 +59,7 @@ are appreciated).
 Performance
 ===========
 
+<<<<<<< HEAD
 Java has a reputation with (mostly) older generation developers, because they remember
 when Java first came out and was very slow.
 Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
@@ -69,13 +78,58 @@ be seen by the performance obtained using Apple's
 ![dgemm](http://i42.tinypic.com/2eltvr4.png)
 
 ![ddot](http://i40.tinypic.com/xc7r7d.png)
+=======
+Java has a reputation with older generation developers because
+Java applications were slow in the 1990s.
+Nowadays, the [JIT](http://en.wikipedia.org/wiki/Just-in-time_compilation)
+ensures that Java applications keep pace with – or exceed the performance of –
+C / C++ / Fortran applications.
+
+The following performance charts give an idea of the performance ratios of Java vs the native
+reference implementation. Also shown are pure C performance runs that show that
+**dropping to C at the application layer gives no performance benefit**.
+If anything, the Java version is faster for smaller matrices.
+
+One should expect machine optimised natives to out-perform the reference implementation
+– especially for larger arrays – as demonstrated below by Apple's
+[veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html),
+Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
+[ATLAS](https://sourceforge.net/projects/math-atlas/).
+
+*NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
+Raspberry Pi for ARM; and iMac for Windows 8.*
+
+The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
+measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
+performance:
+
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsad92ee47.png)
+
+The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
+measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
+and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
+
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsa4fd0d9e.png)
+
+The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
+[vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
+
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps656df909.png)
+
+>>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
+<<<<<<< HEAD
 faster by about the 3rd or 4th iteration (that's the JIT kicking in).
 
 ![linpack](http://i41.tinypic.com/29cpbwz.png)
+=======
+faster (than its start speed) by about the 20th iteration (that's the JIT kicking in).
+
+![linpack](http://i43.tinypic.com/66kume.png)
+>>>>>>> 1b766b82c26fbb3ecaca6a5c782d089a3ca664e4
 
 
 Installation
