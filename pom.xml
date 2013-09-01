@@ -6,9 +6,20 @@
 
     <!--
     NOTE: generator is not part of the reactor and
-    must be build/released separately.
+    must be build/released separately. Also, the
+    release plugin **TOTALLY SUCKS** for git modules
+    (especially the setup here) so we need to do
+    manual version name changes and deploys.
 
     # Deploying requires two machines (OS X and Linux)...
+
+    # to RELEASE, do the version line and append
+    # -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/
+    mvn versions:set -DnewVersion=1.0
+    # MANUALLY update all the xbuild and all modules (sigh)
+    # after release, create a release tag on git and do the same again
+    git tag 1.0
+    git push --tags
 
     # OS X (Mountain Lion, see build poms for macports setup)
     mvn clean
@@ -25,18 +36,14 @@
     cd all
     mvn clean
     mvn deploy -Psonatype-oss-release
-
+    
 
     # To delete unwanted files from sonatype (use sparingly)
     curl -X DELETE -u <username>:<password> https://oss.sonatype.org/content/repositories/snapshots/com/github/fommil/netlib/
     curl -X DELETE -u <username>:<password> https://oss.sonatype.org/content/repositories/snapshots/com/googlecode/netlib-java/
 
-
-    # To release, follow this process for the same order
-    mvn release:clean
-    mvn release:prepare
-    mvn release:perform
-    -> https://oss.sonatype.org/index.html#welcome
+    # For release, follow this process for the same order
+    -> https://oss.sonatype.org
     -> "Staging Repositories"
     -> "close"
     -> wait for confirmation -> "release"

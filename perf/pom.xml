@@ -7,22 +7,22 @@
     <!--
 
     mvn compile assembly:single
-    java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+    java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
+    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-jar-with-dependencies.jar
 
     and potentially (e.g. on raspberrypi)
 
-/usr/bin/java -Dperf.max=75 -Djvm.type=jdk7 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-/usr/bin/java -jamvm -Dperf.max=75 -Djvm.type=jamvm -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-/usr/bin/java -avian -Dperf.max=75 -Djvm.type=avian -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-/opt/jdk8/bin/java -Dperf.max=75 -Djvm.type=jdk8 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
-/opt/jdk8/bin/java -Dperf.max=75 -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-SNAPSHOT-jar-with-dependencies.jar
+/usr/bin/java -Dperf.max=75 -Djvm.type=jdk7 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
+/usr/bin/java -jamvm -Dperf.max=75 -Djvm.type=jamvm -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
+/usr/bin/java -avian -Dperf.max=75 -Djvm.type=avian -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
+/opt/jdk8/bin/java -Dperf.max=75 -Djvm.type=jdk8 -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
+/opt/jdk8/bin/java -Dperf.max=75 -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-jar-with-dependencies.jar
     -->
 
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>perf</artifactId>
