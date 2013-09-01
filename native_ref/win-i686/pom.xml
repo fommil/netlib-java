@@ -45,7 +45,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>${project.groupId}</groupId>
+                <groupId>com.github.fommil.netlib</groupId>
                 <artifactId>generator</artifactId>
                 <executions>
                     <execution>
