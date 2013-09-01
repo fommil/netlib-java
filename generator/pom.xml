@@ -10,6 +10,7 @@
     -->
 
     <!--
+
     mvn clean
     mvn compile
     mvn deploy -Psonatype-oss-release
@@ -21,6 +22,7 @@
     -> "Staging Repositories"
     -> "close"
     -> wait for confirmation -> "release"
+
     -->
 
     <groupId>com.github.fommil.netlib</groupId>
@@ -52,8 +54,8 @@
     </licenses>
     <scm>
         <url>https://github.com/fommil/netlib-java</url>
-        <connection>scm:git:git@github.com:fommil/netlib-java.git</connection>
-        <developerConnection>scm:git:git@github.com:fommil/netlib-java.git</developerConnection>
+        <connection>scm:git:git@github.com:fommil/netlib-java.git/generator</connection>
+        <developerConnection>scm:git:git@github.com:fommil/netlib-java.git/generator</developerConnection>
     </scm>
     <developers>
         <developer>
