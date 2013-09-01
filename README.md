@@ -99,13 +99,24 @@ faster (than its start speed) by about the 20th iteration (that's the JIT kickin
 Installation
 ============
 
+Releases are distributed on Maven central:
+
+```xml
+<dependency>
+  <groupId>com.github.fommil.netlib</groupId>
+  <artifactId>all</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+
 Snapshots are distributed on Sonatype's Snapshot Repository:
 
 ```xml
 <dependency>
   <groupId>com.github.fommil.netlib</groupId>
   <artifactId>all</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
 </dependency>
 ```
 
