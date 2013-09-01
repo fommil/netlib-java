@@ -82,10 +82,20 @@ getPlotParams = function(t, i) {
 	
 	if (regexpr("CBLAS", i) > 0) {
 		col = "green"
-		sym = 10
+		if (regexpr("arm", t) > 0) {
+			sym = 8
+		} else {
+			sym = 10
+		}
 	} else if (regexpr("veclib", i) > 0) {
 		col = "green"
 		sym = 13
+	} else if (regexpr("atlas", i) > 0) {
+		col = "green"
+		sym = 9
+	} else if (regexpr("mkl", i) > 0) {
+		col = "green"
+		sym = 14
 	} else if (regexpr("arm", t) > 0) {
 		sym = 8
 	} else if (regexpr("linux", t) > 0) {
