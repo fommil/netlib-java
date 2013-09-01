@@ -67,7 +67,8 @@ One should expect machine optimised natives to out-perform the reference impleme
 [veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html)
 and Intel's [MKL](http://software.intel.com/en-us/intel-mkl).
 
-*NOTE: a different machine is used for each OS.*
+*NOTE: a different machine is used for each OS. Macbook was used for OS X and Linux, Raspberry Pi was
+used for ARM and an iMac was used for Windows 8.*
 
 DGEMM measures matrix / matrix multiplication:
 
