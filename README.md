@@ -77,18 +77,18 @@ The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zps383da294.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsb30bcbb1.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
 and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
 
-![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zps3e50aad4.png)
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zps0da1931b.png)
 
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsa0b38ccb.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsd1e50fa4.png)
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of

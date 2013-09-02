@@ -55,6 +55,7 @@ doPlot = function(data, col, sym) {
 	points(dd, pch=as.numeric(sym), lwd=1, col=col)
 }
 
+# nobody would be proud of this function...
 getPlotParams = function(t, i) {
 	if (regexpr("i386", t) > 0 || regexpr("x86", t) > 0) {
 		if (regexpr("native", i) > 0) {
@@ -92,7 +93,11 @@ getPlotParams = function(t, i) {
 		sym = 13
 	} else if (regexpr("atlas", i) > 0) {
 		col = "green"
-		sym = 9
+		if (regexpr("arm", t) > 0) {
+			sym = 11
+		} else {
+			sym = 9
+		}
 	} else if (regexpr("mkl", i) > 0) {
 		col = "green"
 		sym = 14
