@@ -88,7 +88,7 @@ and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performa
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](hhttp://i752.photobucket.com/albums/xx162/fommil/ddot_zpsa0b38ccb.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsa0b38ccb.png)
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
