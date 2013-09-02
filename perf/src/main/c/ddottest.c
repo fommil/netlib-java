@@ -24,11 +24,10 @@ export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib
 #include "common.h"
 
 long benchmark(int size) {
-    int m = sqrt(size);
 	long requestStart, requestEnd;
 
-    double* a = random_array(m);
-    double* b = random_array(m);
+    double* a = random_array(size);
+    double* b = random_array(size);
 
 	requestStart = currentTimeNanos();
 
