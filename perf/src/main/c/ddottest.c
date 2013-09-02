@@ -2,10 +2,10 @@
 
 cp ../../../../native_ref/<target binary> libnetlib.so
 
-gcc -O3 ddottest.c common.c -o ddottest -L. -lnetlib -I../../../../netlib/CBLAS
+gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -L. -lnetlib -I../../../../netlib/CBLAS
 ./ddottest  > ../../../results/mac_os_x-x86_64-ddot-CBLAS.csv
 
-gcc -O3 ddottest.c common.c -o ddottest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
+gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
 ./ddottest  > ../../../results/mac_os_x-x86_64-ddot-veclib.csv
 
 gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran

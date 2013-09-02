@@ -2,10 +2,10 @@
 
 cp ../../../../native_ref/<target binary> libnetlib.so
 
-gcc -O3 dgetritest.c common.c -o dgetritest -L. -lnetlib -I../../../../netlib/CBLAS -I../../../../netlib/LAPACKE
+gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -L. -lnetlib -I../../../../netlib/CBLAS -I../../../../netlib/LAPACKE
 ./dgetritest  > ../../../results/mac_os_x-x86_64-dgetri-CBLAS.csv
 
-gcc -O3 dgetritest.c common.c -o dgetritest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
+gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I/System/Library/Frameworks/vecLib.framework/Headers -framework veclib
 ./dgetritest  > ../../../results/mac_os_x-x86_64-dgetri-veclib.csv
 
 gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran
