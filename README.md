@@ -123,7 +123,7 @@ note that it **will** be removed in the next release):
 
 and developers who feel the native libs are too much bandwidth can
 depend on a subset of implementations: simply look in the `all`
-module's [`pom.xml`](blob/master/all/pom.xml).
+module's [`pom.xml`](all/pom.xml).
 
 
 Snapshots are distributed on Sonatype's Snapshot Repository, e.g.:
