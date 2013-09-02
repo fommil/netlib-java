@@ -106,11 +106,27 @@ Releases are distributed on Maven central:
   <groupId>com.github.fommil.netlib</groupId>
   <artifactId>all</artifactId>
   <version>1.0</version>
+  <type>pom</type>
 </dependency>
 ```
 
+Those wanting to preserve the pre-1.0 API can use the legacy package (but
+note that it **will** be removed in the next release):
 
-Snapshots are distributed on Sonatype's Snapshot Repository:
+```xml
+<dependency>
+  <groupId>com.googlecode.netlib-java</groupId>
+  <artifactId>netlib</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+and developers who feel the native libs are too much bandwidth can
+depend on a subset of implementations: simply look in the `all`
+module's [`pom.xml`](blob/master/all/pom.xml).
+
+
+Snapshots are distributed on Sonatype's Snapshot Repository, e.g.:
 
 ```xml
 <dependency>
