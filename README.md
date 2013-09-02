@@ -60,7 +60,8 @@ C / C++ / Fortran applications.
 The following performance charts give an idea of the performance ratios of Java vs the native
 reference implementation. Also shown are pure C performance runs that show that
 **dropping to C at the application layer gives no performance benefit**.
-If anything, the Java version is faster for smaller matrices.
+If anything, the Java version is faster for smaller matrices and is consistently faster
+than the "optimised" implementations for some types of operations (e.g. `ddot`).
 
 One should expect machine optimised natives to out-perform the reference implementation
 – especially for larger arrays – as demonstrated below by Apple's
@@ -69,7 +70,8 @@ Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
 *NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
-Raspberry Pi for ARM; and iMac for Windows 8.*
+Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
+to wait around all day.*
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
@@ -86,7 +88,7 @@ and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performa
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps5d5a4a1c.png)
+![ddot](hhttp://i752.photobucket.com/albums/xx162/fommil/ddot_zpsa0b38ccb.png)
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
