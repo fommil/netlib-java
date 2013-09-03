@@ -57,58 +57,58 @@ doPlot = function(data, col, sym) {
 
 # nobody would be proud of this function...
 getPlotParams = function(t, i) {
-	if (regexpr("i386", t) > 0 || regexpr("x86", t) > 0) {
-		if (regexpr("native", i) > 0) {
-			col = "tomato1"
-		} else {
-			col = "gray"
-		}
-	} else {
-		if (regexpr("native", i) > 0) {
-			col = "red"
-		}
-		else if (regexpr("jamvm", t) > 0) {
-			col = "magenta"
-		}
-		else if (regexpr("avian", t) > 0) {
-			col = "blue"
-		}
-		else if (regexpr("jdk7", t) > 0) {
-			col = "orange"
-		}
-		else {
-			col = "black"
-		}
-	}
-	
-	if (regexpr("CBLAS", i) > 0) {
-		col = "green"
-		if (regexpr("arm", t) > 0) {
-			sym = 8
-		} else {
-			sym = 10
-		}
-	} else if (regexpr("veclib", i) > 0) {
-		col = "green"
-		sym = 13
-	} else if (regexpr("atlas", i) > 0) {
-		col = "green"
-		if (regexpr("arm", t) > 0) {
-			sym = 11
-		} else {
-			sym = 9
-		}
-	} else if (regexpr("mkl", i) > 0) {
-		col = "green"
-		sym = 14
-	} else if (regexpr("arm", t) > 0) {
+	if (regexpr("arm", t) > 0) {
 		sym = 8
 	} else if (regexpr("linux", t) > 0) {
 		sym = 3
 	} else if (regexpr("mac", t) > 0) {
 		sym = 20
-	} else {
+	} else if (regexpr("win", t) > 0) {
 		sym = 4
+	}
+	
+	if (regexpr("nativeref", i) > 0) {
+		col = "red"
+	}
+	else if (regexpr("nativesystem", i) > 0) {
+		col = "cyan"
+	}
+	else if (regexpr("jamvm", t) > 0) {
+		col = "magenta"
+	}
+	else if (regexpr("avian", t) > 0) {
+		col = "blue"
+	}
+	else if (regexpr("jdk7", t) > 0) {
+		col = "orange"
+	}
+	else if (regexpr("(CBLAS|veclib|mkl|atlas)", i) > 0) {
+		col = "green"
+	}
+	else {
+		col = "black"
+	}
+	
+	# exceptions
+	if (regexpr("i386", t) > 0 || regexpr("x86$", t) > 0) {
+		if (regexpr("native", i) > 0) {
+			col = "tomato1"
+		} else {
+			col = "gray"
+		}
+	}
+	if (regexpr("arm", t) == -1) {
+		if (regexpr("CBLAS", i) > 0) {
+			sym = 10
+		} else if (regexpr("veclib", i) > 0) {
+			sym = 13
+		} else if (regexpr("atlas", i) > 0) {
+			sym = 9
+		} else if (regexpr("mkl", i) > 0) {
+			sym = 14
+		}
+	} else if (regexpr("atlas", i) > 0) {
+		sym = 15
 	}
 	
 	c(col, sym)

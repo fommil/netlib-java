@@ -162,66 +162,60 @@
                                     <include>*.c</include>
                                 </includes>
                             </source>
-                            <!-- <source>
-                                <directory>${netlib.src}/LAPACK</directory>
-                                <includes>
-                                    <include>*.f</include>
-                                </includes>
-                            </source> -->
                             <source>
                                 <directory>${netlib.src}/LAPACKE</directory>
                                 <includes>
-                                    <include>*.f</include>
-                                    <include>*.c</include>
+                                    <include>**/*.f</include>
+                                    <include>**/*.c</include>
                                 </includes>
                                 <excludes>
                                     <!-- yay for regex exclusion rules, oh wait... -->
                                     <!-- no.veclib.impl -->
-                                    <exclude>lapacke_dbbcsd_work.c</exclude>
-                                    <exclude>lapacke_dgemqrt_work.c</exclude>
-                                    <exclude>lapacke_dgeqrfp_work.c</exclude>
-                                    <exclude>lapacke_dgeqrt2_work.c</exclude>
-                                    <exclude>lapacke_dgeqrt3_work.c</exclude>
-                                    <exclude>lapacke_dgeqrt_work.c</exclude>
-                                    <exclude>lapacke_dlagge_work.c</exclude>
-                                    <exclude>lapacke_dlagsy_work.c</exclude>
-                                    <exclude>lapacke_dlapmr_work.c</exclude>
-                                    <exclude>lapacke_dlartgp_work.c</exclude>
-                                    <exclude>lapacke_dlartgs_work.c</exclude>
-                                    <exclude>lapacke_dlatms_work.c</exclude>
-                                    <exclude>lapacke_dorbdb_work.c</exclude>
-                                    <exclude>lapacke_dorcsd_work.c</exclude>
-                                    <exclude>lapacke_dsyconv_work.c</exclude>
-                                    <exclude>lapacke_dsyswapr_work.c</exclude>
-                                    <exclude>lapacke_dsytri2_work.c</exclude>
-                                    <exclude>lapacke_dsytri2x_work.c</exclude>
-                                    <exclude>lapacke_dsytrs2_work.c</exclude>
-                                    <exclude>lapacke_dtpmqrt_work.c</exclude>
-                                    <exclude>lapacke_dtpqrt2_work.c</exclude>
-                                    <exclude>lapacke_dtpqrt_work.c</exclude>
-                                    <exclude>lapacke_dtprfb_work.c</exclude>
-                                    <exclude>lapacke_sbbcsd_work.c</exclude>
-                                    <exclude>lapacke_sgemqrt_work.c</exclude>
-                                    <exclude>lapacke_sgeqrfp_work.c</exclude>
-                                    <exclude>lapacke_sgeqrt2_work.c</exclude>
-                                    <exclude>lapacke_sgeqrt3_work.c</exclude>
-                                    <exclude>lapacke_sgeqrt_work.c</exclude>
-                                    <exclude>lapacke_slagge_work.c</exclude>
-                                    <exclude>lapacke_slagsy_work.c</exclude>
-                                    <exclude>lapacke_slapmr_work.c</exclude>
-                                    <exclude>lapacke_slartgp_work.c</exclude>
-                                    <exclude>lapacke_slartgs_work.c</exclude>
-                                    <exclude>lapacke_slatms_work.c</exclude>
-                                    <exclude>lapacke_sorbdb_work.c</exclude>
-                                    <exclude>lapacke_sorcsd_work.c</exclude>
-                                    <exclude>lapacke_ssyconv_work.c</exclude>
-                                    <exclude>lapacke_ssyswapr_work.c</exclude>
-                                    <exclude>lapacke_ssytri2_work.c</exclude>
-                                    <exclude>lapacke_ssytri2x_work.c</exclude>
-                                    <exclude>lapacke_ssytrs2_work.c</exclude>
-                                    <exclude>lapacke_stpmqrt_work.c</exclude>
-                                    <exclude>lapacke_stpqrt2_work.c</exclude>
-                                    <exclude>lapacke_stprfb_work.c</exclude>
+                                    <exclude>**/*_dbbcsd*</exclude>
+                                    <exclude>**/*_dgemqrt*</exclude>
+                                    <exclude>**/*_dgeqrfp*</exclude>
+                                    <exclude>**/*_dgeqrt2*</exclude>
+                                    <exclude>**/*_dgeqrt3*</exclude>
+                                    <exclude>**/*_dgeqrt*</exclude>
+                                    <exclude>**/*_dlagge*</exclude>
+                                    <exclude>**/*_dlagsy*</exclude>
+                                    <exclude>**/*_dlapmr*</exclude>
+                                    <exclude>**/*_dlartgp*</exclude>
+                                    <exclude>**/*_dlartgs*</exclude>
+                                    <exclude>**/*_dlatms*</exclude>
+                                    <exclude>**/*_dorbdb*</exclude>
+                                    <exclude>**/*_dorcsd*</exclude>
+                                    <exclude>**/*_dsyconv*</exclude>
+                                    <exclude>**/*_dsyswapr*</exclude>
+                                    <exclude>**/*_dsytri2*</exclude>
+                                    <exclude>**/*_dsytri2x*</exclude>
+                                    <exclude>**/*_dsytrs2*</exclude>
+                                    <exclude>**/*_dtpmqrt*</exclude>
+                                    <exclude>**/*_dtpqrt2*</exclude>
+                                    <exclude>**/*_dtpqrt*</exclude>
+                                    <exclude>**/*_dtprfb*</exclude>
+                                    <exclude>**/*_sbbcsd*</exclude>
+                                    <exclude>**/*_sgemqrt*</exclude>
+                                    <exclude>**/*_sgeqrfp*</exclude>
+                                    <exclude>**/*_sgeqrt2*</exclude>
+                                    <exclude>**/*_sgeqrt3*</exclude>
+                                    <exclude>**/*_sgeqrt*</exclude>
+                                    <exclude>**/*_slagge*</exclude>
+                                    <exclude>**/*_slagsy*</exclude>
+                                    <exclude>**/*_slapmr*</exclude>
+                                    <exclude>**/*_slartgp*</exclude>
+                                    <exclude>**/*_slartgs*</exclude>
+                                    <exclude>**/*_slatms*</exclude>
+                                    <exclude>**/*_sorbdb*</exclude>
+                                    <exclude>**/*_sorcsd*</exclude>
+                                    <exclude>**/*_ssyconv*</exclude>
+                                    <exclude>**/*_ssyswapr*</exclude>
+                                    <exclude>**/*_ssytri2*</exclude>
+                                    <exclude>**/*_ssytri2x*</exclude>
+                                    <exclude>**/*_ssytrs2*</exclude>
+                                    <exclude>**/*_stpmqrt*</exclude>
+                                    <exclude>**/*_stpqrt2*</exclude>
+                                    <exclude>**/*_stprfb*</exclude>
                                 </excludes>
                             </source>
                             <source>

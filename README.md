@@ -83,25 +83,25 @@ The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsb30bcbb1.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsa272550e.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
 and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
 
-![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zps0da1931b.png)
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsca6e1ada.png)
 
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsd1e50fa4.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps25486a2e.png)
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
 Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
 faster (than its start speed) by about the 20th iteration (that's the JIT kicking in).
 
-![linpack](http://i43.tinypic.com/66kume.png)
+![linpack](http://i752.photobucket.com/albums/xx162/fommil/linpack_zps8fdf763b.png)
 
 
 Installation

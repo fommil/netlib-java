@@ -9,6 +9,7 @@
     mvn compile assembly:single
     java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
     java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-jar-with-dependencies.jar
+    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeSystemBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeSystemLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeSystemARPACK -jar target/perf-1.0-jar-with-dependencies.jar
 
     and potentially (e.g. on raspberrypi)
 
@@ -22,11 +23,13 @@
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <!-- FIXME HACK -->
+        <version>1.0</version>
     </parent>
 
     <artifactId>perf</artifactId>
     <packaging>jar</packaging>
+    <version>1.1-SNAPSHOT</version>
 
     <properties>
         <exec.mainClass>com.github.fommil.netlib.Benchmarks</exec.mainClass>
@@ -44,8 +47,15 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>all</artifactId>
-            <version>${project.version}</version>
+            <!-- FIXME HACK -->
+            <version>1.0</version>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-osx-x86_64</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <classifier>natives</classifier>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
