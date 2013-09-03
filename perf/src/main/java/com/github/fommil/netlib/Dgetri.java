@@ -20,7 +20,7 @@ public class Dgetri implements Benchmark.Parameterised {
     // http://www.sciencedirect.com/science/article/pii/S0096300306009040
     double[] a = Benchmarks.randomArray(m * m);
     double[] aOrig = Arrays.copyOf(a, a.length);
-    double[] b = new double[m * m];
+    double[] b = new double[m];
     int[] p = new int[m];
     intW info = new intW(0);
 
