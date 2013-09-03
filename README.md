@@ -7,8 +7,14 @@ Mission-critical components for linear algebra systems.
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces**.
 
-Pure Java implementations are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability,
-with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
+If you're a developer looking for an easy-to-use linear algebra library on the JVM, we strongly recommend:
+
+* [Apache Commons Math](http://commons.apache.org/proper/commons-math/) for the most popular mathematics library in Java.
+* [Matrix Toolkits for Java](https://github.com/fommil/matrix-toolkits-java/) for high performance linear algebra in Java (builds on top of `netlib-java`).
+* [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
+
+
+In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability, with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
 shipped as standard for all major operating systems:
 
 * OS X (`x86_64`)
