@@ -79,7 +79,7 @@ public abstract class $name$ {
       $name$ impl;
       try {
         impl = load(className);
-      } catch (Throwable e) {
+      } catch (ExceptionInInitializerError e) {
         log.warning("Failed to load " + className + ", falling back to F2J.");
         impl = load(FALLBACK);
       }
