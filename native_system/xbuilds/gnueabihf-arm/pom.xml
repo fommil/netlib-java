@@ -83,6 +83,8 @@
 <!-- Inspect binary with
 arm-rpi-linux-gnueabi-readelf -a target/netlib-native_system-gnueabihf-arm.so | grep "Shared library:"
 -->
+                        <linkerMiddleOption>-L/opt/gnueabihf-arm/usr/lib/libblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/gnueabihf-arm/usr/lib/lapack</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lblas</linkerMiddleOption>

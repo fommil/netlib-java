@@ -95,8 +95,8 @@
                         <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-lblas3</linkerMiddleOption>
-                        <linkerMiddleOption>-llapack3</linkerMiddleOption>
+                        <linkerMiddleOption>-lblas</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
