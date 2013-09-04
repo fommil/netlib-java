@@ -18,7 +18,7 @@
     Ubuntu Wheezy is best as it compiles for GLIBC_2.2.5 whereas Ubuntu
     requires the more recent GLIBC_2.13.
 
-      sudo apt-get install gfortran openjdk-7-jdk atlas
+      sudo apt-get install gfortran openjdk-7-jdk libblas-dev liblapack-dev
 
     It is impossible to compile a library on Ubuntu that has static
     references to the fortran libraries, as the static fortran library
@@ -74,8 +74,8 @@
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-lblas</linkerMiddleOption>
-                        <linkerMiddleOption>-llapack</linkerMiddleOption>
+                        <linkerMiddleOption>-l:libblas.so</linkerMiddleOption>
+                        <linkerMiddleOption>-l:liblapack.so</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
