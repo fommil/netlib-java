@@ -21,10 +21,18 @@
     get the 32 bit JDK from
 
       http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
-
+        
     and install into
 
       /opt/linux-i686/jdk7
+        
+    along with the contents of
+        
+        for A in b/blas/libblas-dev_1.2.20110419-5_i386.deb b/blas/libblas3_1.2.20110419-5_i386.deb l/lapack/liblapack3_3.4.1+dfsg-1+deb70u1_i386.deb l/lapack/liblapack-dev_3.4.1+dfsg-1+deb70u1_i386.deb ; do
+          curl -O "http://mirrors.kernel.org/debian/pool/main/$A"
+          ar vx `basename $A`
+          sudo tar xfzv data.tar.gz -C /opt/linux-i686/
+        done
 
     It is impossible to compile a library on Ubuntu that has static
     references to the fortran libraries, as the static fortran library
@@ -78,6 +86,8 @@
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>
                     <linkerMiddleOptions>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas/</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/liblapack/</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lblas</linkerMiddleOption>
