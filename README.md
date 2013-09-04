@@ -47,7 +47,9 @@ Due to the nature of machine-optimised binaries, we cannot bundle them with `net
 
 However, we have made it as simple as possible (without sacrificing performance)
 for developers to use existing optimised implementations:
-the primary goal of the `native_ref` module is to show how this can be achieved.
+the primary goal of the `native_ref` module is to show how this can be achieved and
+the current `SNAPSHOT` release has a `native_system` module which will use shared
+system-installed libraries (e.g. ATLAS or `veclib`).
 
 [The author](https://github.com/fommil/) may be available to assist with builds (and further
 improvements to `netlib-java`) on a commercial basis. Make contact for availability (budget estimates
@@ -89,7 +91,7 @@ The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
 and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
 
-![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsca6e1ada.png)
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsf883006e.png)
 
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
