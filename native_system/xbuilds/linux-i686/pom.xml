@@ -86,12 +86,13 @@
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption>
+                        <!-- <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption> -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <linkerMiddleOption>-l:libblas.so</linkerMiddleOption>
-                        <linkerMiddleOption>-l:liblapack.so</linkerMiddleOption>
+                        <!-- this forces linking against the .so, not .so.3 files (for ubuntu compatibility) -->
+                        <linkerMiddleOption>/opt/linux-i686/usr/lib/libblas/libblas.so</linkerMiddleOption>
+                        <linkerMiddleOption>/opt/linux-i686/usr/lib/lapack/liblapack.so</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
