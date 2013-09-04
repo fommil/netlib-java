@@ -32,6 +32,12 @@
     mvn compile
     mvn deploy -Psonatype-oss-release
 
+    cd native_system/xbuilds
+    mvn clean
+    mvn compile
+    mvn deploy -Psonatype-oss-release
+
+
     # (OS X or Linux) Oober project
     cd all
     mvn clean
@@ -58,6 +64,7 @@
         <module>core</module>
         <module>legacy</module>
         <module>native_ref</module>
+        <module>native_system</module>
     </modules>
 
     <properties>
@@ -211,7 +218,7 @@
                 <plugin>
                     <groupId>com.github.fommil.netlib</groupId>
                     <artifactId>generator</artifactId>
-                    <version>1.0</version>
+                    <version>${project.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

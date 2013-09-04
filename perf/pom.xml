@@ -23,13 +23,11 @@
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
-        <!-- FIXME HACK -->
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>perf</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-SNAPSHOT</version>
 
     <properties>
         <exec.mainClass>com.github.fommil.netlib.Benchmarks</exec.mainClass>
@@ -47,15 +45,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>all</artifactId>
-            <!-- FIXME HACK -->
-            <version>1.0</version>
             <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_system-osx-x86_64</artifactId>
-            <version>1.1-SNAPSHOT</version>
-            <classifier>natives</classifier>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
