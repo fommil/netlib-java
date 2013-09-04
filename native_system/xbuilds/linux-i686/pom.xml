@@ -39,6 +39,11 @@
     has not been compiled with -fPIC. The only workaround would be
     to compile gcc from scratch, with the flags added, and then compile
     these natives. That is not a wise move.
+        
+    NOTE: on some Ubuntu systems, the libblas.so.3 and liblapack.so.3
+        don't always exist. So you need to create them against the
+        sudo ln -s libblas.so /usr/lib/libblas.so.3
+        sudo ln -s liblapack.so /usr/lib/liblapack.so.3
     -->
     <properties>
         <netlib.src>../../../netlib</netlib.src>
@@ -86,13 +91,12 @@
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>
                     <linkerMiddleOptions>
-                        <!-- <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption> -->
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
-                        <!-- this forces linking against the .so, not .so.3 files (for ubuntu compatibility) -->
-                        <linkerMiddleOption>/opt/linux-i686/usr/lib/libblas/libblas.so</linkerMiddleOption>
-                        <linkerMiddleOption>/opt/linux-i686/usr/lib/lapack/liblapack.so</linkerMiddleOption>
+                        <linkerMiddleOption>-lblas3</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack3</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
