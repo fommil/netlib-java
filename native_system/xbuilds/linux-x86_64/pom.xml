@@ -25,6 +25,13 @@
     has not been compiled with -fPIC. The only workaround would be
     to compile gcc from scratch, with the flags added, and then compile
     these natives. That is not a wise move.
+        
+    Don't forget to enable your optimised system libraries at runtime!
+        
+        sudo update-alternatives --config libblas.so.3
+        sudo update-alternatives --config liblapack.so.3
+        
+    see https://wiki.debian.org/DebianScience/LinearAlgebraLibraries for more.
     -->
     <properties>
         <netlib.src>../../../netlib</netlib.src>
