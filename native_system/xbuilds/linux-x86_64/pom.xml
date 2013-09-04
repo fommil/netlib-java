@@ -76,7 +76,7 @@
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lblas3</linkerMiddleOption>
-                        <linkerMiddleOption>-llapack3.so</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack3</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
