@@ -168,13 +168,13 @@
             <dependency>
                 <groupId>net.sourceforge.f2j</groupId>
                 <artifactId>arpack_combined_all</artifactId>
+                <classifier>javadoc</classifier>
+                <scope>provided</scope>
                 <version>0.1</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.f2j</groupId>
                 <artifactId>arpack_combined_all</artifactId>
-                <classifier>javadoc</classifier>
-                <scope>provided</scope>
                 <version>0.1</version>
             </dependency>
             <dependency>
