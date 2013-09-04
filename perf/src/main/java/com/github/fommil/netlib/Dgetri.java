@@ -20,11 +20,15 @@ public class Dgetri implements Benchmark.Parameterised {
     // http://www.sciencedirect.com/science/article/pii/S0096300306009040
     double[] a = Benchmarks.randomArray(m * m);
     double[] aOrig = Arrays.copyOf(a, a.length);
-    double[] b = new double[m * m];
+    double[] b = new double[1];
     int[] p = new int[m];
     intW info = new intW(0);
 
     Stopwatch watch = new Stopwatch();
+
+    LAPACK.getInstance().dgetri(m, a, m, p, b, -1, info);
+    //log.info(m + " supposedly has optimal work of " + b[0]);
+    b = new double[(int)b[0]];
 
     watch.start();
     LAPACK.getInstance().dgetrf(m, m, a, m, p, info);
