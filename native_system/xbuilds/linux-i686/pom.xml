@@ -86,8 +86,8 @@
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>
                     <linkerMiddleOptions>
-                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas/</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/liblapack/</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/libblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/linux-i686/usr/lib/lapack</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lblas</linkerMiddleOption>
