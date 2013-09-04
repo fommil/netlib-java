@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
-        <artifactId>native_ref-xbuilds</artifactId>
+        <artifactId>native_system-xbuilds</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
@@ -81,7 +81,7 @@
                     </linkerStartOptions>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
-arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
+arm-rpi-linux-gnueabi-readelf -a target/netlib-native_system-gnueabihf-arm.so | grep "Shared library:"
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
