@@ -44,6 +44,7 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
+            <version>${project.parent.version}</version>
             <artifactId>all</artifactId>
             <type>pom</type>
         </dependency>
