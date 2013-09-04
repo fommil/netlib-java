@@ -27,9 +27,10 @@
     these natives. That is not a wise move.
         
     Don't forget to enable your optimised system libraries at runtime!
+        (double dashes below... damn you XML!)
         
-        sudo update-alternatives --config libblas.so.3
-        sudo update-alternatives --config liblapack.so.3
+        sudo update-alternatives - -config libblas.so.3
+        sudo update-alternatives - -config liblapack.so.3
         
     see https://wiki.debian.org/DebianScience/LinearAlgebraLibraries for more.
     -->
