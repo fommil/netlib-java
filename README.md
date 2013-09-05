@@ -26,9 +26,8 @@ for all major operating systems:
 * Linux (`i686`, `x86_64`, Raspberry Pi `armhf`)
 * Windows (32 and 64 bit)
 
-Native loading is provided by [JNILoader](https://github.com/fommil/jniloader).
-
-Enabling reference natives is as simple as setting system properties on JVM startup:
+The F2J is the default implementation. Thanks to [JNILoader](https://github.com/fommil/jniloader),
+enabling reference natives is as simple as setting system properties on JVM startup:
 
 * `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
 * `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
@@ -39,10 +38,6 @@ Enabling reference natives is as simple as setting system properties on JVM star
 Machine optimised libraries require a little more setup, see below.
 
 If the natives fail to load, the Java implementation is the fallback.
-
-*Improvements to startup time (tens to hundreds of milliseconds) can be achieved by providing the exact binary name to load,
-e.g. on OS X `-Dcom.github.fommil.netlib.NativeRefBLAS.natives=netlib-native_ref-osx-x86_64.jnilib`,
-and placing the file in a directory which is passed as `-Djava.library.path=...`.*
 
 
 Machine Optimised Natives
