@@ -11,7 +11,7 @@ gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I/System/Library/Frameworks/
 gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran
 ./dgetritest  > ../../../results/mac_os_x-x86_64-dgetri-atlas.csv
 
-gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -L/opt/intel/composerxe/lib/ -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -liomp5
+gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -lmkl_rt
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./dgetritest  > ../../../results/mac_os_x-x86_64-dgetri-mkl.csv
 

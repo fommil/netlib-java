@@ -44,9 +44,10 @@ Machine Optimised Natives
 =========================
 
 High performance BLAS / LAPACK are available
-[commercially](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
-and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software) (and [here](https://github.com/xianyi/OpenBLAS/)) for
-specific CPU chipsets.
+[commercially and open source](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
+for specific CPU chipsets. It is worth noting that "optimised" here means a lot more than simply changing
+the compiler optimisation flags: specialist assembly instructions are combined with [compile time profiling](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Optimization_approach)
+and the [selection of array alignments for the kernel and CPU combination](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Can_it_afford_to_copy.3F).
 
 Due to the nature of machine-optimised binaries, we cannot bundle them with `netlib-java`:
 commercial licenses prohibit distribution and open source *tuning* only occurs when
@@ -102,8 +103,7 @@ exist and point to your optimal builds.
 
 *NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
 `/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
-so they must be created manually:
-`sudo ln -s libblas.so.3gf /usr/lib/libblas.so.3 ; sudo ln -s liblapack.so.3gf /usr/lib/liblapack.so.3`*
+so they must be created manually.*
 
 Windows
 -------
@@ -112,7 +112,7 @@ Windows has no package manager that can install and maintain multiple BLAS/LAPAC
 Because of this, the `native_system` builds only link to the `libopenblas.dll` file (not to `libblas.dll`
 and `liblapack.dll`). Either install the generically tuned
 [OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`, or
-compile your own machine-optimised build.
+compile and install your own machine-optimised OpenBLAS build.
 
 
 Performance

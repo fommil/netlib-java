@@ -11,7 +11,7 @@ gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I/System/Library/Frameworks/vecL
 gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran
 ./ddottest  > ../../../results/mac_os_x-x86_64-ddot-atlas.csv
 
-gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -L/opt/intel/composerxe/lib/ -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -liomp5
+gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -lmkl_rt
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./ddottest  > ../../../results/mac_os_x-x86_64-ddot-mkl.csv
 

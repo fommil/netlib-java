@@ -11,7 +11,7 @@ gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I/System/Library/Frameworks/ve
 gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran
 ./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-atlas.csv
 
-gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -L/opt/intel/composerxe/lib/ -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -liomp5
+gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I../../../../netlib/CBLAS-L/opt/intel/composerxe/mkl/lib -lmkl_rt
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-mkl.csv
 
