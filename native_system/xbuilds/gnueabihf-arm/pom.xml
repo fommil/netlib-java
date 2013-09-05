@@ -83,6 +83,7 @@
                     <linkerExecutable>arm-rpi-linux-gnueabi-gcc</linkerExecutable>
                     <compilerStartOptions>
                         <compilerStartOption>-Os</compilerStartOption>
+                        <compilerStartOption>-I/opt/gnueabihf-arm/usr/include/</compilerStartOption>
                     </compilerStartOptions>
                     <linkerStartOptions>
                         <linkerStartOption>-Wl,-s</linkerStartOption>
