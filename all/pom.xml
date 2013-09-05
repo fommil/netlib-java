@@ -73,5 +73,11 @@
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
         </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-gnueabihf-arm</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+        </dependency>
     </dependencies>
 </project>
