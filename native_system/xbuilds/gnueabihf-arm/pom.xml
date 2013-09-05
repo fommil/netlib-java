@@ -34,6 +34,14 @@
     installed into
 
       /opt/gnueabihf-arm/jdk8
+        
+    along with the contents of
+        
+        for A in b/blas/libblas-dev_1.2.20110419-5_armhf.deb b/blas/libblas3_1.2.20110419-5_armhf.deb l/lapack/liblapack-dev_3.4.2%2bdfsg-1_armhf.deb l/lapack/liblapack3_3.4.2%2bdfsg-1_armhf.deb ; do
+          curl -O "http://archive.raspbian.org/raspbian/pool/main/$A"
+          ar vx `basename $A`
+          sudo tar xfzv data.tar.gz -C /opt/gnueabihf-arm/
+        done
     -->
     <properties>
         <netlib.src>../../../netlib</netlib.src>
