@@ -14,19 +14,24 @@ If you're a developer looking for an easy-to-use linear algebra library on the J
 * [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
 
 
-In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability, with native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
-shipped as standard for all major operating systems:
+In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability, with full native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
+and delegating builds that use system (potentially machine optimised) library for all major operating systems:
 
 * OS X (`x86_64`)
-* Linux (`i686`, `x86_64`, Raspberry Pi (`armhf`): `GLIBC_2.2.5+` and `libgfortran3`)
+* Linux (`i686`, `x86_64`, Raspberry Pi `armhf`)
 * Windows (32 and 64 bit)
 
-Native loading is provided by [JNILoader](https://github.com/fommil/jniloader): disabled by default.
+Native loading is provided by [JNILoader](https://github.com/fommil/jniloader).
+
 Enabling reference natives is as simple as setting system properties on JVM startup:
 
 * `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
 * `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
 * `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK`
+
+*Linux natives require the system library `libgfortran3` to be installed.*
+
+Machine optimised libraries require a little more setup, see below.
 
 If the natives fail to load, the Java implementation is the fallback.
 
@@ -40,20 +45,74 @@ Machine Optimised Natives
 
 High performance BLAS / LAPACK are available
 [commercially](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
-and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software) for
+and [open source](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software) (and [here](https://github.com/xianyi/OpenBLAS/)) for
 specific CPU chipsets.
 
-Due to the nature of machine-optimised binaries, we cannot bundle them with `netlib-java`.
+Due to the nature of machine-optimised binaries, we cannot bundle them with `netlib-java`:
+commercial licenses prohibit distribution and open source *tuning* only occurs when
+compiled on the target machine.
 
-However, we have made it as simple as possible (without sacrificing performance)
-for developers to use existing optimised implementations:
-the primary goal of the `native_ref` module is to show how this can be achieved and
-the current `SNAPSHOT` release has a `native_system` module which will use shared
-system-installed libraries (e.g. ATLAS or `veclib`).
+There are two ways to use machine-optimised natives with `netlib-java`:
 
-[The author](https://github.com/fommil/) may be available to assist with builds (and further
+1. make `libblas` (CBLAS) and `liblapack` (Fortran) available to the `native_system` implementation.
+2. build a custom backend (using `native_ref` and `native_system` as inspiration).
+
+[The author](https://github.com/fommil/) may be available to assist with custom builds (and further
 improvements to `netlib-java`) on a commercial basis. Make contact for availability (budget estimates
 are appreciated).
+
+
+The `native_system` implementation is enabled with the following (requires at least `1.1-SNAPSHOT`):
+
+* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeSystemBLAS`
+* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeSystemLAPACK`
+* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeSystemARPACK`
+
+plus the following Operating System specific instructions.
+
+
+OS X
+----
+
+Apple OS X requires no further setup because OS X ships with the [veclib framework](https://developer.apple.com/documentation/Performance/Conceptual/vecLib/),
+boasting incredible performance that is difficult to surpass (performance charts below
+show that it out-performs ATLAS and is on par with the Intel MKL).
+
+
+Linux
+-----
+
+(includes Raspberry Pi)
+
+Generically-tuned ATLAS and OpenBLAS are available with most distributions (e.g. [Debian](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries)) and must be enabled
+explicitly using the package-manager. e.g. for Debian / Ubuntu one would type
+
+    sudo apt-get install libatlas3-base libopenblas-base
+    sudo update-alternatives --config libblas.so.3
+    sudo update-alternatives --config liblapack.so.3
+
+selecting the preferred implementation.
+
+However, these are only generic pre-tuned builds. To get optimal performance for a specific
+machine, it is best to compile locally by grabbing the [latest ATLAS](http://sourceforge.net/projects/math-atlas/files/latest/download) or the [latest OpenBLAS](https://github.com/xianyi/OpenBLAS/archive/master.zip) and following the compilation
+instructions (don't forget to turn off CPU throttling and power management during the build!).
+Install the shared libraries into a folder that is seen by the runtime linker (e.g. add your install
+folder to `/etc/ld.so.conf` then run `ldconfig`) ensuring that `libblas.so.3` and `liblapack.so.3`
+exist and point to your optimal builds.
+
+*NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
+`/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
+so they must be created manually:
+`sudo ln -s libblas.so.3gf /usr/lib/libblas.so.3 ; sudo ln -s liblapack.so.3gf /usr/lib/liblapack.so.3`*
+
+Windows
+-------
+
+Windows has no package manager that can install and maintain multiple BLAS/LAPACK implementations.
+Because of this, the `native_system` builds only link to the `libopenblas.dll` file (not to `libblas.dll`
+and `liblapack.dll`). Either install the generically tuned
+[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`, or
+compile your own machine-optimised build.
 
 
 Performance
@@ -66,12 +125,12 @@ ensures that Java applications keep pace with – or exceed the performance of �
 C / C++ / Fortran applications.
 
 The following performance charts give an idea of the performance ratios of Java vs the native
-reference implementation. Also shown are pure C performance runs that show that
+implementations. Also shown are pure C performance runs that show that
 **dropping to C at the application layer gives no performance benefit**.
 If anything, the Java version is faster for smaller matrices and is consistently faster
 than the "optimised" implementations for some types of operations (e.g. `ddot`).
 
-One should expect machine optimised natives to out-perform the reference implementation
+One can expect machine-optimised natives to out-perform the reference implementation
 – especially for larger arrays – as demonstrated below by Apple's
 [veclib framework](https://developer.apple.com/library/mac/documentation/Performance/Conceptual/vecLib/Reference/reference.html),
 Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)

@@ -24,8 +24,8 @@
     <modules>
         <module>java</module>
         <module>osx-x86_64</module>
-        <!-- <module>win-i686</module>
-        <module>win-x86_64</module> -->
+        <module>win-i686</module>
+        <module>win-x86_64</module>
         <!-- cross compiles are built separately on a Linux box... -->
     </modules>
 
