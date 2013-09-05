@@ -14,8 +14,13 @@ If you're a developer looking for an easy-to-use linear algebra library on the J
 * [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
 
 
-In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability, with full native reference builds (using the Fortran code from [netlib.org](http://www.netlib.org))
-and delegating builds that use system (potentially machine optimised) library for all major operating systems:
+In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by:
+
+* [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability
+* self-contained native builds using the reference Fortran from [netlib.org](http://www.netlib.org)
+* delegating builds that use (potentially machine optimised) system libraries
+
+for all major operating systems:
 
 * OS X (`x86_64`)
 * Linux (`i686`, `x86_64`, Raspberry Pi `armhf`)
