@@ -15,6 +15,12 @@ gcc-mp-4.8 -O3 ddottest.c common.c -o ddottest -I../../../../netlib/CBLAS -L/opt
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./ddottest  > ../../../results/mac_os_x-x86_64-ddot-mkl.csv
 
+gcc-mp-4.8 -O3 ddottest.c cudawrapper.c common.c -o ddottest -I../../../../netlib/CBLAS -I/usr/local/cuda/include/ -L/usr/local/cuda/lib -lcublas
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib
+./ddottest  > ../../../results/mac_os_x-x86_64-ddot-cuda.csv
+
+
+
 */
 
 #include <stdlib.h>

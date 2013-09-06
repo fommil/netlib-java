@@ -15,7 +15,6 @@ gcc-mp-4.8 -O3 dgetritest.c common.c -o dgetritest -I../../../../netlib/CBLAS -L
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./dgetritest  > ../../../results/mac_os_x-x86_64-dgetri-mkl.csv
 
-
 */
 
 #include <stdlib.h>
