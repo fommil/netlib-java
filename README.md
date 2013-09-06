@@ -1,8 +1,6 @@
 netlib-java
 ===========
 
-Mission-critical components for linear algebra systems.
-
 `netlib-java` is a wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces**.
@@ -14,9 +12,9 @@ If you're a developer looking for an easy-to-use linear algebra library on the J
 * [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
 
 
-In `netlib-java`, pure Java implementations of BLAS/LAPACK/ARPACK are provided by:
+In `netlib-java`, implementations of BLAS/LAPACK/ARPACK are provided by:
 
-* [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability
+* [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability on the JVM
 * self-contained native builds using the reference Fortran from [netlib.org](http://www.netlib.org)
 * delegating builds that use (potentially machine optimised) system libraries
 
