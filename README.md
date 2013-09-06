@@ -162,7 +162,9 @@ times faster for larger arrays.
 
 *NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
 Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
-to wait around all day.*
+to wait around all day. Also, the larger runs were called first so the JIT has already kicked in for F2J
+implementations: on a cold startup the F2J implementations are about 10 times slower and plateau
+after about 20 calls of a function.*
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
@@ -181,12 +183,6 @@ The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 
 ![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpse3fd3f64.png)
 
-
-The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
-Java vs reference native implementations of BLAS. Note that the Java implementation is about 10 times
-faster (than its start speed) by about the 20th iteration (that's the JIT kicking in).
-
-![linpack](http://i752.photobucket.com/albums/xx162/fommil/linpack_zps8fdf763b.png)
 
 
 Installation
