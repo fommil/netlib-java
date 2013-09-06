@@ -30,11 +30,14 @@
       sudo mkdir -p /opt/win-i686
       sudo mv drive_c/Program\ Files\ (x86)/Java/jdk1.7.0_25 /opt/win-i686/jdk7
         
-      Also get the reference standalone DLLS:
-          http://downloads.sourceforge.net/project/openblas/v0.2.8/OpenBLAS-v0.2.8-x86-Win.zip
-      and put them in /opt/win-x86_64/        
         
-      and REMOVE the static (.a file), or else this build will prefer the static libs.
+        i686-w64-mingw32-gcc BLAS/*.f CBLAS/*.c CBLAS/*.f -shared -o libblas3.dll -lgfortran -DADD_ -Wl,DOUBLEDASHkill-at
+        i686-w64-mingw32-gcc LAPACK/*.f -shared -o liblapack3.dll -lgfortran -L. -lblas3 -Wl,DOUBLEDASHkill-at
+        sudo mv libblas3.dll liblapack3.dll /opt/win-i686/lib
+        sudo cp CBLAS/*.h /opt/win-i686/include
+        
+        where DOUBLEDASH should be replaced with a double dash (not valid in XML comments)
+      
     -->
     <properties>
         <netlib.src>../../netlib</netlib.src>
@@ -78,15 +81,16 @@
                     <compilerEndOptions>
                         <!-- silencing warnings because jint* int* are actually safe on this platform -->
                         <compilerEndOption>-w</compilerEndOption>
-                        <compilerEndOption>-I/opt/win-i686/openblas/include</compilerEndOption>
+                        <compilerEndOption>-I/opt/win-i686/include</compilerEndOption>
                     </compilerEndOptions>
                     <linkerMiddleOptions>
 <!-- check binary link with
   i686-w64-mingw32-objdump -p target/netlib-native_system-win-i686.dll | grep DLL
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/win-i686/openblas/lib</linkerMiddleOption>
-                        <linkerMiddleOption>-lopenblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/win-i686/lib</linkerMiddleOption>
+                        <linkerMiddleOption>-lblas3</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack3</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw32/mingw/lib/libgfortran.a</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw32/mingw/lib/libquadmath.a</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>

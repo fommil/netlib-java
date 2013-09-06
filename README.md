@@ -79,6 +79,9 @@ Apple OS X requires no further setup because OS X ships with the [veclib framewo
 boasting incredible performance that is difficult to surpass (performance charts below
 show that it out-performs ATLAS and is on par with the Intel MKL).
 
+*We're working on additional performance for machines with NVIDIA GPUs by allowing the
+use of [cuBLAS](https://developer.nvidia.com/cublas) libraries at runtime.*
+
 
 Linux
 -----
@@ -101,6 +104,10 @@ Install the shared libraries into a folder that is seen by the runtime linker (e
 folder to `/etc/ld.so.conf` then run `ldconfig`) ensuring that `libblas.so.3` and `liblapack.so.3`
 exist and point to your optimal builds.
 
+If you have an [Intel MKL](http://software.intel.com/en-us/intel-mkl) licence, you could also
+try creating symbolic links from `libblas.so.3` and `liblapack.so.3` to `libmkl_rt.so`
+(and let us know how you get on), and the equivalents for other vendor-supplied libraries.
+
 *NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
 `/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
 so they must be created manually.*
@@ -108,11 +115,13 @@ so they must be created manually.*
 Windows
 -------
 
-Windows has no package manager that can install and maintain multiple BLAS/LAPACK implementations.
-Because of this, the `native_system` builds only link to the `libopenblas.dll` file (not to `libblas.dll`
-and `liblapack.dll`). Either install the generically tuned
+The `native_system` builds expect to find `libblas3.dll` and `liblapack3.dll` on the library path.
+Either install the generically tuned
 [OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`, or
 compile and install your own machine-optimised OpenBLAS build.
+
+*NOTE: OpenBLAS [doesn't provide separate libraries](https://github.com/xianyi/OpenBLAS/issues/296)
+so you might have to customise the build or rename the binary appropriately.*
 
 
 Performance

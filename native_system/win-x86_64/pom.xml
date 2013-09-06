@@ -30,11 +30,14 @@
       sudo mkdir -p /opt/win-x86_64
       sudo mv drive_c/Program\ Files/Java/jdk1.7.0_25 /opt/win-x86_64/jdk7
        
-      Also get the reference standalone DLLS:
-          http://downloads.sourceforge.net/project/openblas/v0.2.8/OpenBLAS-v0.2.8-x86_64-Win.zip
-      and put them in /opt/win-x86_64/        
+    There are no sensible pre-built binaries of BLAS for Windows
+    (they are usually missing the CBLAS API)
+    so we compile our own from the netlib folder
         
-      and REMOVE the static (.a file), or else this build will prefer the static libs.
+        x86_64-w64-mingw32-gcc BLAS/*.f CBLAS/*.c CBLAS/*.f -shared -o libblas3.dll -lgfortran -DADD_
+        x86_64-w64-mingw32-gcc LAPACK/*.f -shared -o liblapack3.dll -lgfortran -L. -lblas3
+        sudo mv libblas3.dll liblapack3.dll /opt/win-x86_64/lib
+        sudo cp CBLAS/*.h /opt/win-x86_64/include
     -->
     <properties>
         <netlib.src>../../netlib</netlib.src>
@@ -78,15 +81,16 @@
                     <compilerEndOptions>
                         <!-- silencing warnings because jint* int* are actually safe on this platform -->
                         <compilerEndOption>-w</compilerEndOption>
-                        <compilerEndOption>-I/opt/win-x86_64/openblas/include</compilerEndOption>
+                        <compilerEndOption>-I/opt/win-x86_64/include</compilerEndOption>
                     </compilerEndOptions>
                     <linkerMiddleOptions>
 <!-- check binary link with
   x86_64-w64-mingw32-objdump -p target/netlib-native_system-win-x86_64.dll | grep DLL
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
-                        <linkerMiddleOption>-L/opt/win-x86_64/openblas/lib</linkerMiddleOption>
-                        <linkerMiddleOption>-lopenblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/win-x86_64/lib</linkerMiddleOption>
+                        <linkerMiddleOption>-lblas3</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack3</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw64/mingw/lib/libgfortran.a</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw64/mingw/lib/libquadmath.a</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
