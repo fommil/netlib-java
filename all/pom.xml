@@ -15,6 +15,13 @@
 
     <dependencies>
         <dependency>
+            <!-- WORKAROUND: https://github.com/sbt/sbt/issues/861 -->
+            <groupId>net.sourceforge.f2j</groupId>
+            <artifactId>arpack_combined_all</artifactId>
+            <classifier>jar</classifier>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>core</artifactId>
             <version>${project.parent.version}</version>
