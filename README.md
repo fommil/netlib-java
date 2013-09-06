@@ -115,8 +115,10 @@ Windows
 
 The `native_system` builds expect to find `libblas3.dll` and `liblapack3.dll` on the library path.
 Either install the generically tuned
-[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`, or
-compile and install your own machine-optimised OpenBLAS build.
+[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`,
+obtain vendor-supplied libraries (Intel, AMD, NVIDIA), or
+compile and install your own machine-optimised OpenBLAS /
+[ATLAS](http://math-atlas.sourceforge.net/atlas_install/node54.html).
 
 *NOTE: OpenBLAS [doesn't provide separate libraries](https://github.com/xianyi/OpenBLAS/issues/296)
 so you might have to customise the build or rename the binary appropriately.*
