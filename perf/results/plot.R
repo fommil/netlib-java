@@ -85,6 +85,9 @@ getPlotParams = function(t, i) {
 	else if (regexpr("(CBLAS|veclib|mkl|atlas)", i) > 0) {
 		col = "green"
 	}
+	else if (regexpr("cuda", i) > 0) {
+		col = "turquoise"
+	}
 	else {
 		col = "black"
 	}
@@ -138,6 +141,7 @@ addDataSingle = function(f, t, i, c) {
 
 	myleg <- rbind(leg, c(paste(t, i), col, sym))
 	assign("leg", myleg, env=globalenv()) 
+	print(leg)
 }
 
 logAxis = function(type, lims) {

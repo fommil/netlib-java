@@ -77,9 +77,14 @@ Apple OS X requires no further setup because OS X ships with the [veclib framewo
 boasting incredible performance that is difficult to surpass (performance charts below
 show that it out-performs ATLAS and is on par with the Intel MKL).
 
-*We're working on additional performance for machines with NVIDIA GPUs by allowing the
-use of [cuBLAS](https://developer.nvidia.com/cublas) libraries at runtime.*
+Unfortunately, although [cuBLAS](https://developer.nvidia.com/cublas) implements a form
+of the BLAS interface, some "genius" decided to re-design the API with trivial changes
+that require *source code modifications* (hopefully somebody will write a CBLAS compatibility layer).
+Seriously NVIDIA, **epic fail** guys!
 
+The future of GPU BLAS appears to be in the AMD-sponsored, open source,
+[clBLAS](https://github.com/clMathLibraries/clBLAS). It looks like
+[some work needs to be done for OS X](https://github.com/clMathLibraries/clBLAS/issues/7).
 
 Linux
 -----
@@ -113,15 +118,20 @@ so they must be created manually.*
 Windows
 -------
 
-The `native_system` builds expect to find `libblas3.dll` and `liblapack3.dll` on the library path.
+The `native_system` builds expect to find `libblas3.dll` and `liblapack3.dll` on the `%PATH%`
+(or current working directory).
 Either install the generically tuned
-[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/) into `C:\WINDOWS\SYSTEM32`,
+[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/),
 obtain vendor-supplied libraries (Intel, AMD, NVIDIA), or
 compile and install your own machine-optimised OpenBLAS /
 [ATLAS](http://math-atlas.sourceforge.net/atlas_install/node54.html).
 
+Use [Dependency Walker](http://www.dependencywalker.com) to help resolve any
+
 *NOTE: OpenBLAS [doesn't provide separate libraries](https://github.com/xianyi/OpenBLAS/issues/296)
-so you might have to customise the build or rename the binary appropriately.*
+so you will have to customise the build or copy the binary into both `libblas3.dll` and
+`liblapack3.dll` whilst also obtaining a copy of `libgfortran-1-3.dll`, `libquadmath-0.dll` and
+`libgcc_s_seh-1.dll` from [MinGW](http://www.mingw.org).*
 
 
 Performance
@@ -145,6 +155,11 @@ One can expect machine-optimised natives to out-perform the reference implementa
 Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
+Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which appears to have
+constant time evaluation of arrays up to 1 million entries. Although this means that cuBLAs
+is rather slow for smaller matrices, it is hundreds (and possibly thousands to millions) of
+times faster for larger arrays.
+
 *NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
 Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
 to wait around all day.*
@@ -153,7 +168,7 @@ The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsa272550e.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsd831b476.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
@@ -164,7 +179,7 @@ and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performa
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zps25486a2e.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsb1a4a7f1.png)
 
 
 The following benchmark, [LINPACK](http://www.netlib.org/linpack), shows the performance of
