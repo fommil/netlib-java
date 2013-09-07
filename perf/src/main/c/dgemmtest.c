@@ -60,6 +60,7 @@ main()
             if (size < 10) continue;
             long took = benchmark(size);
             printf("\"%d\",\"%lu\"\n", size, took);
+			fflush(stdout);
         }
     }
 }

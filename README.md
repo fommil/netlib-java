@@ -155,10 +155,10 @@ One can expect machine-optimised natives to out-perform the reference implementa
 Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
-Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which appears to have
-constant time evaluation of arrays up to 1 million entries. Although this means that cuBLAs
-is rather slow for smaller matrices, it is hundreds (and possibly thousands to millions) of
-times faster for larger arrays.
+Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which has
+constant time evaluation of arrays up to the size of the GPU memory. Although this means that cuBLAs
+is rather slow for smaller matrices, it is millions/billions faster for larger arrays
+(such that the memory allocation itself becomes the bottleneck!).
 
 *NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
 Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
