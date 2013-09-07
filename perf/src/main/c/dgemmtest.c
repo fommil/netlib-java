@@ -11,10 +11,13 @@ gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I/System/Library/Frameworks/ve
 gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I/opt/local/include /opt/local/lib/libatlas.a /opt/local/lib/libcblas.a /opt/local/lib/liblapack.a /opt/local/lib/libf77blas.a -lgfortran
 ./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-atlas.csv
 
-gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I../../../../netlib/CBLAS-L/opt/intel/composerxe/mkl/lib -lmkl_rt
+gcc-mp-4.8 -O3 dgemmtest.c common.c -o dgemmtest -I../../../../netlib/CBLAS -L/opt/intel/composerxe/mkl/lib -lmkl_rt
 export DYLD_LIBRARY_PATH=/opt/intel/composerxe/mkl/lib:/opt/intel/composerxe/lib/
 ./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-mkl.csv
 
+gcc-mp-4.8 -O3 dgemmtest.c cudawrapper.c common.c -o dgemmtest -I../../../../netlib/CBLAS -I/usr/local/cuda/include/ -L/usr/local/cuda/lib -lcublas
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib
+./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-cuda.csv
 
 */
 
