@@ -5,9 +5,9 @@ netlib-java
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces**.
 
-If you're a developer looking for an easy-to-use linear algebra library on the JVM, we strongly recommend:
+If you're a developer looking for an easy-to-use linear algebra library on the JVM, we strongly recommend Commons-Math, MTJ and Breeze:
 
-* [Apache Commons Math](http://commons.apache.org/proper/commons-math/) for the most popular mathematics library in Java.
+* [Apache Commons Math](http://commons.apache.org/proper/commons-math/) for the most popular mathematics library in Java ([not using `netlib-java`](https://issues.apache.org/jira/browse/MATH-270)).
 * [Matrix Toolkits for Java](https://github.com/fommil/matrix-toolkits-java/) for high performance linear algebra in Java (builds on top of `netlib-java`).
 * [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
 
@@ -16,7 +16,7 @@ In `netlib-java`, implementations of BLAS/LAPACK/ARPACK are provided by:
 
 * [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability on the JVM
 * self-contained native builds using the reference Fortran from [netlib.org](http://www.netlib.org)
-* delegating builds that use (potentially machine optimised) system libraries
+* delegating builds that use machine optimised system libraries
 
 for all major operating systems:
 
@@ -24,8 +24,10 @@ for all major operating systems:
 * Linux (`i686`, `x86_64`, Raspberry Pi `armhf`)
 * Windows (32 and 64 bit)
 
-The F2J is the default implementation. Thanks to [JNILoader](https://github.com/fommil/jniloader),
-enabling reference natives is as simple as setting system properties on JVM startup:
+F2J is the default implementation.
+
+Thanks to [JNILoader](https://github.com/fommil/jniloader),
+enabling the reference natives is as simple as setting system properties on JVM startup:
 
 * `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
 * `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
@@ -41,6 +43,8 @@ If the natives fail to load, the Java implementation is the fallback.
 Machine Optimised Natives
 =========================
 
+**Only for 1.1-SNAPSHOT**
+
 High performance BLAS / LAPACK are available
 [commercially and open source](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
 for specific CPU chipsets. It is worth noting that "optimised" here means a lot more than simply changing
@@ -51,14 +55,12 @@ Due to the nature of machine-optimised binaries, we cannot bundle them with `net
 commercial licenses prohibit distribution and open source *tuning* only occurs when
 compiled on the target machine.
 
-There are two ways to use machine-optimised natives with `netlib-java`:
+To get machine optimised natives in `netlib-java`, users make their machine-optimised `libblas` (CBLAS) and
+`liblapack` (Fortran) available as shared libraries at runtime.
 
-1. make `libblas` (CBLAS) and `liblapack` (Fortran) available to the `native_system` implementation.
-2. build a custom backend (using `native_ref` and `native_system` as inspiration).
-
-[The author](https://github.com/fommil/) may be available to assist with custom builds (and further
-improvements to `netlib-java`) on a commercial basis. Make contact for availability (budget estimates
-are appreciated).
+If it is not possible to provide a shared library, [the author](https://github.com/fommil/) may be available
+to assist with custom builds (and further improvements to `netlib-java`) on a commercial basis.
+Make contact for availability (budget estimates are appreciated).
 
 
 The `native_system` implementation is enabled with the following (requires at least `1.1-SNAPSHOT`):
@@ -74,17 +76,14 @@ OS X
 ----
 
 Apple OS X requires no further setup because OS X ships with the [veclib framework](https://developer.apple.com/documentation/Performance/Conceptual/vecLib/),
-boasting incredible performance that is difficult to surpass (performance charts below
+boasting incredible CPU performance that is difficult to surpass (performance charts below
 show that it out-performs ATLAS and is on par with the Intel MKL).
 
-Unfortunately, although [cuBLAS](https://developer.nvidia.com/cublas) implements a form
-of the BLAS interface, some "genius" decided to re-design the API with trivial changes
-that require *source code modifications* (hopefully somebody will write a CBLAS compatibility layer).
-Seriously NVIDIA, **epic fail** guys!
+Further improvements can be achieved for very large arrays by using the GPU:
+e.g. [cuBLAS](https://developer.nvidia.com/cublas) or [clBLAS](https://github.com/clMathLibraries/clBLAS).
+However, GPU implementations have severe performance degradation for small arrays and require
+a [wrapper layer](https://github.com/fommil/netlib-java/issues/50) to be usable in the general case.
 
-The future of GPU BLAS appears to be in the AMD-sponsored, open source,
-[clBLAS](https://github.com/clMathLibraries/clBLAS). It looks like
-[some work needs to be done for OS X](https://github.com/clMathLibraries/clBLAS/issues/7).
 
 Linux
 -----
@@ -126,7 +125,8 @@ obtain vendor-supplied libraries (Intel, AMD, NVIDIA), or
 compile and install your own machine-optimised OpenBLAS /
 [ATLAS](http://math-atlas.sourceforge.net/atlas_install/node54.html).
 
-Use [Dependency Walker](http://www.dependencywalker.com) to help resolve any
+Use [Dependency Walker](http://www.dependencywalker.com) to help resolve any problems such as:
+`UnsatisfiedLinkError (Can't find dependent libraries)`.
 
 *NOTE: OpenBLAS [doesn't provide separate libraries](https://github.com/xianyi/OpenBLAS/issues/296)
 so you will have to customise the build or copy the binary into both `libblas3.dll` and
