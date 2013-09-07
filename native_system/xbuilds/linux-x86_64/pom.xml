@@ -20,6 +20,9 @@
 
       sudo apt-get install gfortran openjdk-7-jdk libblas-dev liblapack-dev
 
+    DO NOT INSTALL OPENBLAS at compile time or it will (unexplicably)
+    be added to the link path.
+
     It is impossible to compile a library on Ubuntu that has static
     references to the fortran libraries, as the static fortran library
     has not been compiled with -fPIC. The only workaround would be

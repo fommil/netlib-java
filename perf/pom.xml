@@ -7,9 +7,12 @@
     <!--
 
     mvn compile assembly:single
-    java -Djava.util.logging.config.file=logging.properties -jar target/perf-1.0-jar-with-dependencies.jar
-    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-1.0-jar-with-dependencies.jar
-    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeSystemBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeSystemLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeSystemARPACK -jar target/perf-1.0-jar-with-dependencies.jar
+    # F2J
+    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.F2jBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.F2jLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.F2jARPACK -jar target/perf-*-jar-with-dependencies.jar
+    # native_ref
+    java -Djava.util.logging.config.file=logging.properties -Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS -Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK -Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK -jar target/perf-*-jar-with-dependencies.jar
+    # native_system
+    java -Djava.util.logging.config.file=logging.properties -jar target/perf-*-jar-with-dependencies.jar
 
     and potentially (e.g. on raspberrypi)
 

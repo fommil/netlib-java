@@ -18,7 +18,6 @@
             <!-- WORKAROUND: https://github.com/sbt/sbt/issues/861 -->
             <groupId>net.sourceforge.f2j</groupId>
             <artifactId>arpack_combined_all</artifactId>
-            <classifier>jar</classifier>
             <version>0.1</version>
         </dependency>
         <dependency>
