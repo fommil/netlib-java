@@ -156,15 +156,11 @@ Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
 Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which has
-constant time evaluation of arrays up to the size of the GPU memory. Although this means that cuBLAs
+constant time evaluation of arrays up to the size of the GPU memory. Although this means that the GPU
 is rather slow for smaller matrices, it is millions/billions faster for larger arrays
 (such that the memory allocation itself becomes the bottleneck!).
-
-*NOTE: a different machine is used for each OS: Macbook Air for OS X, Debian 64bit and Ubuntu 32 bit;
-Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
-to wait around all day. Also, the larger runs were called first so the JIT has already kicked in for F2J
-implementations: on a cold startup the F2J implementations are about 10 times slower and plateau
-after about 20 calls of a function.*
+A [batched API](https://github.com/fommil/netlib-java/issues/49) would provide an alternative for
+some situations.
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
@@ -183,6 +179,12 @@ The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 
 ![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpse3fd3f64.png)
 
+
+*NOTE: a different machine was used for each OS: Macbook Air for OS X, Debian 64 bit and Ubuntu 32 bit;
+Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
+to wait around all day. Also, the larger runs were called first so the JIT has already kicked in for F2J
+implementations: on a cold startup the F2J implementations are about 10 times slower and get to peak
+performance after about 20 calls of a function (Raspberry Pi doesn't seem to have a JIT).*
 
 
 Installation
