@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
-        <artifactId>native_ref-xbuilds</artifactId>
+        <artifactId>native_system-xbuilds</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>netlib-native_ref-gnueabihf-arm</artifactId>
+    <artifactId>netlib-native_system-linux-armhf</artifactId>
     <packaging>so</packaging>
 
     <!--
@@ -34,6 +34,14 @@
     installed into
 
       /opt/gnueabihf-arm/jdk8
+        
+    along with the contents of
+        
+        for A in b/blas/libblas-dev_1.2.20110419-5_armhf.deb b/blas/libblas3_1.2.20110419-5_armhf.deb l/lapack/liblapack-dev_3.4.2%2bdfsg-1_armhf.deb l/lapack/liblapack3_3.4.2%2bdfsg-1_armhf.deb ; do
+          curl -O "http://archive.raspbian.org/raspbian/pool/main/$A"
+          ar vx `basename $A`
+          sudo tar xfzv data.tar.gz -C /opt/gnueabihf-arm/
+        done
     -->
     <properties>
         <netlib.src>../../../netlib</netlib.src>
@@ -42,7 +50,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>native_ref-java</artifactId>
+            <artifactId>native_system-java</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
@@ -75,16 +83,21 @@
                     <linkerExecutable>arm-rpi-linux-gnueabi-gcc</linkerExecutable>
                     <compilerStartOptions>
                         <compilerStartOption>-Os</compilerStartOption>
+                        <compilerStartOption>-I/opt/gnueabihf-arm/usr/include/</compilerStartOption>
                     </compilerStartOptions>
                     <linkerStartOptions>
                         <linkerStartOption>-Wl,-s</linkerStartOption>
                     </linkerStartOptions>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
-arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-gnueabihf-arm.so | grep "Shared library:"
+arm-rpi-linux-gnueabi-readelf -a target/netlib-native_system-linux-armhf.so | grep "Shared library:"
 -->
+                        <linkerMiddleOption>-L/opt/gnueabihf-arm/usr/lib/libblas</linkerMiddleOption>
+                        <linkerMiddleOption>-L/opt/gnueabihf-arm/usr/lib/lapack</linkerMiddleOption>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-lblas</linkerMiddleOption>
+                        <linkerMiddleOption>-llapack</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

@@ -58,7 +58,7 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_ref-gnueabihf-arm</artifactId>
+            <artifactId>netlib-native_ref-linux-armhf</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
         </dependency>
@@ -82,7 +82,7 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>netlib-native_system-gnueabihf-arm</artifactId>
+            <artifactId>netlib-native_system-linux-armhf</artifactId>
             <version>${project.parent.version}</version>
             <classifier>natives</classifier>
         </dependency>
