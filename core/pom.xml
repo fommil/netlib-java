@@ -48,6 +48,7 @@
                             <outputName>com/github/fommil/netlib/BLAS.java</outputName>
                             <scan>org.netlib.blas</scan>
                             <fallback>com.github.fommil.netlib.F2jBLAS</fallback>
+                            <impls>com.github.fommil.netlib.NativeSystemBLAS,com.github.fommil.netlib.NativeRefBLAS,com.github.fommil.netlib.F2jBLAS</impls>
                         </configuration>
                     </execution>
                     <execution>
@@ -70,6 +71,7 @@
                             <outputName>com/github/fommil/netlib/LAPACK.java</outputName>
                             <scan>org.netlib.lapack</scan>
                             <fallback>com.github.fommil.netlib.F2jLAPACK</fallback>
+                            <impls>com.github.fommil.netlib.NativeSystemLAPACK,com.github.fommil.netlib.NativeRefLAPACK,com.github.fommil.netlib.F2jLAPACK</impls>
                             <initCode>INSTANCE.slamch("E"); INSTANCE.dlamch("E");</initCode>
                         </configuration>
                     </execution>
@@ -93,6 +95,7 @@
                             <outputName>com/github/fommil/netlib/ARPACK.java</outputName>
                             <scan>org.netlib.arpack</scan>
                             <fallback>com.github.fommil.netlib.F2jARPACK</fallback>
+                            <impls>com.github.fommil.netlib.NativeSystemARPACK,com.github.fommil.netlib.NativeRefARPACK,com.github.fommil.netlib.F2jARPACK</impls>
                         </configuration>
                     </execution>
                     <execution>

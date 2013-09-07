@@ -53,7 +53,7 @@ $paramNames:{n|  * @param $n$};separator="\n"$
 abstract public $return$ $method$($params(paramTypes,paramNames)$);
 >>
 
-abstractClass(package, name, members, docs, fallback, initCode = "") ::= <<
+abstractClass(package, name, members, docs, fallback, impls, initCode = "") ::= <<
 $copyright()$
 package $package$;
 
@@ -71,16 +71,22 @@ package $package$;
 public abstract class $name$ {
 
   private static final String FALLBACK = "$fallback$";
+  private static final String IMPLS = "$impls$";
   private static final String PROPERTY_KEY = "$package$.$name$";
   private static final $name$ INSTANCE;
   static {
     try {
-      String className = System.getProperty(PROPERTY_KEY, FALLBACK);
-      $name$ impl;
-      try {
-        impl = load(className);
-      } catch (ExceptionInInitializerError e) {
-        log.warning("Failed to load " + className + ", falling back to F2J.");
+      String[] classNames = System.getProperty(PROPERTY_KEY, IMPLS).split(",");
+      $name$ impl = null;
+      for (String className: classNames) {
+        try {
+          impl = load(className);
+        } catch (ExceptionInInitializerError e) {
+          log.warning("Failed to load implementation from: " + className);
+        }
+      }
+      if (impl == null) {
+        log.warning("Using the fallback implementation.");
         impl = load(FALLBACK);
       }
       INSTANCE = impl;
@@ -129,9 +135,10 @@ public $returns$ $method$($params(paramTypes,paramNames)$) {
 }
 >>
 
-staticJniLoader(prop, libs) ::= <<
+staticJniLoader(prop, lib) ::= <<
 static {
-  String natives = System.getProperty("$prop$", "$libs$");
+  String jnilib = com.github.fommil.jni.JniNamer.getJniName("$lib$");
+  String natives = System.getProperty("$prop$", jnilib);
   com.github.fommil.jni.JniLoader.load(natives.split(","));
 }
 >>

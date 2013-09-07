@@ -37,10 +37,16 @@ import java.util.List;
 public class JavaInterfaceGenerator extends AbstractJavaGenerator {
 
   /**
-   * The default implementation.
+   * The fallback implementation.
    */
   @Parameter(required = true)
   protected String fallback;
+
+  /**
+   * The default implementations (CSV).
+   */
+  @Parameter(required = true)
+  protected String impls;
 
   /**
    * Arbitrary Java code that is run after instance creation.
@@ -63,6 +69,7 @@ public class JavaInterfaceGenerator extends AbstractJavaGenerator {
     t.add("members", members);
     t.add("docs", getGenerationSummaryJavadocs());
     t.add("fallback", fallback);
+    t.add("impls", impls);
     if (!Strings.isNullOrEmpty(initCode))
       t.add("initCode", initCode);
 
