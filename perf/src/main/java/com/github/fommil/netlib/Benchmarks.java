@@ -28,12 +28,13 @@ public class Benchmarks {
     ARPACK.getInstance();
 
     List<Benchmark> benchmarks = Lists.newArrayList();
-    benchmarks.add(new Linpack());
+//    benchmarks.add(new Linpack());
 
     List<Benchmark.Parameterised> pBenchmarks = Lists.newArrayList();
-    pBenchmarks.add(new Ddot());
-    pBenchmarks.add(new Dgemm());
-    pBenchmarks.add(new Dgetri());
+//    pBenchmarks.add(new Ddot());
+//    pBenchmarks.add(new Dgemm());
+//    pBenchmarks.add(new Dgetri());
+    pBenchmarks.add(new Dsaupd());
 
     for (Benchmark b : benchmarks) {
       File file = new File(getTarget(b) + ".csv");

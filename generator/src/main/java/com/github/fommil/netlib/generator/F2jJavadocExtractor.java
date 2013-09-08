@@ -69,7 +69,7 @@ public class F2jJavadocExtractor {
 
         int start = matcher.end();
         int end = javadoc.indexOf("</pre>", start);
-        javadoc = javadoc.substring(start, end).replaceAll("\n\\s*c", "\n").replace("\n\n", "\n");
+        javadoc = javadoc.substring(start, end).replaceAll("\n\\s*c(?!\\w)", "\n").replace("\n\n", "\n");
         return "<pre><code>" + javadoc + " * </code></pre>";
     }
 
