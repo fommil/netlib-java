@@ -23,7 +23,7 @@ The [JNILoader](https://github.com/fommil/jniloader) will attempt to load the im
 All major operating systems are supported out-of-the-box:
 
 * OS X (`x86_64`)
-* Linux (`i686`, `x86_64`, Raspberry Pi `armhf`) (**`libgfortran3` must be installed**)
+* Linux (`i686`, `x86_64`, Raspberry Pi `armhf`) (**must have `libgfortran3` installed**)
 * Windows (32 and 64 bit)
 
 
