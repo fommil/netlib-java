@@ -27,7 +27,7 @@ public class Dsaupd implements Benchmark.Parameterised {
     boolean eigenvectors = true;
     int eigenvalues = Math.max(1, n / 10);
 
-    double tolerance = 0;
+    double tolerance = 0.00001;
 
     int ldv = n;
     intW nev = new intW(eigenvalues);
@@ -70,6 +70,7 @@ public class Dsaupd implements Benchmark.Parameterised {
     log.info(ncv + " " + nev.val + " " + n);
 
     while (true) {
+//      log.info(Joiner.on(",").join(ido.val, bmat, n, which, nev.val, tol.val, resid, ncv, v, ldv, iparam, ipntr, workd, workl, lworkl, info.val));
       arpack.dsaupd(ido, bmat, n, which, nev.val, tol, resid, ncv, v, ldv, iparam, ipntr, workd, workl, lworkl, info);
       if (ido.val != -1 && ido.val != 1) break;
 
@@ -105,19 +106,20 @@ public class Dsaupd implements Benchmark.Parameterised {
   */
   private void av(int n, double[] input, int input_offset, double[] output, int output_offset) {
     double[] x = Arrays.copyOfRange(input, input_offset, input_offset + n);
-    double[] y = new double[n];
+//    double[] y = new double[n];
 
+    double[] y = x;
     // let T = 2, I = 1
     // matrix applied to x, results in y...
-    for (int row = 0; row < n; row++) {
-      for (int col = 0; col < n; col++) {
-        if (col == (row - 1) || col == (row + 1)) {
-          y[row] = y[row] - x[col];
-        } else if (row == col) {
-          y[row] = y[row] + 2 * x[col];
-        }
-      }
-    }
+//    for (int row = 0; row < n; row++) {
+//      for (int col = 0; col < n; col++) {
+//        if (col == (row - 1) || col == (row + 1)) {
+//          y[row] = y[row] - x[col];
+//        } else if (row == col) {
+//          y[row] = y[row] + 2 * x[col];
+//        }
+//      }
+//    }
 
     for (int i = 0; i < n; i++) {
       output[i + output_offset] = y[i];
