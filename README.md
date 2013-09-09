@@ -14,34 +14,21 @@ If you're a developer looking for an easy-to-use linear algebra library on the J
 
 In `netlib-java`, implementations of BLAS/LAPACK/ARPACK are provided by:
 
-* [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability on the JVM
+* delegating builds that use machine optimised system libraries (see below)
 * self-contained native builds using the reference Fortran from [netlib.org](http://www.netlib.org)
-* delegating builds that use machine optimised system libraries
+* [F2J](http://icl.cs.utk.edu/f2j/) to ensure full portability on the JVM
 
-for all major operating systems:
+The [JNILoader](https://github.com/fommil/jniloader) will attempt to load the implementations in this order automatically.
+
+All major operating systems are supported out-of-the-box:
 
 * OS X (`x86_64`)
-* Linux (`i686`, `x86_64`, Raspberry Pi `armhf`)
+* Linux (`i686`, `x86_64`, Raspberry Pi `armhf`) (**`libgfortran3` must be installed**)
 * Windows (32 and 64 bit)
 
-F2J is the default implementation.
 
-Thanks to [JNILoader](https://github.com/fommil/jniloader),
-enabling the reference natives is as simple as setting system properties on JVM startup:
-
-* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
-* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
-* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK`
-
-*Linux natives require the system library `libgfortran3` to be installed.*
-
-Machine optimised libraries require a little more setup, see below.
-
-If the natives fail to load, the Java implementation is the fallback.
-
-
-Machine Optimised Natives
-=========================
+Machine Optimised System Libraries
+==================================
 
 **Only for 1.1-SNAPSHOT**
 
@@ -55,22 +42,12 @@ Due to the nature of machine-optimised binaries, we cannot bundle them with `net
 commercial licenses prohibit distribution and open source *tuning* only occurs when
 compiled on the target machine.
 
-To get machine optimised natives in `netlib-java`, users make their machine-optimised `libblas` (CBLAS) and
-`liblapack` (Fortran) available as shared libraries at runtime.
+To enable machine optimised natives in `netlib-java`, end-users make their machine-optimised `libblas3` (CBLAS) and
+`liblapack3` (Fortran) available as shared libraries at runtime.
 
 If it is not possible to provide a shared library, [the author](https://github.com/fommil/) may be available
 to assist with custom builds (and further improvements to `netlib-java`) on a commercial basis.
 Make contact for availability (budget estimates are appreciated).
-
-
-The `native_system` implementation is enabled with the following (requires at least `1.1-SNAPSHOT`):
-
-* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeSystemBLAS`
-* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeSystemLAPACK`
-* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeSystemARPACK`
-
-plus the following Operating System specific instructions.
-
 
 OS X
 ----
@@ -107,8 +84,7 @@ folder to `/etc/ld.so.conf` then run `ldconfig`) ensuring that `libblas.so.3` an
 exist and point to your optimal builds.
 
 If you have an [Intel MKL](http://software.intel.com/en-us/intel-mkl) licence, you could also
-try creating symbolic links from `libblas.so.3` and `liblapack.so.3` to `libmkl_rt.so`
-(and let us know how you get on), and the equivalents for other vendor-supplied libraries.
+create symbolic links from `libblas.so.3` and `liblapack.so.3` to `libmkl_rt.so`.
 
 *NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
 `/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
@@ -132,6 +108,20 @@ Use [Dependency Walker](http://www.dependencywalker.com) to help resolve any pro
 so you will have to customise the build or copy the binary into both `libblas3.dll` and
 `liblapack3.dll` whilst also obtaining a copy of `libgfortran-1-3.dll`, `libquadmath-0.dll` and
 `libgcc_s_seh-1.dll` from [MinGW](http://www.mingw.org).*
+
+
+Customisation
+=============
+
+A specific implementation may be forced like so:
+
+* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.NativeRefBLAS`
+* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
+* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK`
+
+And a specific (non-standard) native binary may be forced like so:
+
+* `-Dcom.github.fommil.netlib.NativeSystemBLAS.natives=netlib-native_system-myos-myarch.so`
 
 
 Performance
@@ -178,6 +168,14 @@ The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
 ![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpse3fd3f64.png)
+
+
+The [DSAUPD](http://www.caam.rice.edu/software/ARPACK/UG/node136.html) benchmark measures the
+calculation of 10% of the eigenvalues for sparse matrices (`M` elements). Not included in
+this benchmark is the time taken to perform the matrix multiplication at each iteration
+(typically `sqrt(M)` iterations).
+
+![dsaupd](http://i752.photobucket.com/albums/xx162/fommil/dsaupd_zps0a5e3372.png)
 
 
 *NOTE: a different machine was used for each OS: Macbook Air for OS X, Debian 64 bit and Ubuntu 32 bit;
