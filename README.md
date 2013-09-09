@@ -93,10 +93,9 @@ Windows
 
 The `native_system` builds expect to find `libblas3.dll` and `liblapack3.dll` on the `%PATH%`
 (or current working directory).
-Either install the generically tuned
-[OpenBLAS binaries](http://sourceforge.net/projects/openblas/files/),
-obtain vendor-supplied libraries (Intel, AMD, NVIDIA), or
-compile and install your own machine-optimised OpenBLAS /
+Besides vendor-supplied implementations,
+OpenBLAS provide [generically tuned binaries](http://sourceforge.net/projects/openblas/files/),
+and it is possible to build
 [ATLAS](http://math-atlas.sourceforge.net/atlas_install/node54.html).
 
 Use [Dependency Walker](http://www.dependencywalker.com) to help resolve any problems such as:
@@ -169,9 +168,9 @@ The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 
 
 The [DSAUPD](http://www.caam.rice.edu/software/ARPACK/UG/node136.html) benchmark measures the
-calculation of 10% of the eigenvalues for sparse matrices (`M` elements). Not included in
+calculation of 10% of the eigenvalues for sparse matrices (`N` rows by `N` colums). Not included in
 this benchmark is the time taken to perform the matrix multiplication at each iteration
-(typically `sqrt(M)` iterations).
+(typically `N` iterations).
 
 ![dsaupd](http://i752.photobucket.com/albums/xx162/fommil/dsaupd_zps0a5e3372.png)
 
