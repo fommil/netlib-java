@@ -38,12 +38,15 @@ for specific CPU chipsets. It is worth noting that "optimised" here means a lot 
 the compiler optimisation flags: specialist assembly instructions are combined with [compile time profiling](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Optimization_approach)
 and the [selection of array alignments for the kernel and CPU combination](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Can_it_afford_to_copy.3F).
 
-Due to the nature of machine-optimised binaries, we cannot bundle them with `netlib-java`:
-commercial licenses prohibit distribution and open source *tuning* only occurs when
-compiled on the target machine.
+Further improvements can be achieved for very large arrays by using the GPU:
+e.g. [cuBLAS](https://developer.nvidia.com/cublas) or [clBLAS](https://github.com/clMathLibraries/clBLAS).
+However, GPU implementations have severe performance degradation for small arrays.
+[MultiBLAS](https://github.com/fommil/multiblas) is an initiative to work around
+the limitation of GPU BLAS implementations by selecting the optimal implementation
+at runtime, based on the array size.
 
-To enable machine optimised natives in `netlib-java`, end-users make their machine-optimised `libblas3` (CBLAS) and
-`liblapack3` (Fortran) available as shared libraries at runtime.
+**To enable machine optimised natives in `netlib-java`, end-users make their machine-optimised `libblas3` (CBLAS) and
+`liblapack3` (Fortran) available as shared libraries at runtime.**
 
 If it is not possible to provide a shared library, [the author](https://github.com/fommil/) may be available
 to assist with custom builds (and further improvements to `netlib-java`) on a commercial basis.
@@ -55,11 +58,6 @@ OS X
 Apple OS X requires no further setup because OS X ships with the [veclib framework](https://developer.apple.com/documentation/Performance/Conceptual/vecLib/),
 boasting incredible CPU performance that is difficult to surpass (performance charts below
 show that it out-performs ATLAS and is on par with the Intel MKL).
-
-Further improvements can be achieved for very large arrays by using the GPU:
-e.g. [cuBLAS](https://developer.nvidia.com/cublas) or [clBLAS](https://github.com/clMathLibraries/clBLAS).
-However, GPU implementations have severe performance degradation for small arrays and require
-a [wrapper layer](https://github.com/fommil/netlib-java/issues/50) to be usable in the general case.
 
 
 Linux
