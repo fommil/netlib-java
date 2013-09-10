@@ -19,6 +19,9 @@ gcc-mp-4.8 -O3 dgemmtest.c cudawrapper.c common.c -o dgemmtest -I../../../../net
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib
 ./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-cuda.csv
 
+gcc-mp-4.8 -O3 dgemmtest.c clwrapper.c common.c -o dgemmtest -I../../../../netlib/CBLAS -L -lclBLAS
+./dgemmtest  > ../../../results/mac_os_x-x86_64-dgemm-clblas.csv
+
 */
 
 #include <stdlib.h>
