@@ -142,8 +142,10 @@ One can expect machine-optimised natives to out-perform the reference implementa
 Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
-Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which has
-constant time evaluation of arrays up to the size of the GPU memory. Although this means that the GPU
+Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which has apparently
+constant time evaluation of arrays up to the size of the GPU memory (**NOTE: I need to check this,
+it could be that the calculations are not succeeding. The clBLAS results should be ignored as the
+operations are all `NULL`. I'm working on it.**). Although this means that the GPU
 is rather slow for smaller matrices, it is millions/billions faster for larger arrays
 (such that the memory allocation itself becomes the bottleneck!).
 A [batched API](https://github.com/fommil/netlib-java/issues/49) would provide an alternative for
