@@ -31,6 +31,35 @@ gcc-mp-4.8 -O3 dgemmtest.c clwrapper.c common.c -o dgemmtest -I../../../../netli
 #include <cblas.h>
 #include "common.h"
 
+// does AB == C ? If not, complain on stderr
+void test(int m, double* a, double *b, double *c) {
+	int i, j, k, exact = 0, wrong = 0;
+	double diff;
+	double* d = calloc(m * m, sizeof(double));
+	for (i = 0 ; i < m ; i++) {
+		for (j = 0 ; j < m ; j++) {
+			for (k = 0 ; k < m ; k++) {
+				d[i + j * m] += a[i + k * m] * b[j * m + k];
+			}
+		}
+	}
+	for (i = 0 ; i < m ; i++) {
+		for (j = 0 ; j < m ; j++) {
+			diff = c[i * m + j] - d[i * m + j];
+			if (diff != 0.0) {
+				exact++;
+			}
+			if (abs(diff) > 0.000001) {
+				wrong++;
+			}
+		}		
+	}
+	free(d);
+	if (wrong > 0) {
+		fprintf(stderr, "not exact = %d, wrong = %d\n", exact, wrong);
+	}
+}
+
 long benchmark(int size) {
     int m = sqrt(size);
 	long requestStart, requestEnd;
@@ -44,6 +73,8 @@ long benchmark(int size) {
     cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, m, m, 1, a, m, b, m, 0, c, m);
 
 	requestEnd = currentTimeNanos();
+
+	test(m, a, b, c);
 
     free(a);
     free(b);
