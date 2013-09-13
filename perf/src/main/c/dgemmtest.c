@@ -74,7 +74,9 @@ long benchmark(int size) {
 
 	requestEnd = currentTimeNanos();
 
+#ifdef __TEST__
 	test(m, a, b, c);
+#endif
 
     free(a);
     free(b);

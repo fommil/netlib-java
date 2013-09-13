@@ -11,18 +11,17 @@ doesn't seem to produce the correct calls, giving:
 
 #include <cublas.h>
 #include <cblas.h>
+#include <stdio.h>
+#include <stdlib.h>
 							   
 double cblas_ddot (const int n, const double *x, const int incx, const double *y, const int incy) {
 	return cublasDdot(n, x, incx, y, incy);
 }
 
 void checkStatus(char* message, cublasStatus status) {
-	printf(message);
-	printf("\n");
-	fflush(stdout);
     if (status != CUBLAS_STATUS_SUCCESS) {
-    	fprintf (stderr, "!!!! device memory allocation error (A)\n");
-    	return EXIT_FAILURE;
+    	fprintf (stderr, "!!!! %s fail %d\n", message, status);
+    	exit(EXIT_FAILURE);
     }
 }
 
@@ -53,10 +52,10 @@ void cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA
 	// checkStatus("setC", status);
 	
 	// HACK: ignore trans			   
-	status = cublasDgemm('N', 'N', M, N, K, alpha, cuA, lda, cuB, ldb, beta, cuC, ldc);
-	checkStatus("dgemm", status);
+	cublasDgemm('N', 'N', M, N, K, alpha, cuA, lda, cuB, ldb, beta, cuC, ldc);
+	//checkStatus("dgemm", status);
 	
-	status = cubblasGetMatrix(M, N, sizeof(double), cuC, ldc, C, ldc);
+	status = cublasGetMatrix(M, N, sizeof(double), cuC, ldc, C, ldc);
 	checkStatus("setB", status);
 	
 	status = cublasFree(cuA);
@@ -65,4 +64,6 @@ void cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA
 	checkStatus("freeB", status);
 	status = cublasFree(cuC);
 	checkStatus("freeC", status);
+	
+//	cudaDeviceReset();
 }
