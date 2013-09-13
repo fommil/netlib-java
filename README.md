@@ -38,7 +38,7 @@ for specific CPU chipsets. It is worth noting that "optimised" here means a lot 
 the compiler optimisation flags: specialist assembly instructions are combined with [compile time profiling](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Optimization_approach)
 and the [selection of array alignments for the kernel and CPU combination](http://en.wikipedia.org/wiki/Automatically_Tuned_Linear_Algebra_Software#Can_it_afford_to_copy.3F).
 
-Further improvements can be achieved for very large arrays by using the GPU:
+An alternative to optimised libraries is to use the GPU:
 e.g. [cuBLAS](https://developer.nvidia.com/cublas) or [clBLAS](https://github.com/clMathLibraries/clBLAS).
 However, GPU implementations have severe performance degradation for small arrays.
 [MultiBLAS](https://github.com/fommil/multiblas) is an initiative to work around
@@ -142,20 +142,20 @@ One can expect machine-optimised natives to out-perform the reference implementa
 Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent)
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
-Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which has apparently
-constant time evaluation of arrays up to the size of the GPU memory (**NOTE: I need to check this,
-it could be that the calculations are not succeeding. The clBLAS results should be ignored as the
-operations are all `NULL`. I'm working on it.**). Although this means that the GPU
-is rather slow for smaller matrices, it is millions/billions faster for larger arrays
-(such that the memory allocation itself becomes the bottleneck!).
-A [batched API](https://github.com/fommil/netlib-java/issues/49) would provide an alternative for
-some situations.
+Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) which performs as well
+as ATLAS for arrays of about `20,000+` elements (but as badly as the Raspberry Pi below!).
+Included in the CUDA performance results is the
+time taken to setup the CUDA interface and copy the matrix elements to the GPU device.
+If the GPU is substantially more powerful than the CPU, the performance profile may look very
+different... and don't forget that the CPU is now freed up to perform other computations!
+The GPU can be used most efficiently when the amount of array copying is kept to a minimum:
+i.e. coding directly for the GPU instead of accessing it via BLAS / LAPACK.
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpsb0981b15.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zps40eb8b6d.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
@@ -166,7 +166,7 @@ and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performa
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpse3fd3f64.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsb25ccda4.png)
 
 
 The [DSAUPD](http://www.caam.rice.edu/software/ARPACK/UG/node136.html) benchmark measures the
