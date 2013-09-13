@@ -21,10 +21,6 @@ cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
 	cl_event	event = NULL;
 	cl_uint available = 0;
 	int		ret = 0;
-	size_t off  = 1;
-	size_t offA = K + 1;   /* K + off */
-	size_t offB = N + 1;   /* N + off */
-	size_t offC = N + 1;   /* N + off */
 
 	// HACK: ignore order / trans
     clblasOrder order = clblasColumnMajor;
@@ -90,10 +86,10 @@ cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
 	 * Call clblas extended function. Perform gemm for the lower right
 	 * sub-matrices
 	 */
-	err = clblasDgemm(order, transA, transB, M - off, N - off, K - off,
-                         alpha, bufA, offA, lda,
-                         bufB, offB, ldb, beta,
-                         bufC, offC, ldc,
+	err = clblasDgemm(order, transA, transB, M, N, K,
+                         alpha, bufA, 0, lda,
+                         bufB, 0, ldb, beta,
+                         bufC, 0, ldc,
                          1, &queue, 0, NULL, &event);
 	if (err != CL_SUCCESS) {
 		printf("clblasSgemmEx() failed with %d\n", err);
