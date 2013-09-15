@@ -20,8 +20,8 @@ enum CBLAS_DIAG getCblasDiag(const char *);
 void check_memory(JNIEnv *, void *);
 
 
-/* Convenience for converting between jboolean and jint representations of booleans */
-jint jboolean2jint(jboolean b);
-jboolean jint2jboolean(jint i);
-jint* jbooleanArray2jintArray(jboolean * a, jint size);
-void jintArray2jbooleanArray(jint * a, jboolean * b, jint size);
+/* Convenience for converting between jboolean (Java Boolean) and int (Fortran LOGICAL). */
+int jboolean2int(jboolean b);
+jboolean int2jboolean(int i);
+int* jbooleanArray2intArray(JNIEnv * env, jboolean * a, jint size);
+void intArray2jbooleanArray(int * a, jboolean * b, jint size);

@@ -60,14 +60,14 @@ inline void check_memory(JNIEnv * env, void * arg) {
 		"Out of memory transferring array to native code in F2J JNI");
 }
 
-inline jint jboolean2jint(jboolean b) {
+inline int jboolean2int(jboolean b) {
     switch (b) {
         case JNI_TRUE: return 1;
         default: return 0;
     }
 }
 
-inline jboolean jint2jboolean(jint i) {
+inline jboolean int2jboolean(int i) {
     switch (i) {
         case 1: return JNI_TRUE;
         default: return JNI_FALSE;
@@ -75,8 +75,10 @@ inline jboolean jint2jboolean(jint i) {
 }
 
 
-jint* jbooleanArray2jintArray(jboolean * a, jint size) {
-	jint * j = (jint*) malloc(size);
+int* jbooleanArray2intArray(JNIEnv * env, jboolean * a, jint size) {
+	int * j = (int*) malloc(size * sizeof(int));
+	check_memory(env, j);
+	
 	int i;
 	for (i = 0 ; i < size ; i++) {
 	    j[i] = jboolean2jint(a[i]);
@@ -84,7 +86,7 @@ jint* jbooleanArray2jintArray(jboolean * a, jint size) {
 	return j;
 }
 
-void jintArray2jbooleanArray(jint * a, jboolean * b, jint size) {
+void intArray2jbooleanArray(int * a, jboolean * b, jint size) {
 	int i;
 	for (i = 0 ; i < size ; i++) {
 	    b[i] = jint2jboolean(a[i]);
