@@ -81,7 +81,7 @@ int* jbooleanArray2intArray(JNIEnv * env, jboolean * a, jint size) {
 	
 	int i;
 	for (i = 0 ; i < size ; i++) {
-	    j[i] = jboolean2jint(a[i]);
+	    j[i] = jboolean2int(a[i]);
 	}
 	return j;
 }
@@ -89,7 +89,7 @@ int* jbooleanArray2intArray(JNIEnv * env, jboolean * a, jint size) {
 void intArray2jbooleanArray(int * a, jboolean * b, jint size) {
 	int i;
 	for (i = 0 ; i < size ; i++) {
-	    b[i] = jint2jboolean(a[i]);
+	    b[i] = int2jboolean(a[i]);
 	}
 }
 
