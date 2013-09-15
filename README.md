@@ -260,6 +260,8 @@ Please consider supporting the maintenance of this open source project with a do
 Contributing
 ============
 
+You can contribute by clicking the star button!
+
 Contributors are encouraged to fork this repository and issue pull
 requests. Contributors implicitly agree to assign an unrestricted licence
 to Sam Halliday, but retain the copyright of their code (this means
