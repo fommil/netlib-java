@@ -24,7 +24,7 @@ setPdfOut <- function(filename){
 # calls f(file, target, implementation, count) for every file that matches the 
 # pattern expected for the benchmark b
 foreachResult = function(f, b) {
-	regex = paste("(.*)-", b, "-(.*)\\.csv", sep="")
+	regex = paste("(.*)-", b, "-(.*)\\.csv.gz", sep="")
 	files = list.files(pattern=regex)
 	count = 0
 	for (file in files) {
@@ -112,7 +112,7 @@ getPlotParams = function(t, i) {
 
 leg = c()
 addData = function(f, t, i, c) {
-	data = read.csv(f, col.names=c("size", "time"))
+	data = read.csv(gzfile(f), col.names=c("size", "time"))
 	data[,2] = data[,2] / 1000000000
 	settings = getPlotParams(t, i)
 	col = settings[1]
