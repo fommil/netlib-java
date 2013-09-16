@@ -85,6 +85,9 @@ getPlotParams = function(t, i) {
 	else if (regexpr("(CBLAS|veclib|mkl|atlas)", i) > 0) {
 		col = "green"
 	}
+	else if (regexpr("cuda_nooh", i) > 0) {
+		col = "blue"
+	}
 	else if (regexpr("cuda", i) > 0) {
 		col = "turquoise"
 	}

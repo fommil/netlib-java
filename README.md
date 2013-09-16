@@ -145,17 +145,17 @@ Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent
 Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) (NVIDIA's graphics card) which performs as well
 as ATLAS for arrays of `~20,000+` elements (but as badly as the Raspberry Pi for smaller arrays!).
 Included in the CUDA performance results is the
-time taken to setup the CUDA interface and copy the matrix elements to the GPU device.
-If the GPU is substantially more powerful than the CPU, the performance profile will look
-different... and don't forget that the CPU is now free to perform other computations!
-The GPU can be used most efficiently when the amount of array copying is kept to a minimum:
-i.e. coding directly for the GPU instead of accessing it via BLAS / LAPACK.
+time taken to setup the CUDA interface and copy the matrix elements to the GPU device. The `nooh` run is
+a version that does not include the overhead of transferring arrays to/from the GPU device: to take
+full advantage of the GPU requires developers to re-write their applications with
+GPU devices in mind.
+
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zps03cf9ae3.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zpseeb1eb73.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
