@@ -143,30 +143,33 @@ Intel's [MKL](http://software.intel.com/en-us/intel-mkl) and (to a lesser extent
 [ATLAS](https://sourceforge.net/projects/math-atlas/).
 
 Of particular note is the [cuBLAS](https://developer.nvidia.com/cublas) (NVIDIA's graphics card) which performs as well
-as ATLAS for arrays of `~20,000+` elements (but as badly as the Raspberry Pi for smaller arrays!).
+as ATLAS on `DGEMM` for arrays of `~20,000+` elements (but as badly as the Raspberry Pi for smaller arrays!) and
+not so good for `DDOT`.
+
 Included in the CUDA performance results is the
-time taken to setup the CUDA interface and copy the matrix elements to the GPU device.
-If the GPU is substantially more powerful than the CPU, the performance profile will look
-different... and don't forget that the CPU is now free to perform other computations!
-The GPU can be used most efficiently when the amount of array copying is kept to a minimum:
-i.e. coding directly for the GPU instead of accessing it via BLAS / LAPACK.
+time taken to setup the CUDA interface and copy the matrix elements to the GPU device. The `nooh` run is
+a version that does not include the overhead of transferring arrays to/from the GPU device: to take
+full advantage of the GPU requires developers to re-write their applications with
+GPU devices in mind. e.g. re-written implementation of LAPACK that took advantage of the GPU BLAS
+would give a much better performance improvement than dipping in-and-out of GPU address space.
+
 
 The [DGEMM](http://www.netlib.no/netlib/lapack/double/dgemm.f) benchmark
 measures [matrix multiplication](http://en.wikipedia.org/wiki/General_Matrix_Multiply)
 performance:
 
-![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zps03cf9ae3.png)
+![dgemm](http://i752.photobucket.com/albums/xx162/fommil/dgemm_zps96e874f4.png)
 
 The [DGETRI](http://www.netlib.no/netlib/lapack/double/dgetri.f) benchmark
 measures matrix [LU Factorisation](http://en.wikipedia.org/wiki/LU_decomposition)
 and [matrix inversion](http://mathworld.wolfram.com/MatrixInverse.html) performance:
 
-![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsf53df589.png)
+![dgetri](http://i752.photobucket.com/albums/xx162/fommil/dgetri_zpsbbbf225f.png)
 
 The [DDOT](http://www.netlib.no/netlib/blas/ddot.f) benchmark measures
 [vector dot product](http://en.wikipedia.org/wiki/Dot_product) performance:
 
-![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsb25ccda4.png)
+![ddot](http://i752.photobucket.com/albums/xx162/fommil/ddot_zpsa0f2eb74.png)
 
 
 The [DSAUPD](http://www.caam.rice.edu/software/ARPACK/UG/node136.html) benchmark measures the
@@ -174,12 +177,10 @@ calculation of 10% of the eigenvalues for sparse matrices (`N` rows by `N` colum
 this benchmark is the time taken to perform the matrix multiplication at each iteration
 (typically `N` iterations).
 
-![dsaupd](http://i752.photobucket.com/albums/xx162/fommil/dsaupd_zps0a5e3372.png)
+![dsaupd](http://i752.photobucket.com/albums/xx162/fommil/dsaupd_zps1b033991.png)
 
 
-*NOTE: a different machine was used for each OS: Macbook Air for OS X, Debian 64 bit and Ubuntu 32 bit;
-Raspberry Pi for ARM; and iMac for Windows 8. Raspberry Pi results are truncated because I didn't want
-to wait around all day. Also, the larger runs were called first so the JIT has already kicked in for F2J
+*NOTE: larger arrays were called first so the JIT has already kicked in for F2J
 implementations: on a cold startup the F2J implementations are about 10 times slower and get to peak
 performance after about 20 calls of a function (Raspberry Pi doesn't seem to have a JIT).*
 

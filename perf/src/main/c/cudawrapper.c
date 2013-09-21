@@ -1,22 +1,7 @@
-/*
-This seems to be needed as the CBLAS with, e.g.
-
-../../../../netlib/CBLAS/*{dgemm,xerbla,f77,globals}*.* -DF77_dgemm=cublasDgemm
-
-doesn't seem to produce the correct calls, giving:
-
-  ** On entry to DGEMM  parameter number 1 had an illegal value
-
-*/
-
 #include <cublas.h>
 #include <cblas.h>
 #include <stdio.h>
 #include <stdlib.h>
-							   
-double cblas_ddot (const int n, const double *x, const int incx, const double *y, const int incy) {
-	return cublasDdot(n, x, incx, y, incy);
-}
 
 void checkStatus(char* message, cublasStatus status) {
     if (status != CUBLAS_STATUS_SUCCESS) {
@@ -24,6 +9,37 @@ void checkStatus(char* message, cublasStatus status) {
     	exit(EXIT_FAILURE);
     }
 }
+							   
+double cblas_ddot (const int n, const double *x, const int incx, const double *y, const int incy) {
+	double result;
+	double *cuA, *cuB;
+	cublasStatus status;
+
+	status = cublasInit();
+	checkStatus("init",  status);	
+	status = cublasAlloc(n, sizeof(double),(void**)&cuA);
+	checkStatus("A", status);
+	status = cublasAlloc(n, sizeof(double),(void**)&cuB);
+	checkStatus("B", status);
+	
+	status = cublasSetVector(n, sizeof(double), x, incx, cuA, incx);
+	checkStatus("setA", status);
+
+	status = cublasSetVector(n, sizeof(double), y, incy, cuB, incy);
+	checkStatus("setB", status);
+	
+	result = cublasDdot(n, cuA, incx, cuB, incy);
+	
+	status = cublasFree(cuA);
+	checkStatus("freeA", status);
+	status = cublasFree(cuB);
+	checkStatus("freeB", status);
+
+//	cublasShutdown();
+	
+	return result;
+}
+
 
 void cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
                  const enum CBLAS_TRANSPOSE TransB, const int M, const int N,
@@ -64,6 +80,6 @@ void cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA
 	checkStatus("freeB", status);
 	status = cublasFree(cuC);
 	checkStatus("freeC", status);
-	
-//	cudaDeviceReset();
+
+//	cublasShutdown();
 }

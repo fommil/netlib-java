@@ -24,7 +24,7 @@ setPdfOut <- function(filename){
 # calls f(file, target, implementation, count) for every file that matches the 
 # pattern expected for the benchmark b
 foreachResult = function(f, b) {
-	regex = paste("(.*)-", b, "-(.*)\\.csv", sep="")
+	regex = paste("(.*)-", b, "-(.*)\\.csv.gz", sep="")
 	files = list.files(pattern=regex)
 	count = 0
 	for (file in files) {
@@ -82,39 +82,29 @@ getPlotParams = function(t, i) {
 	else if (regexpr("jdk7", t) > 0) {
 		col = "orange"
 	}
-	else if (regexpr("(CBLAS|veclib|mkl|atlas)", i) > 0) {
-		col = "green"
+	else if (regexpr("veclib", i) > 0) {
+		col = "black"
+	}
+	else if (regexpr("CBLAS", i) > 0) {
+		col = "tomato1"
+	}
+	else if (regexpr("mkl", i) > 0) {
+		col = "orange"
+	}
+	else if (regexpr("atlas", i) > 0) {
+		col = "gray"
+	}
+	else if (regexpr("cuda_nooh", i) > 0) {
+		col = "blue"
 	}
 	else if (regexpr("cuda", i) > 0) {
 		col = "purple"
 	}
 	else if (regexpr("clblas", i) > 0) {
-		col = "blue"
+		col = "brown"
 	}
 	else {
-		col = "black"
-	}
-	
-	# exceptions
-	if (regexpr("i386", t) > 0 || regexpr("x86$", t) > 0) {
-		if (regexpr("native", i) > 0) {
-			col = "tomato1"
-		} else {
-			col = "gray"
-		}
-	}
-	if (regexpr("arm", t) == -1) {
-		if (regexpr("CBLAS", i) > 0) {
-			sym = 10
-		} else if (regexpr("veclib", i) > 0) {
-			sym = 13
-		} else if (regexpr("atlas", i) > 0) {
-			sym = 9
-		} else if (regexpr("mkl", i) > 0) {
-			sym = 14
-		}
-	} else if (regexpr("atlas", i) > 0) {
-		sym = 15
+		col = "yellow"
 	}
 	
 	c(col, sym)
@@ -122,7 +112,7 @@ getPlotParams = function(t, i) {
 
 leg = c()
 addData = function(f, t, i, c) {
-	data = read.csv(f, col.names=c("size", "time"))
+	data = read.csv(gzfile(f), col.names=c("size", "time"))
 	data[,2] = data[,2] / 1000000000
 	settings = getPlotParams(t, i)
 	col = settings[1]
