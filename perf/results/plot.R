@@ -86,7 +86,7 @@ getPlotParams = function(t, i) {
 		col = "green"
 	}
 	else if (regexpr("cuda", i) > 0) {
-		col = "turquoise"
+		col = "purple"
 	}
 	else if (regexpr("clblas", i) > 0) {
 		col = "blue"
