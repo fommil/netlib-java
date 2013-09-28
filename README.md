@@ -120,6 +120,12 @@ And a specific (non-standard) native binary may be forced like so:
 
 * `-Dcom.github.fommil.netlib.NativeSystemBLAS.natives=netlib-native_system-myos-myarch.so`
 
+To turn off natives altogether, add these to the JVM flags:
+
+* `-Dcom.github.fommil.netlib.BLAS=com.github.fommil.netlib.F2jBLAS`
+* `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.F2jLAPACK`
+* `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.F2jARPACK`
+
 
 Performance
 ===========
