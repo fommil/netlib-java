@@ -72,6 +72,7 @@
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-exported_symbol,_Java_*</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

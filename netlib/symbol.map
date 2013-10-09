@@ -1,0 +1,1 @@
+{ global: Java_*; _Java_*; local: *; };

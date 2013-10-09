@@ -96,6 +96,7 @@
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
                         <!-- otherwise an "@..." symbol is added to the function name! -->
                         <linkerMiddleOption>-Wl,--kill-at</linkerMiddleOption>
+                        <!-- No symbol restrictions on Windows, see http://sourceforge.net/p/mingw/bugs/1134/ -->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

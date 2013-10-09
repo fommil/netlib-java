@@ -76,11 +76,13 @@
                     <linkerMiddleOptions>
 <!-- check binary link with
   x86_64-w64-mingw32-objdump -p target/netlib-native_ref-win-x86_64.dll | grep DLL
+  x86_64-w64-mingw32-nm -g target/netlib-native_ref-win-x86_64.dll
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw64/mingw/lib/libgfortran.a</linkerMiddleOption>
                         <linkerMiddleOption>/opt/mingw64/mingw/lib/libquadmath.a</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
+                        <!-- No symbol restrictions on Windows, see http://sourceforge.net/p/mingw/bugs/1134/ -->
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
