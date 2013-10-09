@@ -85,9 +85,6 @@
                         <compilerEndOption>-m32</compilerEndOption>
                         <compilerEndOption>-I/opt/linux-i686/usr/include/</compilerEndOption>
                     </compilerEndOptions>
-                    <linkerStartOptions>
-                        <linkerStartOption>-Wl,-s</linkerStartOption>
-                    </linkerStartOptions>
                     <linkerEndOptions>
                         <linkerEndOption>-m32</linkerEndOption>
                     </linkerEndOptions>

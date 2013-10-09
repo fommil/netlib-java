@@ -85,9 +85,6 @@
                         <compilerStartOption>-Os</compilerStartOption>
                         <compilerStartOption>-I/opt/gnueabihf-arm/usr/include/</compilerStartOption>
                     </compilerStartOptions>
-                    <linkerStartOptions>
-                        <linkerStartOption>-Wl,-s</linkerStartOption>
-                    </linkerStartOptions>
                     <linkerMiddleOptions>
 <!-- Inspect binary with
 arm-rpi-linux-gnueabi-readelf -a target/netlib-native_system-linux-armhf.so | grep "Shared library:"
