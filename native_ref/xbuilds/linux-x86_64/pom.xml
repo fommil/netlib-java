@@ -65,6 +65,7 @@
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-xS</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
