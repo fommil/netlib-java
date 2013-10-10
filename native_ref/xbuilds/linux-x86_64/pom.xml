@@ -64,6 +64,7 @@
                     <linkerMiddleOptions>
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-s</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--gc-sections</linkerMiddleOption>
                     </linkerMiddleOptions>

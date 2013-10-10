@@ -82,6 +82,7 @@ arm-rpi-linux-gnueabi-readelf -a target/netlib-native_ref-linux-armhf.so | grep 
 -->
                         <linkerMiddleOption>-shared</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-s</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--gc-sections</linkerMiddleOption>
                     </linkerMiddleOptions>

@@ -74,6 +74,7 @@
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,-dead_strip</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,-exported_symbol,_Java_*</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-x</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>

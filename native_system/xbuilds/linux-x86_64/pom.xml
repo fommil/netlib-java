@@ -77,6 +77,7 @@
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
                         <linkerMiddleOption>-lblas</linkerMiddleOption>
                         <linkerMiddleOption>-llapack</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-s</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--gc-sections</linkerMiddleOption>
                     </linkerMiddleOptions>

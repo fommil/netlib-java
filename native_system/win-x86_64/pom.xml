@@ -95,6 +95,7 @@
                         <linkerMiddleOption>/opt/mingw64/mingw/lib/libquadmath.a</linkerMiddleOption>
                         <linkerMiddleOption>-static-libgcc</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--gc-sections</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-s</linkerMiddleOption>
                         <!-- Ignored, see http://sourceforge.net/p/mingw/bugs/1134/ -->
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
                     </linkerMiddleOptions>
