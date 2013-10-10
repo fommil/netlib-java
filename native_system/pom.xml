@@ -145,9 +145,12 @@
                         </compilerStartOptions>
                         <compilerMiddleOptions>
                             <compilerMiddleOption>-Wall -fPIC -DADD_</compilerMiddleOption>
+                            <compilerMiddleOption>-fdata-sections</compilerMiddleOption>
+                            <compilerMiddleOption>-ffunction-sections</compilerMiddleOption>
                         </compilerMiddleOptions>
                         <linkerStartOptions>
-                            <linkerStartOption>-Wl,-S</linkerStartOption>
+                            <linkerStartOption>-O3</linkerStartOption>
+                            <linkerStartOption>-Wl,--gc-sections</linkerStartOption>
                         </linkerStartOptions>
                         <sources>
                             <source>

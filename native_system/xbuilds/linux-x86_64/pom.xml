@@ -78,7 +78,8 @@
                         <linkerMiddleOption>-lblas</linkerMiddleOption>
                         <linkerMiddleOption>-llapack</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,--version-script=${netlib.src}/symbol.map</linkerMiddleOption>
-                        <linkerMiddleOption>-Wl,-xS</linkerMiddleOption>
+                        <!-- ignored :-( http://stackoverflow.com/questions/19289901 -->
+                        <linkerMiddleOption>-Wl,--discard-all</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>
             </plugin>
