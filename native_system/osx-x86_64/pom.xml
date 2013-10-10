@@ -76,6 +76,7 @@
                         <linkerMiddleOption>-framework JavaVM</linkerMiddleOption>
                         <linkerMiddleOption>-framework veclib</linkerMiddleOption>
                         <linkerMiddleOption>-lgfortran</linkerMiddleOption>
+                        <linkerMiddleOption>-Wl,-dead_strip</linkerMiddleOption>
                         <linkerMiddleOption>-Wl,-exported_symbol,_Java_*</linkerMiddleOption>
                     </linkerMiddleOptions>
                 </configuration>

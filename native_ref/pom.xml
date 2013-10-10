@@ -140,7 +140,6 @@
                         </compilerMiddleOptions>
                         <linkerStartOptions>
                             <linkerStartOption>-O3</linkerStartOption>
-                            <linkerStartOption>-Wl,--gc-sections</linkerStartOption>
                         </linkerStartOptions>
                         <sources>
                             <source>
