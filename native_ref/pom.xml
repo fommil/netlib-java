@@ -140,6 +140,7 @@
                         </compilerMiddleOptions>
                         <linkerStartOptions>
                             <linkerStartOption>-O3</linkerStartOption>
+                            <linkerStartOption>-Wl,--strip-all</linkerStartOption>
                         </linkerStartOptions>
                         <sources>
                             <source>
