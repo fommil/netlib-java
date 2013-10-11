@@ -5,22 +5,8 @@
     <!--
     NOTE: not part of the reactor
     https://github.com/fommil/netlib-java/issues/45
-    -->
-
-    <!--
-
-    mvn clean
-    mvn compile
-    mvn deploy -Psonatype-oss-release
-
-    mvn release:clean
-    mvn release:prepare
-    mvn release:perform
-    -> https://oss.sonatype.org/index.html#welcome
-    -> "Staging Repositories"
-    -> "close"
-    -> wait for confirmation -> "release"
-
+        
+    To release, see ../pom.xml
     -->
 
     <groupId>com.github.fommil.netlib</groupId>
