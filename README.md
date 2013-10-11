@@ -30,8 +30,6 @@ All major operating systems are supported out-of-the-box:
 Machine Optimised System Libraries
 ==================================
 
-**Only for 1.1-SNAPSHOT**
-
 High performance BLAS / LAPACK are available
 [commercially and open source](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms#Implementations)
 for specific CPU chipsets. It is worth noting that "optimised" here means a lot more than simply changing
@@ -218,7 +216,7 @@ note that it **will** be removed in the next release):
 <dependency>
   <groupId>com.googlecode.netlib-java</groupId>
   <artifactId>netlib</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
 </dependency>
 ```
 
@@ -233,7 +231,7 @@ Snapshots are distributed on Sonatype's Snapshot Repository, e.g.:
 <dependency>
   <groupId>com.github.fommil.netlib</groupId>
   <artifactId>all</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
 </dependency>
 ```
 

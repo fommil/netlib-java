@@ -11,7 +11,7 @@
 
     <groupId>com.github.fommil.netlib</groupId>
     <artifactId>generator</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <properties>
