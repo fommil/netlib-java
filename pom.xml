@@ -142,7 +142,7 @@
             </snapshots>
         </pluginRepository>
         <!-- Only needed during releases -->
-        <!-- <pluginRepository>
+        <pluginRepository>
             <id>sonatype-releases</id>
             <url>https://oss.sonatype.org/content/repositories/releases/</url>
             <releases>
@@ -151,7 +151,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository> -->
+        </pluginRepository>
     </pluginRepositories>
 
     <!-- mvn versions:display-dependency-updates -->
