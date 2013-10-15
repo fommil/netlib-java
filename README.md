@@ -198,7 +198,7 @@ Releases are distributed on Maven central:
 <dependency>
   <groupId>com.github.fommil.netlib</groupId>
   <artifactId>all</artifactId>
-  <version>1.1</version>
+  <version>1.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -206,7 +206,7 @@ Releases are distributed on Maven central:
 SBT developers can use
 
 ```scala
-"com.github.fommil.netlib" % "all" % "1.1" pomOnly()
+"com.github.fommil.netlib" % "all" % "1.1.1" pomOnly()
 ```
 
 Those wanting to preserve the pre-1.0 API can use the legacy package (but
