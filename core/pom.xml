@@ -7,12 +7,11 @@
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.1</version>
 
     <dependencies>
         <dependency>
@@ -39,7 +38,6 @@
             <plugin>
                 <groupId>com.github.fommil.netlib</groupId>
                 <artifactId>generator</artifactId>
-                <version>1.1.1</version>
                 <executions>
                     <execution>
                         <id>blas-interface</id>

@@ -7,12 +7,11 @@
     <parent>
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>all</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.1</version>
 
     <dependencies>
         <dependency>
@@ -24,7 +23,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>core</artifactId>
-            <version>1.1.1</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
