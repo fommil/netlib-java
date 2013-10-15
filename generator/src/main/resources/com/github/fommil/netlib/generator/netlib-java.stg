@@ -82,7 +82,7 @@ public abstract class $name$ {
         try {
           impl = load(className);
           break;
-        } catch (ExceptionInInitializerError e) {
+        } catch (Exception e) {
           log.warning("Failed to load implementation from: " + className);
         }
       }
