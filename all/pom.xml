@@ -12,7 +12,7 @@
 
     <artifactId>all</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 
     <dependencies>
         <dependency>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>core</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>

@@ -198,7 +198,7 @@ Releases are distributed on Maven central:
 <dependency>
   <groupId>com.github.fommil.netlib</groupId>
   <artifactId>all</artifactId>
-  <version>1.1</version>
+  <version>1.1.2</version>
   <type>pom</type>
 </dependency>
 ```
