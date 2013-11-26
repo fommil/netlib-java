@@ -82,7 +82,7 @@ public abstract class $name$ {
         try {
           impl = load(className);
           break;
-        } catch (Exception e) {
+        } catch (Throwable e) {
           log.warning("Failed to load implementation from: " + className);
         }
       }
@@ -93,7 +93,7 @@ public abstract class $name$ {
       INSTANCE = impl;
       log.config("Implementation provided by " + INSTANCE.getClass());
       $initCode$
-    } catch (Exception e) {
+    } catch (Throwable e) {
       throw new ExceptionInInitializerError(e);
     }
   }
