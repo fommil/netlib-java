@@ -192,7 +192,7 @@ performance after about 20 calls of a function (Raspberry Pi doesn't seem to hav
 Installation
 ============
 
-**We've recently seen a surge in Java developers using this library who have no [maven](http://maven.apache.org/) or [ivy](http://ant.apache.org/ivy/) experience. If you're even thinking about downloading the zip file and then fumbling around with random maven commands, then this message is written for you: please read about Maven/Ivy and be prepared to be cursed if you contact me about it (I'm genuinely getting fed up with this).**
+**Don't download the zip file unless you know what you're doing: use [maven](http://maven.apache.org/) or [ivy](http://ant.apache.org/ivy/) to manage your dependencies as described below.**
 
 Releases are distributed on Maven central:
 
