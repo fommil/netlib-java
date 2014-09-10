@@ -208,7 +208,7 @@ Releases are distributed on Maven central:
 SBT developers can use
 
 ```scala
-"com.github.fommil.netlib" % "all" % "1.1.1" pomOnly()
+"com.github.fommil.netlib" % "all" % "1.1.2" pomOnly()
 ```
 
 Those wanting to preserve the pre-1.0 API can use the legacy package (but
