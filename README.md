@@ -227,7 +227,7 @@ depend on a subset of implementations: simply look in the `all`
 module's [`pom.xml`](all/pom.xml).
 
 
-Snapshots are distributed on Sonatype's Snapshot Repository, e.g.:
+Snapshots (preview releases, when new features are in active development) are distributed on Sonatype's Snapshot Repository, e.g.:
 
 ```xml
 <dependency>
