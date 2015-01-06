@@ -67,7 +67,9 @@ Generically-tuned ATLAS and OpenBLAS are available with most distributions (e.g.
 explicitly using the package-manager. e.g. for Debian / Ubuntu one would type
 
     sudo apt-get install libatlas3-base libopenblas-base
+    sudo update-alternatives --config libblas.so
     sudo update-alternatives --config libblas.so.3
+    sudo update-alternatives --config liblapack.so
     sudo update-alternatives --config liblapack.so.3
 
 selecting the preferred implementation.
@@ -80,7 +82,15 @@ folder to `/etc/ld.so.conf` then run `ldconfig`) ensuring that `libblas.so.3` an
 exist and point to your optimal builds.
 
 If you have an [Intel MKL](http://software.intel.com/en-us/intel-mkl) licence, you could also
-create symbolic links from `libblas.so.3` and `liblapack.so.3` to `libmkl_rt.so`.
+create symbolic links from `libblas.so.3` and `liblapack.so.3` to `libmkl_rt.so` or use
+Debian's alternatives system:
+
+```
+sudo update-alternatives --install /usr/lib/libblas.so     libblas.so     /opt/intel/mkl/lib/intel64/libmkl_rt.so 1000
+sudo update-alternatives --install /usr/lib/libblas.so.3   libblas.so.3   /opt/intel/mkl/lib/intel64/libmkl_rt.so 1000
+sudo update-alternatives --install /usr/lib/liblapack.so   liblapack.so   /opt/intel/mkl/lib/intel64/libmkl_rt.so 1000
+sudo update-alternatives --install /usr/lib/liblapack.so.3 liblapack.so.3 /opt/intel/mkl/lib/intel64/libmkl_rt.so 1000
+```
 
 *NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
 `/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
