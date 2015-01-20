@@ -5,6 +5,8 @@ netlib-java
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces**.
 
+For more details on high performance linear algebra on the JVM, please watch [my talk at Scala eXchange 2014](https://skillsmatter.com/skillscasts/5849-high-performance-linear-algebra-in-scala) ([follow along with high-res slides](http://fommil.github.io/scalax14/#/)).
+
 If you're a developer looking for an easy-to-use linear algebra library on the JVM, we strongly recommend Commons-Math, MTJ and Breeze:
 
 * [Apache Commons Math](http://commons.apache.org/proper/commons-math/) for the most popular mathematics library in Java ([not using `netlib-java`](https://issues.apache.org/jira/browse/MATH-270)).
