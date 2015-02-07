@@ -3,7 +3,7 @@ netlib-java
 
 `netlib-java` is a wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
-that performs **as fast as the C / Fortran interfaces**.
+that performs **as fast as the C / Fortran interfaces** with a pure JVM fallback. `netlib-java` is included with recent versions of [Apache Spark](https://spark.apache.org/).
 
 For more details on high performance linear algebra on the JVM, please watch [my talk at Scala eXchange 2014](https://skillsmatter.com/skillscasts/5849-high-performance-linear-algebra-in-scala) ([follow along with high-res slides](http://fommil.github.io/scalax14/#/)).
 
@@ -11,7 +11,7 @@ If you're a developer looking for an easy-to-use linear algebra library on the J
 
 * [Apache Commons Math](http://commons.apache.org/proper/commons-math/) for the most popular mathematics library in Java ([not using `netlib-java`](https://issues.apache.org/jira/browse/MATH-270)).
 * [Matrix Toolkits for Java](https://github.com/fommil/matrix-toolkits-java/) for high performance linear algebra in Java (builds on top of `netlib-java`).
-* [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala (builds on top of `netlib-java`).
+* [Breeze](https://github.com/scalanlp/breeze) for high performance linear algebra in Scala and Spark (builds on top of `netlib-java`).
 
 
 In `netlib-java`, implementations of BLAS/LAPACK/ARPACK are provided by:
