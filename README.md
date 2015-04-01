@@ -40,7 +40,9 @@ and the [selection of array alignments for the kernel and CPU combination](http:
 
 An alternative to optimised libraries is to use the GPU:
 e.g. [cuBLAS](https://developer.nvidia.com/cublas) or [clBLAS](https://github.com/clMathLibraries/clBLAS).
-However, GPU implementations have severe performance degradation for small arrays.
+Setting up cuBLAS must be done via [our NVBLAS instructions](https://github.com/fommil/netlib-java/wiki/NVBLAS), since cuBLAS does not implement the actual BLAS API out of the box.
+
+Be aware that GPU implementations have severe performance degradation for small arrays.
 [MultiBLAS](https://github.com/fommil/multiblas) is an initiative to work around
 the limitation of GPU BLAS implementations by selecting the optimal implementation
 at runtime, based on the array size.
