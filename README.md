@@ -96,6 +96,14 @@ sudo update-alternatives --install /usr/lib/liblapack.so   liblapack.so   /opt/i
 sudo update-alternatives --install /usr/lib/liblapack.so.3 liblapack.so.3 /opt/intel/mkl/lib/intel64/libmkl_rt.so 1000
 ```
 
+and don't forget to add the MKL libraries to your `/etc/ld.so.conf`
+file (and run `sudo ldconfig`), e.g. add
+
+```
+/opt/intel/lib/intel64
+/opt/intel/mkl/lib/intel64
+```
+
 *NOTE: Some distributions, such as Ubuntu `precise` do not create the necessary symbolic links
 `/usr/lib/libblas.so.3` and `/usr/lib/liblapack.so.3` for the system-installed implementations,
 so they must be created manually.*
