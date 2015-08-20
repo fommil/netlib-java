@@ -136,9 +136,11 @@ A specific implementation may be forced like so:
 * `-Dcom.github.fommil.netlib.LAPACK=com.github.fommil.netlib.NativeRefLAPACK`
 * `-Dcom.github.fommil.netlib.ARPACK=com.github.fommil.netlib.NativeRefARPACK`
 
-And a specific (non-standard) native binary may be forced like so:
+A specific (non-standard) JNI binary may be forced like so:
 
 * `-Dcom.github.fommil.netlib.NativeSystemBLAS.natives=netlib-native_system-myos-myarch.so`
+
+(note that this is **not** your `libblas.so.3` or `liblapack.so.3`, it is the `netlib-java` native wrapper component which automatically detects and loads your system's libraries).
 
 To turn off natives altogether, add these to the JVM flags:
 
