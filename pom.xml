@@ -60,6 +60,21 @@
     <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <profiles>
+      <profile>
+	<id>ppc64le-profile</id>
+	<activation>
+	  <os><arch>ppc64le</arch></os>
+	</activation>
+      </profile>
+      <profile>
+	<id>default-profile</id>
+	<activation>
+	  <activeByDefault>true</activeByDefault>
+	</activation>
+      </profile>
+    </profiles>
+
     <modules>
         <module>core</module>
         <module>legacy</module>

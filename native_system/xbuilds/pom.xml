@@ -19,10 +19,27 @@
     <artifactId>native_system-xbuilds</artifactId>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>linux-x86_64</module>
-        <module>linux-i686</module>
-        <module>linux-armhf</module>
-    </modules>
+    <profiles>
+      <profile>
+	<id>ppc64le-profile</id>
+	<activation>
+	  <os><arch>ppc64le</arch></os>
+	</activation>
+	<modules>
+          <module>linux-ppc64le</module>
+	</modules>
+      </profile>
+      <profile>
+	<id>default-profile</id>
+	<activation>
+	  <activeByDefault>true</activeByDefault>
+	</activation>
+	<modules>
+          <module>linux-x86_64</module>
+          <module>linux-i686</module>
+          <module>linux-armhf</module>
+	</modules>
+      </profile>
+    </profiles>
 
 </project>
