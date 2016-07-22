@@ -14,12 +14,20 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>java</module>
-        <module>osx-x86_64</module>
-        <module>win-i686</module>
-        <module>win-x86_64</module>
-        <!-- cross compiles are built separately on a Linux box... -->
+      <module>java</module>
     </modules>
+
+    <profiles>
+      <profile>
+	<id>default-profile</id>
+	<modules>
+          <module>osx-x86_64</module>
+          <module>win-i686</module>
+          <module>win-x86_64</module>
+          <!-- cross compiles are built separately on a Linux box... -->
+	</modules>
+      </profile>
+    </profiles>
 
     <properties>
         <natives>netlib-native_ref</natives>
