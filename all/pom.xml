@@ -29,6 +29,26 @@
 
     <profiles>
       <profile>
+	<id>aarch64-profile</id>
+	<activation>
+	  <os><arch>aarch64</arch></os>
+	</activation>
+	<dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-linux-aarch64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-linux-aarch64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+        </dependency>
+	</dependencies>
+      </profile>
+      <profile>
 	<id>ppc64le-profile</id>
 	<activation>
 	  <os><arch>ppc64le</arch></os>

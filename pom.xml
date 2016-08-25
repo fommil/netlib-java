@@ -62,6 +62,12 @@
 
     <profiles>
       <profile>
+	<id>aarch64-profile</id>
+	<activation>
+	  <os><arch>aarch64</arch></os>
+	</activation>
+      </profile>
+      <profile>
 	<id>ppc64le-profile</id>
 	<activation>
 	  <os><arch>ppc64le</arch></os>
