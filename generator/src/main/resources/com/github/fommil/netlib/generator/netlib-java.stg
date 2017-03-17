@@ -84,6 +84,8 @@ public abstract class $name$ {
           break;
         } catch (Throwable e) {
           log.warning("Failed to load implementation from: " + className);
+          log.warning("Error was: " + e.toString());
+          e.printStackTrace();
         }
       }
       if (impl == null) {

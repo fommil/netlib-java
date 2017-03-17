@@ -8,6 +8,7 @@
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
         <version>1.2-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>all</artifactId>
@@ -31,7 +32,10 @@
       <profile>
 	<id>aarch64-profile</id>
 	<activation>
-	  <os><arch>aarch64</arch></os>
+	  <os>
+	    <name>linux</name>
+	    <arch>aarch64</arch>
+	  </os>
 	</activation>
 	<dependencies>
         <dependency>
@@ -51,7 +55,10 @@
       <profile>
 	<id>ppc64le-profile</id>
 	<activation>
-	  <os><arch>ppc64le</arch></os>
+	  <os>
+	    <name>linux</name>
+	    <arch>ppc64le</arch>
+	  </os>
 	</activation>
 	<dependencies>
         <dependency>
@@ -69,10 +76,145 @@
 	</dependencies>
       </profile>
       <profile>
-	<id>default-profile</id>
+        <id>linux-x86_64</id>
 	<activation>
-	  <activeByDefault>true</activeByDefault>
+	  <os>
+	    <name>linux</name>
+	    <arch>amd64</arch>
+	  </os>
 	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-linux-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-linux-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>osx-x86_64</id>
+	<activation>
+	  <os>
+	    <family>mac</family>
+	    <arch>x86_64</arch>
+	  </os>
+	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-osx-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	  <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-osx-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>linux-i686</id>
+	<activation>
+	  <os>
+	    <name>linux</name>
+	    <arch>i686</arch>
+	  </os>
+	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-linux-i686</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-linux-i686</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>win-x86_64</id>
+	<activation>
+	  <os>
+            <family>windows</family>
+	    <arch>amd64</arch>
+	  </os>
+	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-win-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-win-x86_64</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>win-i686</id>
+	<activation>
+	  <os>
+	    <name>win</name>
+	    <arch>i686</arch>
+	  </os>
+	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-win-i686</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-win-i686</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>linux-armhf</id>
+	<activation>
+	  <os>
+	    <name>linux</name>
+	    <arch>armhf</arch>
+	  </os>
+	</activation>
+	<dependencies>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_system-linux-armhf</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+          <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>netlib-native_ref-linux-armhf</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>natives</classifier>
+          </dependency>
+	</dependencies>
+      </profile>
+      <profile>
+	<id>default-profile</id>
 	<dependencies>
 	  <dependency>
             <groupId>${project.parent.groupId}</groupId>

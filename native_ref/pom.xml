@@ -8,6 +8,7 @@
         <groupId>com.github.fommil.netlib</groupId>
         <artifactId>parent</artifactId>
         <version>1.2-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>native_ref</artifactId>
@@ -26,6 +27,37 @@
           <module>win-x86_64</module>
           <!-- cross compiles are built separately on a Linux box... -->
 	</modules>
+      </profile>
+      <profile>
+        <id>windows</id>
+        <activation>
+          <os><family>windows</family></os>
+        </activation>
+        <modules>
+          <module>win-i686</module>
+          <module>win-x86_64</module>
+        </modules>
+      </profile>
+      <profile>
+        <id>osx</id>
+        <activation>
+          <os>
+            <family>mac</family>
+            <arch>x86_64</arch>
+          </os>
+        </activation>
+        <modules>
+          <module>osx-x86_64</module>
+        </modules>
+      </profile>
+      <profile>
+        <id>linux</id>
+        <activation>
+          <os><name>linux</name></os>
+        </activation>
+        <modules>
+          <module>xbuilds</module>
+        </modules>
       </profile>
     </profiles>
 

@@ -64,20 +64,71 @@
       <profile>
 	<id>aarch64-profile</id>
 	<activation>
-	  <os><arch>aarch64</arch></os>
+          <os>
+            <name>linux</name>
+            <arch>aarch64</arch>
+          </os>
 	</activation>
       </profile>
       <profile>
 	<id>ppc64le-profile</id>
 	<activation>
-	  <os><arch>ppc64le</arch></os>
+	  <os>
+            <name>linux</name>
+            <arch>ppc64le</arch>
+          </os>
 	</activation>
       </profile>
       <profile>
 	<id>default-profile</id>
-	<activation>
-	  <activeByDefault>true</activeByDefault>
-	</activation>
+      </profile>
+      <profile>
+        <id>windows</id>
+        <activation>
+          <os><family>windows</family></os>
+        </activation>
+      </profile>
+      <profile>
+        <id>osx</id>
+        <activation>
+          <os>
+            <family>mac</family>
+            <arch>x86_64</arch>
+          </os>
+        </activation>
+      </profile>
+      <profile>
+        <id>linux</id>
+        <activation>
+          <os><name>linux</name></os>
+        </activation>
+      </profile>
+      <profile>
+        <id>x86_64-profile</id>
+        <activation>
+          <os>
+            <name>linux</name>
+            <arch>amd64</arch>
+          </os>
+        </activation>
+      </profile>
+      <profile>
+        <id>i386-profile</id>
+        <activation>
+          <os>
+            <name>linux</name>
+            <arch>i386</arch>
+          </os>
+        </activation>
+      </profile>
+      <profile>
+        <id>armhf-profile</id>
+        <activation>
+          <os>
+            <name>linux</name>
+            <arch>arm</arch>
+          </os>
+        </activation>
       </profile>
     </profiles>
 
@@ -86,6 +137,7 @@
         <module>legacy</module>
         <module>native_ref</module>
         <module>native_system</module>
+        <module>all</module>
     </modules>
 
     <properties>
