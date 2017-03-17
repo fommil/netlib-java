@@ -35,6 +35,6 @@ public class BLASTest {
     int n = dx.length;
 
     double answer = blas.ddot(n, dx, 1, dy, 1);
-    assert Math.abs(answer - 36.3) < 0.00001d;
+    Assert.assertTrue(Math.abs(answer - 36.3) < 0.00001d);
   }
 }

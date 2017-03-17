@@ -201,7 +201,7 @@ public abstract class AbstractNetlibGenerator extends AbstractMojo {
       if (i < method.getParameterTypes().length - 1
           && param.isArray()
           && method.getParameterTypes()[i + 1] == Integer.TYPE)
-      offsetName = names[i+1];
+        offsetName = names[i+1];
 
       callback.process(i, param, name, offsetName);
     }

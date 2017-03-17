@@ -14,8 +14,7 @@ public class LAPACKTest {
   @Test
   public void dgesvd() {
     double [] correct = new double[] {41.319080801703045, 4.036396452114566, 2.264037407750103, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-    Stopwatch watch = new Stopwatch();
-    watch.start();
+    Stopwatch watch = Stopwatch.createStarted();
     for (int i = 0; i < 1000; i++) {
       double[] jAns = testDgesvd1(jLAPACK);
       Assert.assertArrayEquals(correct, jAns, 0.00001);
@@ -27,8 +26,7 @@ public class LAPACKTest {
   @Test
   public void dsygv() {
     double [] correct = new double []{0.38773165525286146, 1.0842530684697642, 2.3704016288236445};
-    Stopwatch watch = new Stopwatch();
-    watch.start();
+    Stopwatch watch = Stopwatch.createStarted();
     for (int i = 0; i < 1000; i++) {
       double[] jAns = testDsygv1(jLAPACK);
       Assert.assertArrayEquals(correct, jAns, 0.00001);
