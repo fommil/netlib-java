@@ -107,15 +107,13 @@ public class Dsaupd implements Benchmark.Parameterised {
     for (int row = 0; row < n; row++) {
       for (int col = 0; col < n; col++) {
         if (col == (row - 1) || col == (row + 1)) {
-          y[row] = y[row] - x[col];
+          y[row] -= x[col];
         } else if (row == col) {
-          y[row] = y[row] + 2 * x[col];
+          y[row] += 2 * x[col];
         }
       }
     }
 
-    for (int i = 0; i < n; i++) {
-      work[i + output_offset] = y[i];
-    }
+    System.arraycopy(y, 0, work, output_offset, n);
   }
 }

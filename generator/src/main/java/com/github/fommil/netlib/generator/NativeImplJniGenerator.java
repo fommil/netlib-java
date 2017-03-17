@@ -214,12 +214,12 @@ public class NativeImplJniGenerator extends AbstractNetlibGenerator {
         }
 
         if (!fortran_hack && param == String.class && extractChar)
-          name = name + "[0]";
+          name += "[0]";
 
         if (fortran_hack && param.isPrimitive())
           name = "&" + name;
 
-        if (offsets & offsetName != null) {
+        if (offsets && offsetName != null) {
           name = name + " + " + offsetName;
         }
 
