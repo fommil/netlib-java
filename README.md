@@ -127,6 +127,56 @@ so you will have to customise the build or copy the binary into both `libblas3.d
 `libgcc_s_seh-1.dll` from [MinGW](http://www.mingw.org).*
 
 
+GPU
+-------
+
+Nvidia has GPU-optimized BLAS-like library called [cuBLAS](https://developer.nvidia.com/cublas). 
+It does not have standard BLAS API, but since the v.6.5 it contains Fortran BLAS wrapper called [NVBLAS](http://docs.nvidia.com/cuda/nvblas).
+NVBLAS offloads most of the BLAS3 routines to GPU (or to GPUs if there are few of them installed).
+To use it within netlib-java, you need to:
+      
+* Install cuBLAS and system BLAS with CBLAS
+* Create NVBLAS configuration file `nvblas.conf` (see example in [NVBLAS](http://docs.nvidia.com/cuda/nvblas))
+* Add cuBLAS and CBLAS paths to `LD_LIBRARY_PATH` 
+* Perform `LD_PRELOAD=libnvblas.so` before running your application
+
+Lets consider the usage in more details.
+
+Debian / Ubuntu installation of cuBLAS:
+
+```
+sudo apt-get install cublas
+```
+
+You also need a library that has CBLAS interface and calls Fortran BLAS. 
+In Debian/Ubuntu it is `libblas.so.3`:
+
+```
+sudo apt-get install blas
+```
+
+In some distributions, in particular Fedora, `libblas.so.3` comes without CBLAS interface. 
+You cannot use CBLAS from ATLAS or OpenBLAS because it links to their own functions and not to Fortran BLAS. 
+In this case you need to build reference BLAS and then CBLAS into shared library `.so` from [netlib web-site](http://www.netlib.org/blas/index.html).
+Original makefile builds static library so some configuration is needed.
+
+Add to you path:
+
+```
+export LD_LIBRARY_PATH=PATH_TO_CUBLAS/lib64:PATH_TO_SYSTEM_BLAS
+```
+
+Load NVBLAS symbols before executing your code:
+
+```
+export LD_PRELOAD=libnvblas.so
+```
+
+At the end, you should make shure that NVBLAS is being used by checking GPU usage with e.g. `nvidia-smi`.
+Also, you might need to pick the appropriate value of `NVBLAS_TILE_DIM` from `nvblas.conf`,
+because for older GPU the default value is too big and some operations might return zero.
+
+
 Customisation
 =============
 
