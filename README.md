@@ -1,6 +1,8 @@
 netlib-java
 ===========
 
+**If you require support or wish to ensure the continuation of this library, you must get your company to respond to the [Call For Funding](https://github.com/fommil/netlib-java/wiki/CallForFunding). I do not have the inclination to provide gratis assistance.**
+
 `netlib-java` is a wrapper for low-level [BLAS](http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms),
 [LAPACK](http://en.wikipedia.org/wiki/LAPACK) and [ARPACK](http://en.wikipedia.org/wiki/ARPACK)
 that performs **as fast as the C / Fortran interfaces** with a pure JVM fallback. `netlib-java` is included with recent versions of [Apache Spark](https://spark.apache.org/).
@@ -277,24 +279,3 @@ If the above fails, ensure you have the following in your `pom.xml`:
         </repository>
     </repositories>
 ```
-
-
-
-Donations
-=========
-
-Please consider supporting the maintenance of this open source project with a donation:
-
-[![Donate via Paypal](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=B2HW5ATB8C3QW&lc=GB&item_name=netlib&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-
-
-Contributing
-============
-
-You can contribute by clicking the star button!
-
-Contributors are encouraged to fork this repository and issue pull
-requests. Contributors implicitly agree to assign an unrestricted licence
-to Sam Halliday, but retain the copyright of their code (this means
-we both have the freedom to update the licence for those contributions).
-
